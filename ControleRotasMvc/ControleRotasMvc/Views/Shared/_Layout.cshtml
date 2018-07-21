@@ -1,0 +1,59 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link rel="stylesheet" href="~/Content/Css/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/Css/Site.css" />
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse">
+                    <a class="navbar-brand" href="#">SISTEMA</a>
+                    <ul class="nav navbar-nav">
+                        @*<li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>*@
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <span class="caret"></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Alunos", "Cadastro", "Aluno")</li>
+                                <li>@Html.ActionLink("Usuários", "Form", "Usuario")</li>
+                                <li>@Html.ActionLink("Matérias", "Cadastro", "Materia")</li>
+</li>
+                    </ul>
+                        </li>
+                    </ul>
+
+        <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alunos <span class="caret"></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Buscar Alunos", "Index", "Aluno")</li>
+                                <li></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Logout    </a></li>
+                    </ul>
+        
+        </nav>
+    <div class="container">
+        <div id="conteudo">
+            @RenderBody()
+        </div>
+    </div>
+
+</body>
+</html>

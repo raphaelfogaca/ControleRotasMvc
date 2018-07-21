@@ -1,0 +1,139 @@
+﻿
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">Messages</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="panel panel-default" id="painel1" role="tab">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="nome">Nome:</label>
+                        <input id="nome" name="aluno.Nome" value="" class="form-control" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="email">E-mail:</label>
+                        <input id="email" type="email" name="aluno.Email" value="" placeholder="Ex: email@email.com" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label for="telefone">Telefone:</label>
+                        <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="responsavel">Nome Responsável:</label>
+                        <input id="responsavel" name="aluno.NomeResponsavel" class="form-control" value="" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="emailResponsavel">E-mail Responsável:</label>
+                        <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="" />
+                    </div>
+                    <div class="col-md-2">
+                        <label for="cpfResponsavel">CPF Responsável:</label>
+                        <input id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value="" />
+                    </div>
+                    <div class="col-md-2">
+                        <label for="telefone">Telefone Responsável:</label>
+                        <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+    <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
+    <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
+</div>
+
+
+
+
+<div class="panel panel-default" id="painel1" role="tab">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="nome">Nome:</label>
+                <input id="nome" name="aluno.Nome" value="" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label for="email">E-mail:</label>
+                <input id="email" type="email" name="aluno.Email" value="" placeholder="Ex: email@email.com" class="form-control" />
+            </div>
+            <div class="col-md-2">
+                <label for="telefone">Telefone:</label>
+                <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <label for="responsavel">Nome Responsável:</label>
+                <input id="responsavel" name="aluno.NomeResponsavel" class="form-control" value="" />
+            </div>
+            <div class="col-md-4">
+                <label for="emailResponsavel">E-mail Responsável:</label>
+                <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="" />
+            </div>
+            <div class="col-md-2">
+                <label for="cpfResponsavel">CPF Responsável:</label>
+                <input id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value="" />
+            </div>
+            <div class="col-md-2">
+                <label for="telefone">Telefone Responsável:</label>
+                <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="painel2">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <label for="mensalidadeValor">Valor Mensalidade:</label>
+                    <input id="mensalidadeValor" name="mensalidade.Valor" class="form-control" value="" />
+                </div>
+                <div class="col-md-1">
+                    <label for="mensalidadeQtd">Meses</label>
+                    <input id="mensalidadeQtd" name="qtdMaterias" class="form-control" value="" />
+                </div>
+                <div class="col-md-1">
+                    <label for="diaVencimento">Dia Venc.</label>
+                    <input id="diaVencimento" name="diaVencimento" class="form-control" value="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function painel1() {
+        document.getElementById("painel1").style.display = "hidden";
+    }
+
+    function painel2() {
+        document.getElementById("painel2").style.display = "hidden";
+    }
+
+
+</script>

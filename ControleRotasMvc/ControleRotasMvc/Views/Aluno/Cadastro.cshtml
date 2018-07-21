@@ -1,0 +1,213 @@
+﻿@*@model IList<ControleRotasMvc.Models.Aluno*@
+@model IList<ControleRotasMvc.Models.MensalidadeMateriaViewModel>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+
+<head>
+    <div align="left">
+        <h3>CADASTRO DE ALUNO</h3>
+    </div>
+</head>
+<br />
+<form id="cad-aluno" action="/Aluno/Adiciona" method="post" class="active">
+    @Html.AntiForgeryToken()
+
+    <!--nav tabs-->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">DADOS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">PAGAMENTOS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">NOTAS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">PRESENÇA</a>
+        </li>
+    </ul>
+    
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <!--ABA DADOS-->
+        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <!--dados-->
+            <br />
+            <label>Dados Pessoais:</label>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+
+
+                        <div class="col-md-4">
+                            <label for="nome">Nome:</label>
+                            <input id="nome" name="aluno.Nome" value="" class="form-control" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="email">E-mail:</label>
+                            <input id="email" type="email" name="aluno.Email" value="" placeholder="Ex: email@email.com" class="form-control" />
+                        </div>
+                        <div class="col-md-2">
+                            <label for="telefone">Telefone:</label>
+                            <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <!-- Responsável -->
+                        <div class="col-md-4">
+                            <label for="responsavel">Nome Responsável:</label>
+                            <input id="responsavel" name="aluno.NomeResponsavel" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="emailResponsavel">E-mail Responsável:</label>
+                            <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-2">
+                            <label for="cpfResponsavel">CPF Responsável:</label>
+                            <input id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-2">
+                            <label for="telefone">Telefone Responsável:</label>
+                            <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <label>Matérias:</label>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="container">
+
+                       @{
+                        int i = 0;
+
+                        foreach (var item in Model)
+                        { 
+
+                    <div class="col-md-2">
+                        <input id="materias" type="checkbox" name="materias" class="form-check-input" value="@item.Materias[i].Id" />
+                        <label class="choice" for="element_1_1">@item.Materias[i].Nome &nbsp;</label>
+                    </div>
+                            i++;
+                        }
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <label>Aulas:</label>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <input id="aulaSegunda" type="checkbox" name="aluno.AulaSegunda" class="form-check-input" value="1" />
+                            <label class="choice" for="aluno.AulaSegunda">SEG &nbsp;</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="aulaTerca" type="checkbox" name="aluno.AulaTerca" class="form-check-input" value="1" />
+                            <label class="choice" for="aluno.AulaTerca">TER &nbsp;</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="AulaQuarta" type="checkbox" name="aluno.AulaQuarta" class="form-check-input" value="1" />
+                            <label class="choice" for="aluno.AulaQuarta"> QUA &nbsp;</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="AulaQuinta" type="checkbox" name="aluno.AulaQuinta" class="form-check-input" value="1" />
+                            <label class="choice" for="aluno.AulaQuinta"> QUI &nbsp;</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="AulaSexta" type="checkbox" name="aluno.AulaSexta" class="form-check-input" value="1" />
+                            <label class="choice" for="aluno.AulaSexta"> SEX &nbsp;</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="AulaSabado" type="checkbox" name="aluno.AulaSabado" class="form-check-input" value="1" />
+                            <label class="choice" for="aluno.AulaSabado"> SAB &nbsp;</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input id="AulaDomingo" type="checkbox" name="aluno.AulaDomingo" class="form-check-input" value="1" />
+                            <label class="choice" for="aluno.AulaDomingo"> DOM</label>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label for="horario">Horário:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input id="horario" name="aluno.Horario" placeholder="Ex: 00:00" class="form-control" value="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--financeiro-->
+        <br />
+        <label>Adicionar Mensalidades:</label>
+        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label for="mensalidadeValor">Valor Mensalidade:</label>
+                            <input id="mensalidadeValor" name="mensalidade.Valor" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-1">
+                            <label for="mensalidadeQtd">Meses</label>
+                            <input id="mensalidadeQtd" name="qtdMaterias" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-1">
+                            <label for="diaVencimento">Dia Venc.</label>
+                            <input id="diaVencimento" name="diaVencimento" class="form-control" value="" />
+                        </div>
+                    </div>
+                </div>
+                <label>Mensalidades do Aluno</label>
+                <div class="panel-body">                 
+
+
+                <div class="col-md-2">
+                   
+                </div>}
+                </div>
+                </div>
+            </div>
+
+        <!--nova aba-->
+        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+
+        </div>
+        <!--nova aba-->
+        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+
+        </div>
+
+    </div>
+
+    <br />
+    <br />
+    <input class="btn btn-primary" align-baseline="right" type="submit" value="Cadastrar" />
+
+
+
+
+
+    <br />
+</form>
+
+
+        <script type="text/javascript">
+            var i = 0;
+            function adiciona(materiaId) {
+                var url = ("/Materia/Adiciona");
+                var params = { id: materiaId };
+                $.post(url, params);
+            }
+
+         
+        </script>

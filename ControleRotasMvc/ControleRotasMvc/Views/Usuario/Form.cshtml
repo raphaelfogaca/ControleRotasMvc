@@ -1,0 +1,25 @@
+﻿      
+<form action="/Usuario/Adiciona" method="post">
+    @Html.AntiForgeryToken()
+    <label for="nome">Nome:</label>
+    <input id="nome" name="usuario.UsuarioNome" value="@ViewBag.Usuario.UsuarioNome" class="form-control" />
+
+    <label for="sobrenome">Sobrenome:</label>
+    <input id="sobrenome" name="usuario.UsuarioSobrenome" value="@ViewBag.Usuario.UsuarioSobrenome" class="form-control" />
+
+    <label for="login">Login:</label>
+    <input id="login" name="usuario.UsuarioLogin" value="@ViewBag.Usuario.UsuarioLogin" class="form-control" />
+    @Html.ValidationMessage("usuario.UsuarioLogin")
+    @Html.ValidationMessage("usuario.LoginExistente")
+
+    <label for="email">E-mail:</label>
+    <input id="email" name="usuario.UsuarioEmail" value="@ViewBag.Usuario.UsuarioEmail" class="form-control" />
+
+    <label for="senha">Senha:</label>
+    <input id="senha" name="usuario.UsuarioSenha" value="@ViewBag.Usuario.UsuarioSenha" class="form-control" />
+
+    <label for="tipo">Tipo [0-Normal e 1-ADM]</label>
+    <input id="tipo" name="usuario.UsuarioTipo" value="@ViewBag.Usuario.UsuarioTipo" class="form-control">
+    
+    <input type="submit" value="Cadastrar" />
+</form>        

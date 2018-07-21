@@ -1,0 +1,37 @@
+﻿
+@model IList<ControleRotasMvc.Models.Aluno>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Responsável</th>
+            <th>E-mail Responsável</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aluno in Model)
+        {
+            <tr>
+                <td>@aluno.Id</td>
+                <td>@Html.RouteLink(aluno.Nome, "VisualizaAluno", new { id = aluno.Id })</td>        
+                <td>@aluno.Email</td>
+                <td>@aluno.Telefone</td>
+                <td>@aluno.NomeResponsavel</td>
+                <td>@aluno.EmailResponsavel</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*/codigo java script*@
+
+
+
+
+
+
+
