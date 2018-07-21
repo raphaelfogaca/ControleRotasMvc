@@ -22,19 +22,13 @@ namespace ControleRotasMvc.Controllers
 
         public ActionResult Cadastro()
         {
-            var viewmod = new MensalidadeMateriaViewModel();
+            //var viewmod = new MateriaAlunos(); comentada 21/07
             //ViewBag.Aluno = new Aluno();
 
             MateriaEntity dao2 = new MateriaEntity();
             IList<Materia> materia = dao2.Materias();
 
-            MensalidadeEntity dao3 = new MensalidadeEntity();
-            IList<Mensalidade> mensalidade = dao3.Mensalidades();    
-            
-            viewmod.Mensalidades = mensalidade;
-            viewmod.Materias = materia;
-
-            return View(viewmod);
+            return View(materia);
         }
 
         [HttpPost]

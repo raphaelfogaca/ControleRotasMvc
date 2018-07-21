@@ -27,7 +27,7 @@ namespace ControleRotasMvc.Models
         public int AulaSabado { get; set; }
         public int AulaDomingo { get; set; }
 
-      //  public IList<MateriaAluno> Materias { get; set; }
+        //public IList<MateriaAluno> Materias { get; set; }
 
         public virtual IEnumerable<MateriaAlunos> MateriaAlunos { get; set; }
     }

@@ -1,5 +1,5 @@
-﻿@*@model IList<ControleRotasMvc.Models.Aluno*@
-@model IList<ControleRotasMvc.Models.MensalidadeMateriaViewModel>
+﻿@model IEnumerable<ControleRotasMvc.Models.Materia>
+
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
@@ -81,19 +81,17 @@
             <label>Matérias:</label>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="container">
+                    <div class="container">                     
+                  
 
-                       @{
-                        int i = 0;
-
-                        foreach (var item in Model)
+                        @foreach (var item in Model)
                         { 
 
                     <div class="col-md-2">
-                        <input id="materias" type="checkbox" name="materias" class="form-check-input" value="@item.Materias[i].Id" />
-                        <label class="choice" for="element_1_1">@item.Materias[i].Nome &nbsp;</label>
+                        <input id="materias" type="checkbox" name="materias" class="form-check-input" value="@item.Id" />
+                        <label class="choice" for="element_1_1">@item.Nome</label>
                     </div>
-                            i++;
+                     
                         }
                         }
 
