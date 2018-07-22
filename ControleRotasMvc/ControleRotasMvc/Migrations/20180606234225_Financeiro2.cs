@@ -10,18 +10,18 @@ namespace ControleRotasMvc.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Mensalidades_Alunos_AlunoId",
-                table: "Mensalidades");
+                table: "DocumentoFinanceiro");
 
             migrationBuilder.AlterColumn<int>(
                 name: "AlunoId",
-                table: "Mensalidades",
+                table: "DocumentoFinanceiro",
                 nullable: false,
                 oldClrType: typeof(int),
                 oldNullable: true);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Mensalidades_Alunos_AlunoId",
-                table: "Mensalidades",
+                table: "DocumentoFinanceiro",
                 column: "AlunoId",
                 principalTable: "Alunos",
                 principalColumn: "Id",
@@ -32,17 +32,17 @@ namespace ControleRotasMvc.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Mensalidades_Alunos_AlunoId",
-                table: "Mensalidades");
+                table: "DocumentoFinanceiro");
 
             migrationBuilder.AlterColumn<int>(
                 name: "AlunoId",
-                table: "Mensalidades",
+                table: "DocumentoFinanceiro",
                 nullable: true,
                 oldClrType: typeof(int));
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Mensalidades_Alunos_AlunoId",
-                table: "Mensalidades",
+                table: "DocumentoFinanceiro",
                 column: "AlunoId",
                 principalTable: "Alunos",
                 principalColumn: "Id",

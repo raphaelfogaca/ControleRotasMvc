@@ -17,7 +17,7 @@ namespace ControleRotasMvc.DAO
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Materia> Materias { get; set; }
         public DbSet<MateriaAlunos> MateriaAlunos { get; set; }
-        public DbSet<Mensalidade> Mensalidades { get; set; }
+        public DbSet<Financeiro> Financeiros { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -47,13 +47,27 @@ namespace ControleRotasMvc.Migrations
 
                     b.Property<string>("NomeResponsavel");
 
-                    b.Property<string>("Sobrenome");
-
                     b.Property<string>("Telefone");
 
                     b.HasKey("Id");
 
                     b.ToTable("Alunos");
+                });
+
+            modelBuilder.Entity("ControleRotasMvc.Models.Financeiro", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AlunoId");
+
+                    b.Property<float>("Valor");
+
+                    b.Property<int>("Vencimento");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Financeiros");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.Materia", b =>
@@ -84,24 +98,6 @@ namespace ControleRotasMvc.Migrations
                     b.HasIndex("MateriaId");
 
                     b.ToTable("MateriaAlunos");
-                });
-
-            modelBuilder.Entity("ControleRotasMvc.Models.Mensalidade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AlunoId");
-
-                    b.Property<float>("Valor");
-
-                    b.Property<DateTime>("Vencimento");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AlunoId");
-
-                    b.ToTable("Mensalidades");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.Usuario", b =>
@@ -138,14 +134,6 @@ namespace ControleRotasMvc.Migrations
                     b.HasOne("ControleRotasMvc.Models.Materia", "Materia")
                         .WithMany("MateriaAlunos")
                         .HasForeignKey("MateriaId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ControleRotasMvc.Models.Mensalidade", b =>
-                {
-                    b.HasOne("ControleRotasMvc.Models.Aluno", "Aluno")
-                        .WithMany()
-                        .HasForeignKey("AlunoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

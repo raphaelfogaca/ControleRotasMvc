@@ -11,6 +11,7 @@ namespace ControleRotasMvc.Models
         public Aluno()
         {
             MateriaAlunos = new HashSet<MateriaAlunos>();
+            
         }
 
         public int Id { get; set; }

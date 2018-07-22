@@ -8,25 +8,27 @@ using System.Web.Mvc;
 
 namespace ControleRotasMvc.Controllers
 {
-    public class MensalidadeController : Controller
+    public class FinanceiroController : Controller
     {
         // GET: Mensalidade
         public ActionResult Index()
         {
-            return View();
+            FinanceiroEntity dao = new FinanceiroEntity();
+            IList<Financeiro> docfin = dao.DocumentoFinanceiro();
+            return View(docfin);
         }
 
-        public Mensalidade Cadastrar(Mensalidade mensalidade, int qtdMaterias)
+        public Financeiro Cadastrar(Financeiro docfin, int qtdMaterias)
         {
-            MensalidadeEntity db3 = new MensalidadeEntity();
+            FinanceiroEntity db3 = new FinanceiroEntity();
             
             while (qtdMaterias > 0)
             {
-                db3.Gravar(mensalidade);
+                db3.Gravar(docfin);
                 qtdMaterias--;
-                mensalidade.Id = 0;
+                docfin.Id = 0;
             }
-            return (mensalidade);
+            return (docfin);
         }
     }
 }

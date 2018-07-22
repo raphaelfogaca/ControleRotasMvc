@@ -7,7 +7,7 @@ namespace ControleRotasMvc.Models
 {
     public class MensalidadeMateriaViewModel
     {
-        public IList<Mensalidade> Mensalidades { get; set; }
+        public IList<Financeiro> Mensalidades { get; set; }
         public IList<Materia> Materias { get; set; }
     }
 }

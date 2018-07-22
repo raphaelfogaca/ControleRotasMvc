@@ -19,7 +19,7 @@ namespace ControleRotasMvc.Migrations
                 oldNullable: true);
 
             migrationBuilder.CreateTable(
-                name: "Mensalidades",
+                name: "DocumentoFinanceiro",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -41,14 +41,14 @@ namespace ControleRotasMvc.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Mensalidades_AlunoId",
-                table: "Mensalidades",
+                table: "DocumentoFinanceiro",
                 column: "AlunoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Mensalidades");
+                name: "DocumentoFinanceiro");
 
             migrationBuilder.AlterColumn<string>(
                 name: "UsuarioLogin",

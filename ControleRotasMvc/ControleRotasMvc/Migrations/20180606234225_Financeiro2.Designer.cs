@@ -102,7 +102,7 @@ namespace ControleRotasMvc.Migrations
 
                     b.HasIndex("AlunoId");
 
-                    b.ToTable("Mensalidades");
+                    b.ToTable("DocumentoFinanceiro");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.Usuario", b =>

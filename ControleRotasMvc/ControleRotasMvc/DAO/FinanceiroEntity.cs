@@ -7,16 +7,16 @@ using System.Web;
 
 namespace ControleRotasMvc.DAO
 {
-    public class MensalidadeEntity : DbContext
+    public class FinanceiroEntity : DbContext
     {
 
-        public IList<Mensalidade> Mensalidades()
+        public IList<Financeiro> DocumentoFinanceiro()
         {
             var repo = new ControleRotasContext();
-            return repo.Mensalidades.ToList();
+            return repo.Financeiros.ToList();
         }
 
-        public bool Gravar(Mensalidade mensalidade)
+        public bool Gravar(Financeiro docfin)
         {
 
             try
@@ -24,7 +24,7 @@ namespace ControleRotasMvc.DAO
 
                 using (var repo = new ControleRotasContext())
                 {
-                    repo.Mensalidades.Add(mensalidade);
+                    repo.Financeiros.Add(docfin);
                     repo.SaveChanges();
                     return true;
                 }

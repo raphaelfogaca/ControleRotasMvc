@@ -33,7 +33,7 @@ namespace ControleRotasMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Adiciona(Aluno aluno, int[] materias, Mensalidade mensalidade, int qtdMaterias)
+        public ActionResult Adiciona(Aluno aluno, int[] materias, Financeiro mensalidade, int qtdMaterias)
         {
             AlunoEntity db2 = new AlunoEntity();
             //aluno.MateriaAluno = materias.Select(o => new MateriaAluno() { MateriaId = o }).ToList();
@@ -51,7 +51,7 @@ namespace ControleRotasMvc.Controllers
                 mensalidade.AlunoId = aluno.Id;
 
                 // gravar mensalidades
-                MensalidadeController mens = new MensalidadeController();
+                FinanceiroController mens = new FinanceiroController();
                 mens.Cadastrar(mensalidade,qtdMaterias);
                 
 

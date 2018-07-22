@@ -11,8 +11,8 @@ using System;
 namespace ControleRotasMvc.Migrations
 {
     [DbContext(typeof(ControleRotasContext))]
-    [Migration("20180606231541_Financeiro")]
-    partial class Financeiro
+    [Migration("20180722081508_VencimentoMensalidadeInt")]
+    partial class VencimentoMensalidadeInt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,31 +48,11 @@ namespace ControleRotasMvc.Migrations
 
                     b.Property<string>("NomeResponsavel");
 
-                    b.Property<string>("Sobrenome");
-
                     b.Property<string>("Telefone");
 
                     b.HasKey("Id");
 
                     b.ToTable("Alunos");
-                });
-
-            modelBuilder.Entity("ControleRotasMvc.Models.Financeiro", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("AlunoId");
-
-                    b.Property<float>("Valor");
-
-                    b.Property<DateTime>("Vencimento");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AlunoId");
-
-                    b.ToTable("DocumentoFinanceiro");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.Materia", b =>
@@ -105,6 +85,22 @@ namespace ControleRotasMvc.Migrations
                     b.ToTable("MateriaAlunos");
                 });
 
+            modelBuilder.Entity("ControleRotasMvc.Models.Mensalidade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AlunoId");
+
+                    b.Property<float>("Valor");
+
+                    b.Property<int>("Vencimento");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DocumentoFinanceiro");
+                });
+
             modelBuilder.Entity("ControleRotasMvc.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -127,13 +123,6 @@ namespace ControleRotasMvc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("ControleRotasMvc.Models.Financeiro", b =>
-                {
-                    b.HasOne("ControleRotasMvc.Models.Aluno", "Aluno")
-                        .WithMany()
-                        .HasForeignKey("AlunoId");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.MateriaAlunos", b =>

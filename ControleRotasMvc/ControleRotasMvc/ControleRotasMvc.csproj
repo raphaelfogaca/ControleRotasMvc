@@ -259,13 +259,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MateriaController.cs" />
-    <Compile Include="Controllers\MensalidadeController.cs" />
+    <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAO\AlunoEntity.cs" />
     <Compile Include="DAO\ControleRotasContext.cs" />
     <Compile Include="DAO\MateriaAlunoEntity.cs" />
     <Compile Include="DAO\MateriaEntity.cs" />
-    <Compile Include="DAO\MensalidadeEntity.cs" />
+    <Compile Include="DAO\FinanceiroEntity.cs" />
     <Compile Include="DAO\UsuarioEntity.cs" />
     <Compile Include="Filtros\AutorizacaoFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -319,9 +319,21 @@
     <Compile Include="Migrations\20180606234225_Financeiro2.designer.cs">
       <DependentUpon>20180606234225_Financeiro2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20180722081429_VencimentoMensalidade.cs" />
+    <Compile Include="Migrations\20180722081429_VencimentoMensalidade.designer.cs">
+      <DependentUpon>20180722081429_VencimentoMensalidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180722081508_VencimentoMensalidadeInt.cs" />
+    <Compile Include="Migrations\20180722081508_VencimentoMensalidadeInt.designer.cs">
+      <DependentUpon>20180722081508_VencimentoMensalidadeInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180722181517_AlterarFinanceiro.cs" />
+    <Compile Include="Migrations\20180722181517_AlterarFinanceiro.designer.cs">
+      <DependentUpon>20180722181517_AlterarFinanceiro.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ControleRotasContextModelSnapshot.cs" />
     <Compile Include="Models\Aluno.cs" />
-    <Compile Include="Models\Mensalidade.cs" />
+    <Compile Include="Models\Financeiro.cs" />
     <Compile Include="Models\Materia.cs" />
     <Compile Include="Models\MateriaAlunos.cs" />
     <Compile Include="Models\Usuario.cs" />
@@ -354,6 +366,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Materia\Index.cshtml" />
     <Content Include="Views\Materia\Cadastro.cshtml" />
+    <Content Include="Views\Financeiro\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -364,7 +377,6 @@
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="Views\MateriaeMensalidadeViewModel\" />
-    <Folder Include="Views\Mensalidade\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

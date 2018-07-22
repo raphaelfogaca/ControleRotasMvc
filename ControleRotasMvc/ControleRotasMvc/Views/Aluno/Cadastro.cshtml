@@ -158,7 +158,7 @@
                         </div>
                         <div class="col-md-1">
                             <label for="diaVencimento">Dia Venc.</label>
-                            <input id="diaVencimento" name="diaVencimento" class="form-control" value="" />
+                            <input id="diaVencimento" name="mensalidade.Vencimento" class="form-control" value="" />
                         </div>
                     </div>
                 </div>
@@ -167,6 +167,50 @@
 
         <!--nova aba-->
         <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="container">
+
+                        <div class="col-md-2">
+                            <label>1º Bimestre</label>
+                            @foreach (var item in Model)
+    {
+                        <input id="horario" name="aluno.Horario" class="form-control" value="" />
+                        <br />
+}
+                        </div>
+                        <div class="col-md-2">
+                            <label>2º Bimestre</label>                            
+                            @foreach (var item in Model)
+    {
+                        <input id="horario" name="aluno.Horario" class="form-control" value="" />
+                        <br />
+}
+                        </div>
+
+                        <div class="col-md-2">
+                            <label>3º Bimestre</label>
+                            @foreach (var item in Model)
+    {
+                        <input id="horario" name="aluno.Horario" class="form-control" value="" />
+                        <br />
+}
+                        </div>
+
+                        <div class="col-md-2">
+                            <label>4º Bimestre</label>
+                            @foreach (var item in Model)
+    {
+                        <input id="horario" name="aluno.Horario" class="form-control" value="" />
+                        <br />
+}
+                        </div>
+
+                    </div>
+                    </div>
+            </div>
+
 
         </div>
         <!--nova aba-->
