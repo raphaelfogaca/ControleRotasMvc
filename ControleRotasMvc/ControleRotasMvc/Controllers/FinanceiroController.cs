@@ -30,5 +30,19 @@ namespace ControleRotasMvc.Controllers
             }
             return (docfin);
         }
+        
+        public Financeiro Deletar(Financeiro docfin)
+        {
+            FinanceiroEntity dao = new FinanceiroEntity();
+            dao.Deletar(docfin);            
+            return(docfin);
+        }
+        
+        public Financeiro Alterar(Financeiro docfin)
+        {
+             FinanceiroEntity dao = new FinanceiroEntity();
+             dao.Alterar(docfin);
+             return(docfin);
+        }
     }
 }
