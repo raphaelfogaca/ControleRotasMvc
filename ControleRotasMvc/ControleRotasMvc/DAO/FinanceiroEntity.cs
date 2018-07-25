@@ -35,5 +35,40 @@ namespace ControleRotasMvc.DAO
                 return false;
             }
         }
+        
+        public bool Deletar(Financeiro docfin)
+        {
+            try 
+            {
+            using (var repo = new ControleRotasContext())
+                {
+                    repo.Financeiro.Remove(docfin);
+                    repo.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception EX)
+                {
+                    return false;
+                }
+        }
+        
+        public bool Alterar(Financeiro docfin)
+        {
+            try
+            {
+            using (var repo = new ControleRotasContext())
+                {
+                    repo.Financeiro.Update(docfin);
+                    repo.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception EX)
+            {
+                return false;
+            }
+        }
+        
     }
 }
