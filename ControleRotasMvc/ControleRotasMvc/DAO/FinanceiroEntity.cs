@@ -42,7 +42,7 @@ namespace ControleRotasMvc.DAO
             {
             using (var repo = new ControleRotasContext())
                 {
-                    repo.Financeiro.Remove(docfin);
+                    repo.Financeiros.Remove(docfin);
                     repo.SaveChanges();
                     return true;
                 }
@@ -59,7 +59,7 @@ namespace ControleRotasMvc.DAO
             {
             using (var repo = new ControleRotasContext())
                 {
-                    repo.Financeiro.Update(docfin);
+                    repo.Financeiros.Update(docfin);
                     repo.SaveChanges();
                     return true;
                 }

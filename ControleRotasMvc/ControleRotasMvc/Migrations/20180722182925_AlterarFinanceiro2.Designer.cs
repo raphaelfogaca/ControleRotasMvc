@@ -11,8 +11,8 @@ using System;
 namespace ControleRotasMvc.Migrations
 {
     [DbContext(typeof(ControleRotasContext))]
-    [Migration("20180722181517_AlterarFinanceiro")]
-    partial class AlterarFinanceiro
+    [Migration("20180722182925_AlterarFinanceiro2")]
+    partial class AlterarFinanceiro2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,6 +61,8 @@ namespace ControleRotasMvc.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AlunoId");
+
+                    b.Property<int>("Situacao");
 
                     b.Property<float>("Valor");
 

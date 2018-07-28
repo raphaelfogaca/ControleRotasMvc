@@ -327,9 +327,9 @@
     <Compile Include="Migrations\20180722081508_VencimentoMensalidadeInt.designer.cs">
       <DependentUpon>20180722081508_VencimentoMensalidadeInt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20180722181517_AlterarFinanceiro.cs" />
-    <Compile Include="Migrations\20180722181517_AlterarFinanceiro.designer.cs">
-      <DependentUpon>20180722181517_AlterarFinanceiro.cs</DependentUpon>
+    <Compile Include="Migrations\20180722182925_AlterarFinanceiro2.cs" />
+    <Compile Include="Migrations\20180722182925_AlterarFinanceiro2.designer.cs">
+      <DependentUpon>20180722182925_AlterarFinanceiro2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ControleRotasContextModelSnapshot.cs" />
     <Compile Include="Models\Aluno.cs" />

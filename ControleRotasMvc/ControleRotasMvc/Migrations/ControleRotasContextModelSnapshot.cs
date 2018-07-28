@@ -61,6 +61,8 @@ namespace ControleRotasMvc.Migrations
 
                     b.Property<int>("AlunoId");
 
+                    b.Property<int>("Situacao");
+
                     b.Property<float>("Valor");
 
                     b.Property<int>("Vencimento");

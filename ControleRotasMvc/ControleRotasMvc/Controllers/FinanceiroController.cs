@@ -30,12 +30,13 @@ namespace ControleRotasMvc.Controllers
             }
             return (docfin);
         }
-        
-        public Financeiro Deletar(Financeiro docfin)
+
+        [Route("financeiro/{id}", Name = "Deletar")]
+        public ActionResult Deletar(Financeiro docfin)
         {
             FinanceiroEntity dao = new FinanceiroEntity();
-            dao.Deletar(docfin);            
-            return(docfin);
+            dao.Deletar(docfin);
+            return RedirectToAction("Index");
         }
         
         public Financeiro Alterar(Financeiro docfin)
