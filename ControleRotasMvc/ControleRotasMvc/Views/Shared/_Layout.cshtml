@@ -19,45 +19,51 @@
 <body>
 
     <nav class="navbar navbar-inverse">
-                    <a class="navbar-brand" href="#">SISTEMA</a>
-                    <ul class="nav navbar-nav">
-                        @*<li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>*@
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <span class="caret"></a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Alunos", "Cadastro", "Aluno")</li>
-                                <li>@Html.ActionLink("Usuários", "Form", "Usuario")</li>
-                                <li>@Html.ActionLink("Matérias", "Cadastro", "Materia")</li>
-</li>
-                    </ul>
-                        </li>
-                    </ul>
+        <a class="navbar-brand" href="#">SISTEMA</a>
+        <ul class="nav navbar-nav">
+            @*<li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>*@
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <span class="caret"></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Alunos", "Cadastro", "Aluno")</li>
+                    <li>@Html.ActionLink("Usuários", "Form", "Usuario")</li>
+                    <li>@Html.ActionLink("Matérias", "Cadastro", "Materia")</li>
+            </li>
+        </ul>
+        </li>
+        </ul>
 
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alunos <span class="caret"></a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Controle", "Index", "Aluno")</li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Financeiro <span class="caret"></a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Operacional","Index", "Financeiro")</li>
-                            </ul>
-                        </li>
-                    </ul>
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alunos <span class="caret"></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Controle", "Index", "Aluno")</li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Financeiro <span class="caret"></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Operacional", "Index", "Financeiro")</li>
+                </ul>
+            </li>
+        </ul>
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Logout    </a></li>
-                    </ul>
-        
-        </nav>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Logout    </a></li>
+        </ul>
+
+    </nav>
     <div class="container">
+        <div id="body" role="alert">
+            @Flash.FlashMessage(TempData)
+            <div id="flash"></div>
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix"></section>
+        </div>
         <div id="conteudo">
             @RenderBody()
         </div>
-    </div>
 
+    </div>  
 </body>
 </html>

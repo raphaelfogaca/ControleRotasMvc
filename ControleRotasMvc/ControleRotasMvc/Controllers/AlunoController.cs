@@ -39,6 +39,7 @@ namespace ControleRotasMvc.Controllers
             //aluno.MateriaAluno = materias.Select(o => new MateriaAluno() { MateriaId = o }).ToList();
             aluno.MateriaAlunos = materias.Select(n => new MateriaAlunos() { MateriaId = n }).ToList();
 
+            
 
             if (db2.BuscaAlunoPorEmail(aluno.Email))
             {
@@ -46,12 +47,14 @@ namespace ControleRotasMvc.Controllers
             }
             if (ModelState.IsValid)
             {
+                
                 AlunoEntity db = new AlunoEntity();                             
                 db.Gravar(aluno);
                 mensalidade.AlunoId = aluno.Id;
-
+               // mensalidade.Vencimento = DateTime.Now;
                 // gravar mensalidades
-                FinanceiroController mens = new FinanceiroController();
+                
+                FinanceiroController mens = new FinanceiroController();                
                 mens.Cadastrar(mensalidade,qtdMaterias);
                 
 

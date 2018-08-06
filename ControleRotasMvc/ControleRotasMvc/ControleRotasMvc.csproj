@@ -237,6 +237,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="App_Code\Flash.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -271,6 +272,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FlashHelper.cs" />
     <Compile Include="Migrations\20180603032224_Inicial.cs" />
     <Compile Include="Migrations\20180603032224_Inicial.designer.cs">
       <DependentUpon>20180603032224_Inicial.cs</DependentUpon>
@@ -331,6 +333,34 @@
     <Compile Include="Migrations\20180722182925_AlterarFinanceiro2.designer.cs">
       <DependentUpon>20180722182925_AlterarFinanceiro2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20180728164508_FinanceiroVencDate.cs" />
+    <Compile Include="Migrations\20180728164508_FinanceiroVencDate.designer.cs">
+      <DependentUpon>20180728164508_FinanceiroVencDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180728164524_FinanceiroVencDate2.cs" />
+    <Compile Include="Migrations\20180728164524_FinanceiroVencDate2.designer.cs">
+      <DependentUpon>20180728164524_FinanceiroVencDate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180728164555_FinanceiroVencDate3.cs" />
+    <Compile Include="Migrations\20180728164555_FinanceiroVencDate3.designer.cs">
+      <DependentUpon>20180728164555_FinanceiroVencDate3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180728210806_FinanceiroVencDate4.cs" />
+    <Compile Include="Migrations\20180728210806_FinanceiroVencDate4.designer.cs">
+      <DependentUpon>20180728210806_FinanceiroVencDate4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180728210833_FinanceiroVencDate5.cs" />
+    <Compile Include="Migrations\20180728210833_FinanceiroVencDate5.designer.cs">
+      <DependentUpon>20180728210833_FinanceiroVencDate5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180805122723_StatusUsuario.cs" />
+    <Compile Include="Migrations\20180805122723_StatusUsuario.designer.cs">
+      <DependentUpon>20180805122723_StatusUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180805124927_StatusUsuarioInt.cs" />
+    <Compile Include="Migrations\20180805124927_StatusUsuarioInt.designer.cs">
+      <DependentUpon>20180805124927_StatusUsuarioInt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ControleRotasContextModelSnapshot.cs" />
     <Compile Include="Models\Aluno.cs" />
     <Compile Include="Models\Financeiro.cs" />
@@ -367,6 +397,7 @@
     <Content Include="Views\Materia\Index.cshtml" />
     <Content Include="Views\Materia\Cadastro.cshtml" />
     <Content Include="Views\Financeiro\Index.cshtml" />
+    <Content Include="Views\Usuario\Alterar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -375,7 +406,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Code\" />
     <Folder Include="Views\MateriaeMensalidadeViewModel\" />
   </ItemGroup>
   <ItemGroup>

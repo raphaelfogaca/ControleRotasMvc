@@ -1,33 +1,12 @@
-﻿
-@*<div>
-    Id: @ViewBag.Usuario.Id<br />
-    Login: @ViewBag.Usuario.UsuarioLogin<br />
-    Nome: @ViewBag.Usuario.UsuarioNome<br />
-    Sobrenome: @ViewBag.Usuario.UsuarioSobrenome<br />
-    Email: @ViewBag.Usuario.UsuarioEmail<br />
-    Senha: @ViewBag.Usuario.UsuarioSenha<br />
-    TIpo: @ViewBag.Usuario.UsuarioTipo<br />
-    @Html.RouteLink("Voltar para a lista de usuários", "ListaUsuarios")
-</div>*@
-
-
-@model ControleRotasMvc.Models.Usuario
+﻿@*@model IList<ControleRotasMvc.Models.Usuario>*@
 
 <form action="/Usuario/Alterar" method="post">
     @*@Html.AntiForgeryToken()*@
-    @*<label for="id">ID</label>
-    <input form="id" name="usuario.Id" value="@ViewBag.Usuario.Id" class="form-control" />*@
-
-    @Html.HiddenFor(model => model.Id)
-
     <label for="nome">Nome:</label>
     <input id="nome" name="usuario.UsuarioNome" value="@ViewBag.Usuario.UsuarioNome" class="form-control" />
 
     <label for="sobrenome">Sobrenome:</label>
     <input id="sobrenome" name="usuario.UsuarioSobrenome" value="@ViewBag.Usuario.UsuarioSobrenome" class="form-control" />
-
-    <label for="login">Login:</label>
-    <input id="login" name="usuario.UsuarioLogin" value="@ViewBag.Usuario.UsuarioLogin" class="form-control" />
 
     <label for="email">E-mail:</label>
     <input id="email" name="usuario.UsuarioEmail" value="@ViewBag.Usuario.UsuarioEmail" class="form-control" />

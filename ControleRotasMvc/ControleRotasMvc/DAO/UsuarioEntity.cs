@@ -71,12 +71,13 @@ namespace ControleRotasMvc.DAO
             }
         }
 
-        public void Atualiza(Usuario usuario)
+        public bool Alterar(Usuario usuario)
         {
             using (var contexto = new ControleRotasContext())
             {
                 contexto.Entry(usuario).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                contexto.SaveChanges();              
+                contexto.SaveChanges();
+                return true;
             }
         }     
     }

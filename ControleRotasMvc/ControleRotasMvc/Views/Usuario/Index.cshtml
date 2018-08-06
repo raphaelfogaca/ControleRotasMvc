@@ -1,5 +1,4 @@
-﻿
-@model IList<ControleRotasMvc.Models.Usuario>
+﻿@model IList<ControleRotasMvc.Models.Usuario>
 
 <table class="table table-hover">
     <thead>
@@ -10,39 +9,65 @@
             <th>Sobrenome</th>
             <th>E-mail</th>
             <th>Tipo</th>
-            <th></th>
+            <th>Status</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var usuario in Model)
         {
-        <tr>
-            <td>@usuario.Id</td>
-            <td>@Html.RouteLink(usuario.UsuarioLogin, "VisualizaProduto", new { id = usuario.Id })</td>
-            <td>@usuario.UsuarioNome</td>
-            <td>@usuario.UsuarioSobrenome</td>
-            <td>@usuario.UsuarioEmail</td>
-            <td id="usuariotipo@(usuario.Id)">@usuario.UsuarioTipo</td>
-            <td><a href="#" onclick="decrementa(@usuario.Id)">Dec.</a></td>
-        </tr>
+            <tr>
+                <td>@usuario.Id</td>
+                <td>@usuario.UsuarioLogin</td>
+                <td>@usuario.UsuarioNome</td>
+                <td>@usuario.UsuarioSobrenome</td>
+                <td>@usuario.UsuarioEmail</td>
+                @if (usuario.UsuarioTipo == 0)
+                {
+                    <td>Contratante</td>
+                }
+                else if (usuario.UsuarioTipo == 1)
+                {
+                    <td>Administrador</td>
+                }
+                else if (usuario.UsuarioTipo == 2)
+                {
+                    <td>Responsável</td>
+                }
+                @if (usuario.Status == 0)
+                {
+                    <td>Inativo</td>
+                }
+                else if (usuario.Status == 1)
+                {
+                    <td>Ativo</td>
+                }
+                <td>
+                    @Html.ActionLink(
+                  "Alterar",
+                  "VisualizaUsuario",                         // controller action
+                  "Usuario",        // controller
+                  new { id = usuario.Id },         // action parameters aka route values
+                  new { @class = "btn btn-info" })
+                </td>
+            </tr>
         }
     </tbody>
 </table>
 
-@*/codigo java script*@
+@*/codigo java script de teste*@
 <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 
-        function decrementa(usuarioId) {
-            var url = ("/Usuario/Decrementar");
-            var params = {id: usuarioId};
-            $.post(url, params, atualiza);
-        }
+    function decrementa(usuarioId) {
+        var url = ("/Usuario/Decrementar");
+        var params = { id: usuarioId };
+        $.post(url, params, atualiza);
+    }
 
-        function atualiza(resposta) {
-            var elemento = $("#usuariotipo" + resposta.Id);
-            elemento.html(resposta.UsuarioTipo);
+    function atualiza(resposta) {
+        var elemento = $("#usuariotipo" + resposta.Id);
+        elemento.html(resposta.UsuarioTipo);
     }
 </script>
 

@@ -11,9 +11,10 @@ using System;
 namespace ControleRotasMvc.Migrations
 {
     [DbContext(typeof(ControleRotasContext))]
-    partial class ControleRotasContextModelSnapshot : ModelSnapshot
+    [Migration("20180728210833_FinanceiroVencDate5")]
+    partial class FinanceiroVencDate5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +66,7 @@ namespace ControleRotasMvc.Migrations
 
                     b.Property<float>("Valor");
 
-                    b.Property<DateTime>("Vencimento");
+                    b.Property<int>("Vencimento");
 
                     b.HasKey("Id");
 
@@ -107,11 +108,11 @@ namespace ControleRotasMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Status");
-
                     b.Property<string>("UsuarioEmail");
 
-                    b.Property<string>("UsuarioLogin");
+                    b.Property<string>("UsuarioLogin")
+                        .IsRequired()
+                        .HasMaxLength(20);
 
                     b.Property<string>("UsuarioNome");
 

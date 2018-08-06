@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using ControleRotasMvc.Helpers;
 
 namespace ControleRotasMvc.Controllers
 {
@@ -17,8 +18,8 @@ namespace ControleRotasMvc.Controllers
     public class UsuarioController : Controller
     {
         // GET: Usuario
-        [Route("usuarios", Name="ListaUsuarios")]
-        
+        [Route("usuarios", Name = "ListaUsuarios")]
+
         public ActionResult Index()
         {
             UsuarioEntity dao = new UsuarioEntity();
@@ -36,20 +37,27 @@ namespace ControleRotasMvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Adiciona(Usuario usuario)
         {
+            usuario.UsuarioLogin = usuario.UsuarioEmail;
+            usuario.Status = 1;
             UsuarioEntity db2 = new UsuarioEntity();
             if (db2.BuscaUsuarioPorLogin(usuario.UsuarioLogin))
             {
-                ModelState.AddModelError("usuario.LoginExistente", "Este login já está cadastrado");
+                ModelState.AddModelError("usuario.LoginExistente", "Este e-mail já está cadastrado");
             }
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 UsuarioEntity db = new UsuarioEntity();
                 db.Gravar(usuario);
-                return RedirectToAction("Index", "Usuario");
+                this.FlashInfo("Usuário cadastrado com sucesso"); //M001
+                return RedirectToAction("Index", "Usuario");       
+                
 
-            }else
+            }
+            else
             {
                 ViewBag.Usuario = usuario;
                 UsuarioEntity db = new UsuarioEntity();
+                this.FlashError("Erro ao cadastrar usuário"); //M006
                 return View("Form");
             }
         }
@@ -59,30 +67,54 @@ namespace ControleRotasMvc.Controllers
             return View();
         }
 
-
-        [Route("produtos/{id}", Name="VisualizaProduto")]
-        public ActionResult Visualiza (int id)
-        {
-            UsuarioEntity db = new UsuarioEntity();      
-            Usuario usuario = db.BuscaUsuarioPorId(id);
-            ViewBag.Usuario = usuario;
-            return View(usuario);
-        }
-
-        public ActionResult Decrementar(int id)
+        //[Route("produtos/{id}", Name = "VisualizaProduto")]
+        [Route("Usuario/VisualizaUsuario/{id}", Name = "VisualizaUsuario")]
+        public ActionResult Visualiza(int id)
         {
             UsuarioEntity db = new UsuarioEntity();
             Usuario usuario = db.BuscaUsuarioPorId(id);
-            usuario.UsuarioTipo--;
-            db.Atualiza(usuario);
-            return Json(usuario);
+            ViewBag.Usuario = usuario;
+            TempData["UsuarioId"] = usuario.Id;
+            TempData.Keep();
+            return View(usuario);
         }
 
-        [HttpPost]
-        public ActionResult CriarManual()
+        //public ActionResult Decrementar(int id)
+        //{
+        //    UsuarioEntity db = new UsuarioEntity();
+        //    Usuario usuario = db.BuscaUsuarioPorId(id);
+        //    usuario.UsuarioTipo--;
+        //    db.Alterar(usuario);
+        //    return Json(usuario);
+        //}
+
+        //[Route("usuarios/{id}", Name="VisualizaUsuario")]
+        //public ActionResult VisualizaUsuario(int usuarioId)
+        //{
+        //    UsuarioEntity dao = new UsuarioEntity();
+        //    Usuario usuario = dao.BuscaUsuarioPorId(usuarioId);
+        //    ViewBag.Usuario = usuario;
+        //    return View(usuario);
+        //}
+
+
+        //[Route("usuarios/{id}", Name = "Alterar")]
+        public ActionResult Alterar(Usuario usuario)
         {
-           
-            return View();
+            int usuarioId = (int)TempData["UsuarioId"];
+            usuario.Id = usuarioId;
+            UsuarioEntity dao = new UsuarioEntity();
+            //Usuario usuario = dao.BuscaUsuarioPorId(id);
+            if (dao.Alterar(usuario))
+            {
+                this.FlashInfo("Usuário alterado com sucesso"); //M002
+                return RedirectToAction("Index");
+            } else {
+                this.FlashInfo("Erro ao alterar usuário"); //M003
+                return RedirectToAction("Index");
+            }
         }
+
+
     }
 }

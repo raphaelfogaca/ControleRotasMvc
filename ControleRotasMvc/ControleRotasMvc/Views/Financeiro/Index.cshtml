@@ -19,24 +19,25 @@
     <tbody>
         @foreach (var documento in Model)
         {
-            <tr>
-                <td>@documento.Id</td>
-                <td>@documento.AlunoId</td>
-                <td>R$@documento.Valor</td>
-                <td>@documento.Vencimento</td>
-                @if (documento.Situacao == 0)
-                {
-                    <td>Aberto</td>
-                }
-                else if (documento.Situacao == 1)
-                {
-                    <td>Liquidado</td>
-                }
-                <td><button class="btn btn-primary">Liquidar</button></td>
-                <td><button class="btn btn-info">Alterar</button></td>
-                <td><button class="btn btn-danger" onclick=@Html.ActionLink("Excluir", "Deletar", new { id = documento.Id })</button></td>
+        <tr>
+            <td>@documento.Id</td>
+            <td>@documento.AlunoId</td>
+            <td>R$@documento.Valor</td>
+            <td>@documento.Vencimento</td>
+            @if (documento.Situacao == 0)
+    {
+        <td>Aberto</td>
+}
+else if (documento.Situacao == 1)
+{
+        <td>Liquidado</td>
+}
+            <td><button class="btn btn-primary">Liquidar</button></td>
+            <td><button class="btn btn-info">Alterar</button></td>
+            <td><button class="btn btn-danger">Excluir</button></td>
+            <td>@Html.ActionLink("Excluir", "Deletar", new { id = documento.Id })</td>
 
-            </tr>
+        </tr>
 
         }
     </tbody>

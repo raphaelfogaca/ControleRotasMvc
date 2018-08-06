@@ -2,8 +2,6 @@
 using ControleRotasMvc.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ControleRotasMvc.Controllers
@@ -21,10 +19,14 @@ namespace ControleRotasMvc.Controllers
         public Financeiro Cadastrar(Financeiro docfin, int qtdMaterias)
         {
             FinanceiroEntity db3 = new FinanceiroEntity();
-            
+
+            // string minhaDataFormatada = docfin.Vencimento.ToString("dd/MM/yyyy");
+
+
+
             while (qtdMaterias > 0)
-            {
-                db3.Gravar(docfin);
+            {              
+                db3.Gravar(docfin);                
                 qtdMaterias--;
                 docfin.Id = 0;
             }
