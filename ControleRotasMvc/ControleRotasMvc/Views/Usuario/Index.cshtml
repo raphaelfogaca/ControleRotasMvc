@@ -1,75 +1,112 @@
 ﻿@model IList<ControleRotasMvc.Models.Usuario>
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Login</th>
-            <th>Nome</th>
-            <th>Sobrenome</th>
-            <th>E-mail</th>
-            <th>Tipo</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var usuario in Model)
-        {
-            <tr>
-                <td>@usuario.Id</td>
-                <td>@usuario.UsuarioLogin</td>
-                <td>@usuario.UsuarioNome</td>
-                <td>@usuario.UsuarioSobrenome</td>
-                <td>@usuario.UsuarioEmail</td>
-                @if (usuario.UsuarioTipo == 0)
-                {
-                    <td>Contratante</td>
-                }
-                else if (usuario.UsuarioTipo == 1)
-                {
-                    <td>Administrador</td>
-                }
-                else if (usuario.UsuarioTipo == 2)
-                {
-                    <td>Responsável</td>
-                }
-                @if (usuario.Status == 0)
-                {
-                    <td>Inativo</td>
-                }
-                else if (usuario.Status == 1)
-                {
-                    <td>Ativo</td>
-                }
-                <td>
-                    @Html.ActionLink(
-                  "Alterar",
-                  "VisualizaUsuario",                         // controller action
-                  "Usuario",        // controller
-                  new { id = usuario.Id },         // action parameters aka route values
-                  new { @class = "btn btn-info" })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
 
+<head>
+        <h3>CADASTRO DE USUÁRIOS</h3>
+</head>
+<body>
+    <div align="right">
+        <br />
+        <input type="text" id="nomedousuario" placeholder=" NOME" width="190" />
+        <button type="button" name="buscador" class="btn btn-default btn-sm" onclick="buscarUsuario()">Pesquisar</button>
+       
+        
+        <button type="button" name="btn.NovoUsuario" class="btn btn-default btn-sm" onclick="window.location.href='/Usuario/Form'">Novo Usuário</button>
+        <br />
+        <br />
+
+    </div>
+
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Login</th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>E-mail</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usuario in Model)
+                {
+                    <tr>
+                        <td>@usuario.Id</td>
+                        <td>@usuario.UsuarioLogin</td>
+                        <td>@usuario.UsuarioNome</td>
+                        <td>@usuario.UsuarioSobrenome</td>
+                        <td>@usuario.UsuarioEmail</td>
+                        @if (usuario.UsuarioTipo == 0)
+                        {
+                            <td>Contratante</td>
+                        }
+                        else if (usuario.UsuarioTipo == 1)
+                        {
+                            <td>Administrador</td>
+                        }
+                        else if (usuario.UsuarioTipo == 2)
+                        {
+                            <td>Responsável</td>
+                        }
+                        @if (usuario.Status == 0)
+                        {
+                            <td>Inativo</td>
+                        }
+                        else if (usuario.Status == 1)
+                        {
+                            <td>Ativo</td>
+                        }
+                        <td>
+                            @Html.ActionLink(
+                                         "Alterar",
+                                         "VisualizaUsuario",                         // controller action
+                                         "Usuario",        // controller
+                                         new { id = usuario.Id },         // action parameters aka route values
+                                         new { @class = "btn btn-info btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</body>
 @*/codigo java script de teste*@
 <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+
 <script type="text/javascript">
 
-    function decrementa(usuarioId) {
-        var url = ("/Usuario/Decrementar");
-        var params = { id: usuarioId };
-        $.post(url, params, atualiza);
+    function buscarUsuario() {       
+        var url = ("/Usuario/BuscarUsuario");
+        //var params = document.getElementById("nomedousuario");
+        var nome = "Raphael";
+        $.post(url, nome);
+    };
+
+    function adiciona(materiaId) {
+        var url = ("/Materia/Adiciona");
+        var params = { id: materiaId };
+        $.post(url, params);
     }
 
+
+        function validar() {
+            alert('hello!');
+        };
+    
     function atualiza(resposta) {
         var elemento = $("#usuariotipo" + resposta.Id);
         elemento.html(resposta.UsuarioTipo);
     }
 </script>
+
+
 
 
 

@@ -71,6 +71,15 @@ namespace ControleRotasMvc.DAO
             }
         }
 
+        public IList<Usuario> BuscarUsuarioPorNome(string nome)
+        {
+            ControleRotasContext db = new ControleRotasContext();
+            return db.Usuarios
+                    .Where(c => c.UsuarioNome == nome)
+                    .ToList();
+        }
+
+
         public bool Alterar(Usuario usuario)
         {
             using (var contexto = new ControleRotasContext())

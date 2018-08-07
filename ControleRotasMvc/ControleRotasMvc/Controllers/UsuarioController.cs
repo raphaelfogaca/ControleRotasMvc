@@ -115,6 +115,15 @@ namespace ControleRotasMvc.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("Usuario/BuscarUsuario", Name = "BuscarUsuario")]
+        public ActionResult BuscarUsuario(string nomeUsuario)
+        {
+            UsuarioEntity dao = new UsuarioEntity();
+            var listaUsuario = dao.BuscarUsuarioPorNome(nomeUsuario);
+            return View(listaUsuario);
+        }
+
 
     }
 }
