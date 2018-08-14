@@ -13,7 +13,7 @@ namespace ControleRotasMvc.DAO
         public IList<Financeiro> DocumentoFinanceiro()
         {
             var repo = new ControleRotasContext();
-            return repo.Financeiros.ToList();
+            return repo.DocumentosFinanceiros.ToList();
         }
 
         public bool Gravar(Financeiro docfin)
@@ -24,7 +24,7 @@ namespace ControleRotasMvc.DAO
 
                 using (var repo = new ControleRotasContext())
                 {
-                    repo.Financeiros.Add(docfin);
+                    repo.DocumentosFinanceiros.Add(docfin);
                     repo.SaveChanges();
                     return true;
                 }
@@ -42,7 +42,7 @@ namespace ControleRotasMvc.DAO
             {
             using (var repo = new ControleRotasContext())
                 {
-                    repo.Financeiros.Remove(docfin);
+                    repo.DocumentosFinanceiros.Remove(docfin);
                     repo.SaveChanges();
                     return true;
                 }
@@ -59,7 +59,7 @@ namespace ControleRotasMvc.DAO
             {
             using (var repo = new ControleRotasContext())
                 {
-                    repo.Financeiros.Update(docfin);
+                    repo.DocumentosFinanceiros.Update(docfin);
                     repo.SaveChanges();
                     return true;
                 }

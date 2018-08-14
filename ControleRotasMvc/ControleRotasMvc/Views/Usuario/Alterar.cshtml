@@ -1,5 +1,12 @@
 ﻿@*@model IList<ControleRotasMvc.Models.Usuario>*@
 
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+
+<head>
+    <h3>CADASTRO DE USUÁRIOS</h3>
+</head>
+
 <form action="/Usuario/Alterar" method="post">
     @*@Html.AntiForgeryToken()*@
     <label for="nome">Nome:</label>
@@ -17,9 +24,8 @@
     <input id="senha" name="usuario.UsuarioSenha" value="@ViewBag.Usuario.UsuarioSenha" class="form-control" />
 
     <label for="tipo">Tipo [0-Contrante  1-ADM  2-Responsável]</label>
-    <input id="tipo" name="usuario.UsuarioTipo" value="@ViewBag.Usuario.UsuarioTipo" class="form-control">
 
-    @*<td>@Html.ActionLink("Alterar", "Alterar", new { id = usuario.Id })</td>*@
+
 
     <input type="submit" value="Cadastrar" />
 </form>

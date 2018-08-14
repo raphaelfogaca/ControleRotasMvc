@@ -1,4 +1,4 @@
-﻿@model IList<ControleRotasMvc.Models.Usuario>
+﻿@model IQueryable<ControleRotasMvc.Models.Usuario>
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
@@ -9,17 +9,30 @@
 <body>
     <div align="right">
         <br />
-        <input type="text" id="nomedousuario" placeholder=" NOME" width="190" />
-        <button type="button" name="buscador" class="btn btn-default btn-sm" onclick="buscarUsuario()">Pesquisar</button>
-       
-        
-        <button type="button" name="btn.NovoUsuario" class="btn btn-default btn-sm" onclick="window.location.href='/Usuario/Form'">Novo Usuário</button>
-        <br />
+
+        @using (Ajax.BeginForm("BuscarUsuario", "Usuario", new AjaxOptions
+        {
+            HttpMethod = "Get",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "listaUsuarios"
+        }))
+        {
+            @Html.TextBox("Pesquisa")
+            <input type="submit" value="Pesquisar" class="btn btn-default btn-sm" />
+            @*<input type="button" class="btn btn-success btn-sm" value="Cadastrar" onclick="~/Usuario/Form" />*@
+            <a href="/Usuario/Form">
+                <input type="button" class="btn btn-success btn-sm" value="Novo Usuário" />
+            </a>
+        }
+
+
+
         <br />
 
+        <br />
     </div>
 
-    <div>
+    <div id="listaUsuarios">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -64,11 +77,11 @@
                         }
                         <td>
                             @Html.ActionLink(
-                                         "Alterar",
-                                         "VisualizaUsuario",                         // controller action
-                                         "Usuario",        // controller
-                                         new { id = usuario.Id },         // action parameters aka route values
-                                         new { @class = "btn btn-info btn-sm" })
+                      "Alterar",
+                      "VisualizaUsuario",                         // controller action
+                      "Usuario",        // controller
+                      new { id = usuario.Id },         // action parameters aka route values
+                      new { @class = "btn btn-info btn-sm" })
                         </td>
                     </tr>
                 }
@@ -76,6 +89,8 @@
         </table>
 
     </div>
+
+
 </body>
 @*/codigo java script de teste*@
 <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
@@ -104,6 +119,22 @@
         var elemento = $("#usuariotipo" + resposta.Id);
         elemento.html(resposta.UsuarioTipo);
     }
+
+
+    function buscarJson() {
+        $.ajax({
+            type: 'GET',
+            url: '/Usuario/BuscarUsuario',
+            dataType: 'json',
+            traditional: true,
+            success: function (data) {
+                results = data;
+            },
+            error: function (data) {
+                alert('Error.');
+            }
+        })
+    };
 </script>
 
 

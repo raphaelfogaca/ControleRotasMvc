@@ -29,10 +29,16 @@ namespace ControleRotasMvc.DAO
         }
 
 
-        public IList<Usuario> Usuarios()
+        public IQueryable<Usuario> Usuarios(string Pesquisa = "")
         {
-            var repo = new ControleRotasContext();
-            return repo.Usuarios.ToList();
+            //var repo = new ControleRotasContext();
+            //return repo.Usuarios.ToList();
+
+            ControleRotasContext db = new ControleRotasContext();
+            var q = db.Usuarios.AsQueryable();
+            q = q.Where(c => c.UsuarioNome.Contains(Pesquisa));
+            q.ToList();
+            return q;
         }
 
         public Usuario ValidaUsuario(string login, string senha)
@@ -71,12 +77,13 @@ namespace ControleRotasMvc.DAO
             }
         }
 
-        public IList<Usuario> BuscarUsuarioPorNome(string nome)
+        public IQueryable<Usuario> BuscarUsuarioPorNome(string nome)
         {
             ControleRotasContext db = new ControleRotasContext();
-            return db.Usuarios
-                    .Where(c => c.UsuarioNome == nome)
-                    .ToList();
+            var q = db.Usuarios.AsQueryable();
+                    q = q.Where(c => c.UsuarioNome.Contains(nome));
+                    q.ToList();
+            return q;
         }
 
 

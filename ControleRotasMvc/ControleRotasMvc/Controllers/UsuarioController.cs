@@ -23,7 +23,7 @@ namespace ControleRotasMvc.Controllers
         public ActionResult Index()
         {
             UsuarioEntity dao = new UsuarioEntity();
-            IList<Usuario> usuario = dao.Usuarios();
+            IQueryable<Usuario> usuario = dao.Usuarios();
             return View(usuario);
         }
 
@@ -115,13 +115,13 @@ namespace ControleRotasMvc.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("Usuario/BuscarUsuario", Name = "BuscarUsuario")]
-        public ActionResult BuscarUsuario(string nomeUsuario)
+        //[HttpGet]
+       // [Route("Usuario/BuscarUsuario", Name = "BuscarUsuario")]
+        public ActionResult BuscarUsuario(string Pesquisa)
         {
-            UsuarioEntity dao = new UsuarioEntity();
-            var listaUsuario = dao.BuscarUsuarioPorNome(nomeUsuario);
-            return View(listaUsuario);
+            UsuarioEntity dao = new UsuarioEntity();            
+            var listaUsuario = dao.BuscarUsuarioPorNome(Pesquisa);            
+            return View("Index", listaUsuario);
         }
 
 

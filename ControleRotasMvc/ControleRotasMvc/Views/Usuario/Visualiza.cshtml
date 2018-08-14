@@ -16,7 +16,7 @@
 <form action="/Usuario/Alterar" method="post">
     @*@Html.AntiForgeryToken()*@
     @*<label for="id">ID</label>
-    <input form="id" name="usuario.Id" value="@ViewBag.Usuario.Id" class="form-control" />*@
+        <input form="id" name="usuario.Id" value="@ViewBag.Usuario.Id" class="form-control" />*@
 
     @Html.HiddenFor(model => model.Id)
 
@@ -40,7 +40,17 @@
     <label for="tipo">Tipo [0-Contrante  1-ADM  2-Responsável]</label>
     <input id="tipo" name="usuario.UsuarioTipo" value="@ViewBag.Usuario.UsuarioTipo" class="form-control">
 
-    @*<td>@Html.ActionLink("Alterar", "Alterar", new { id = usuario.Id })</td>*@
+   
+    <label for="usuarioStatus">Ativo</label>
+    @if (@ViewBag.Usuario.Status == 1)
+    {
+        <input id="status" type="checkbox" name="usuario.Status" value="@ViewBag.Usuario.Status" class="form-check" checked />
+    }
+    else if (@ViewBag.Usuario.Status == 0)
+    {
+        <input id="status" type="checkbox" name="usuario.Status" value="@ViewBag.Usuario.Status" class="form-check" /> }
 
-    <input type="submit" value="Cadastrar" />
+    @*<td>@Html.ActionLink("Alterar", "Alterar", new { id = usuario.Id })</td>*@
+    <p></p>
+    <input type="submit" value="Salvar" class="btn btn-success btn-sm" />
 </form>

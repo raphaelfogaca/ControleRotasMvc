@@ -1,6 +1,10 @@
 ﻿
 @model IList<ControleRotasMvc.Models.Aluno>
 
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+
+
 <table class="table table-hover">
     <thead>
         <tr>
@@ -17,7 +21,7 @@
         {
             <tr>
                 <td>@aluno.Id</td>
-                <td>@Html.RouteLink(aluno.Nome, "VisualizaAluno", new { id = aluno.Id })</td>        
+                <td>@Html.RouteLink(aluno.Nome, "VisualizaAluno", new { id = aluno.Id })</td>
                 <td>@aluno.Email</td>
                 <td>@aluno.Telefone</td>
                 <td>@aluno.NomeResponsavel</td>

@@ -18,15 +18,13 @@ namespace ControleRotasMvc.Controllers
 
         public Financeiro Cadastrar(Financeiro docfin, int qtdMaterias)
         {
-            FinanceiroEntity db3 = new FinanceiroEntity();
-
-            // string minhaDataFormatada = docfin.Vencimento.ToString("dd/MM/yyyy");
-
-
+            FinanceiroEntity db3 = new FinanceiroEntity();            
+            docfin.Situacao = 0;
 
             while (qtdMaterias > 0)
-            {              
-                db3.Gravar(docfin);                
+            { 
+                db3.Gravar(docfin);
+                docfin.Vencimento = docfin.Vencimento.AddMonths(1);
                 qtdMaterias--;
                 docfin.Id = 0;
             }

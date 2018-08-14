@@ -23,16 +23,19 @@
             <td>@documento.Id</td>
             <td>@documento.AlunoId</td>
             <td>R$@documento.Valor</td>
+            @*<td>@Html.TextBoxFor(model => documento.Vencimento, "{0:dd/MM/yyyy}", new { @class = "meuCampoDate" })</td>*@
             <td>@documento.Vencimento</td>
+            
             @if (documento.Situacao == 0)
-    {
-        <td>Aberto</td>
-}
-else if (documento.Situacao == 1)
-{
-        <td>Liquidado</td>
-}
-            <td><button class="btn btn-primary">Liquidar</button></td>
+            {
+                <td>Aberto</td>
+                <td><button class="btn btn-primary">Liquidar</button></td>
+            }
+            else if (documento.Situacao == 1)
+            {
+                <td>Liquidado</td>
+            }
+
             <td><button class="btn btn-info">Alterar</button></td>
             <td><button class="btn btn-danger">Excluir</button></td>
             <td>@Html.ActionLink("Excluir", "Deletar", new { id = documento.Id })</td>
