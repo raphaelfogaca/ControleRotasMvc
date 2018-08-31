@@ -1,1 +1,106 @@
-﻿
+﻿@model IEnumerable<ControleRotasMvc.Models.Materia>
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+
+
+<form id="cad-aluno" action="/Aluno/Adiciona" method="post" class="active">
+
+    <label for="nome">Nome:</label>
+    <input id="nome" name="aluno.Nome" value="" class="form-control" />
+
+
+    @{
+        var i = 0;
+
+        <label for="bimestre">Bimestre</label>
+        <input id="bimestre" name="nota[@i].Bimestre" />
+        <input id="valorNota" name="nota[@i].ValorNota" />
+
+    }
+
+    @*<br />
+        <label for="bimestre">Bimestre1</label>
+        <input id="bimestre" name="nota[0].Bimestre" />
+        <br />
+
+        <label for="nota">Nota1</label>
+        <input id="nota" name="nota[0].ValorNota" />
+        <br />
+
+        <br />
+        <label for="bimestre">Bimestre2</label>
+        <input id="bimestre" name="nota[1].Bimestre" />
+        <br />
+
+        <label for="nota">Nota2</label>
+        <input id="nota" name="nota[1].ValorNota" />
+        <br />*@
+
+
+
+    <input class="btn btn-primary" id="btnSave" align-baseline="right" type="submit" value="Salvar" />
+
+</form>
+
+@*<input class="btn btn-primary" id="btnSave" align-baseline="right" type="button" value="Salvar" />*@
+
+<script type="text/javascript">
+
+            @*$(document).ready(function () {
+            $("#btnSave").on('click', function () {
+
+            var url = '@Url.Action("Adiciona", "Aluno")';
+            var data = [];
+
+            data.push(
+                 {
+                     Bimestre: 1,
+                     ValorNota: 2,
+                 },
+                 {
+                     Bimestre: 2,
+                     ValorNota: 3,
+                 }
+                );
+            $.ajax({
+                url:url,
+                type:"POST",
+                data:{
+                    nota: data,
+                    form: $("#cad-aluno").serialize(),
+                },
+                datatype:'json',
+                ContentType:'application/json;utf-8'
+            }).done(function(resp){
+                alert('Success ' +resp);
+            }).error(function(err){
+                alert("Error " + err.status);
+            });
+
+        });
+
+    });*@
+
+
+
+    $("#cad-aluno").submit(function (e) {
+
+
+        var form = $(this);
+        var url = form.attr('action');
+
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(),
+             // serializes the form's elements.
+            success: function (data) {
+                alert(data); // show response from the php script.
+            }
+        });
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+    });
+</script>

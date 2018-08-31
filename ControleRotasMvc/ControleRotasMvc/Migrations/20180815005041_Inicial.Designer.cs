@@ -11,8 +11,8 @@ using System;
 namespace ControleRotasMvc.Migrations
 {
     [DbContext(typeof(ControleRotasContext))]
-    [Migration("20180728210806_FinanceiroVencDate4")]
-    partial class FinanceiroVencDate4
+    [Migration("20180815005041_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,9 +66,11 @@ namespace ControleRotasMvc.Migrations
 
                     b.Property<float>("Valor");
 
+                    b.Property<DateTime>("Vencimento");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Financeiros");
+                    b.ToTable("DocumentosFinanceiros");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.Materia", b =>
@@ -106,11 +108,11 @@ namespace ControleRotasMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("Status");
+
                     b.Property<string>("UsuarioEmail");
 
-                    b.Property<string>("UsuarioLogin")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                    b.Property<string>("UsuarioLogin");
 
                     b.Property<string>("UsuarioNome");
 

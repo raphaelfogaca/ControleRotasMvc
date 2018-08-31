@@ -4,9 +4,7 @@
 <script src="~/Scripts/bootstrap.js"></script>
 
 <head>
-    <div align="left">
-        <h3>CADASTRO DE ALUNO</h3>
-    </div>
+    <h3>CADASTRO DE ALUNO</h3>
 </head>
 <br />
 <form id="cad-aluno" action="/Aluno/Adiciona" method="post" class="active">
@@ -27,7 +25,7 @@
             <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">PRESENÇA</a>
         </li>
     </ul>
-    
+
     <!-- Tab panes -->
     <div class="tab-content">
         <!--ABA DADOS-->
@@ -80,16 +78,16 @@
             <label>Matérias:</label>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="container">                     
-                  
+                    <div class="container">
+
 
                         @foreach (var item in Model)
                         {
 
-                    <div class="col-md-2">
-                        <input id="materias" type="checkbox" name="materias" class="form-check-input" value="@item.Id" />
-                        <label class="choice" for="element_1_1">@item.Nome</label>
-                    </div>
+                            <div class="col-md-2">
+                                <input id="materias" type="checkbox" name="materias" class="form-check-input" value="@item.Id" />
+                                <label class="choice" for="element_1_1">@item.Nome</label>
+                            </div>
                         }
                     </div>
                 </div>
@@ -171,43 +169,40 @@
                 <div class="panel-body">
                     <div class="container">
 
-                        <div class="col-md-2">
-                            <label>1º Bimestre</label>
-                            @foreach (var item in Model)
-    {
-                        <input id="horario" name="aluno.Horario" class="form-control" value="" />
-                        <br />
-}
-                        </div>
-                        <div class="col-md-2">
-                            <label>2º Bimestre</label>                            
-                            @foreach (var item in Model)
-    {
-                        <input id="horario" name="aluno.Horario" class="form-control" value="" />
-                        <br />
-}
-                        </div>
+                        @*@Html.Partial("_Cadastro")*@
 
-                        <div class="col-md-2">
-                            <label>3º Bimestre</label>
-                            @foreach (var item in Model)
-    {
-                        <input id="horario" name="aluno.Horario" class="form-control" value="" />
-                        <br />
-}
-                        </div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Matéria&nbsp;</td>
+                                    <td>1º Bimestre&nbsp;</td>
+                                    <td>2º Bimestre&nbsp;</td>
 
-                        <div class="col-md-2">
-                            <label>4º Bimestre</label>
-                            @foreach (var item in Model)
-    {
-                        <input id="horario" name="aluno.Horario" class="form-control" value="" />
-                        <br />
-}
-                        </div>
 
+                                </tr>
+
+                                @{
+                                    var i = 0;
+
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.Nome</td>
+                                            <td><input id="bimestre" name="nota[@i].Bimestre" /></td>
+                                            <td><input id="valorNota" name="nota[@i].ValorNota" /></td>
+
+                                        </tr>
+                                        i++;
+
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+
+                        <br />
                     </div>
-                    </div>
+                </div>
             </div>
 
 
@@ -218,26 +213,47 @@
         </div>
 
     </div>
-
     <br />
     <br />
-    <input class="btn btn-primary" align-baseline="right" type="submit" value="Cadastrar" />
-
-
-
-
-
+    <input class="btn btn-primary" id="btnSave" align-baseline="right" type="submit" value="Cadastrar" />
     <br />
 </form>
 
+@*<input class="btn btn-primary" id="btnSave" align-baseline="right" type="button" value="Salvar" />
 
-        <script type="text/javascript">
-            var i = 0;
-            function adiciona(materiaId) {
-                var url = ("/Materia/Adiciona");
-                var params = { id: materiaId };
-                $.post(url, params);
+
+
+<script type="text/javascript">
+
+    $("#cad-aluno").submit(function (e) {
+
+        var form = $("#cad-aluno");
+        var url = form.attr('action');
+
+        data.push(
+            {
+                Bimestre: 1,
+                ValorNota: 2,
+            },
+            {
+                Bimestre: 2,
+                ValorNota: 3,
             }
+        );
 
-         
-        </script>
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                nota: data,
+                : $("#cad-aluino").serialize(),
+            },
+            success: function (data) {
+                alert(data); // show response from the php script.
+            }
+        });
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+    });
+</script>*@
+

@@ -25,5 +25,14 @@ namespace ControleRotasMvc.DAO
                 return false;
             }
         }
+
+        public MateriaAlunos BuscaMateriaPorAlunoId(int alunoId)
+        {
+            using (ControleRotasContext db = new ControleRotasContext())
+            {
+                return db.MateriaAlunos.LastOrDefault(u => u.AlunoId == alunoId);              
+                   
+            }
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace ControleRotasMvc.Models
         public Aluno()
         {
             MateriaAlunos = new HashSet<MateriaAlunos>();
+            Notas = new HashSet<Nota>();
             
         }
 
@@ -28,9 +29,8 @@ namespace ControleRotasMvc.Models
         public int AulaSabado { get; set; }
         public int AulaDomingo { get; set; }
 
-        //public IList<MateriaAluno> Materias { get; set; }
-
         public virtual IEnumerable<MateriaAlunos> MateriaAlunos { get; set; }
+        public virtual IEnumerable<Nota> Notas { get; set; }
     }
 
 

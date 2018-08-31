@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ControleRotasMvc.Models.Materia>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<table>
+    <tbody>
+        <tr>
+            <td>Matéria&nbsp;</td>
+            <td>1º Bimestre&nbsp;</td>
+            <td>2º Bimestre&nbsp;</td>
+
+
+        </tr>
+
+        @{
+            int i = 0;
+
+            foreach (var item in Model)
+            {
+                <tr>
+                        <td>@item.Nome</td>
+                        <td><input id="bimestre" name="nota[i].Bimestre" /></td>
+                        <td><input id="valorNota" name="nota[i].ValorNota" /></td>
+                        
+                    </tr>
+                i++;
+
+            }
+
+        }
+    </tbody>
+</table>
+

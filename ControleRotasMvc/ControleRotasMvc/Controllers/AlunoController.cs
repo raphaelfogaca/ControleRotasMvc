@@ -33,13 +33,19 @@ namespace ControleRotasMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Adiciona(Aluno aluno, int[] materias, Financeiro mensalidade, int qtdMaterias)
+        public JsonResult Adiciona(Aluno aluno, int[] materias, Financeiro mensalidade, int qtdMaterias, Nota[] nota)
         {
-            AlunoEntity db2 = new AlunoEntity();
-            //aluno.MateriaAluno = materias.Select(o => new MateriaAluno() { MateriaId = o }).ToList();
-            aluno.MateriaAlunos = materias.Select(n => new MateriaAlunos() { MateriaId = n }).ToList();
+            ///cadastro automatico aluno///
+            aluno.Nome = "raphael";
+            aluno.NomeResponsavel = "Jose";
+            aluno.Email = "raphael.fogaca@hotmail.com2";
+            aluno.AulaSexta = 1;
+            aluno.Telefone = "123456";
+            aluno.EmailResponsavel = "liliane@gmail.com";
 
-            
+            AlunoEntity db2 = new AlunoEntity();
+            //aluno.MateriaAlunos = materias.Select(n => new MateriaAlunos() { MateriaId = n }).ToList();
+
 
             if (db2.BuscaAlunoPorEmail(aluno.Email))
             {
@@ -47,25 +53,37 @@ namespace ControleRotasMvc.Controllers
             }
             if (ModelState.IsValid)
             {
-                
-                AlunoEntity db = new AlunoEntity();                             
+
+                AlunoEntity db = new AlunoEntity();
                 db.Gravar(aluno);
                 mensalidade.AlunoId = aluno.Id;
-               // mensalidade.Vencimento = DateTime.Now;
-                // gravar mensalidades
-                
-                FinanceiroController mens = new FinanceiroController();                
-                mens.Cadastrar(mensalidade,qtdMaterias);
-                
 
-                return RedirectToAction("Index", "Aluno");
+                FinanceiroController mens = new FinanceiroController();
+                mens.Cadastrar(mensalidade,qtdMaterias);
+
+                // gambiarra para buscar AlunoId e MateriaId
+                /*nota.AlunoId = aluno.Id;
+                MateriaAlunoEntity db3 = new MateriaAlunoEntity();
+                db3.BuscaMateriaPorAlunoId(aluno.Id);
+                MateriaAlunos materiaAlunos = new MateriaAlunos();
+                materiaAlunos = db3.BuscaMateriaPorAlunoId(aluno.Id);
+                nota.MateriaId = materiaAlunos.MateriaId;*/
+                ///////////////////////////////////////////////
+
+                NotaController not = new NotaController();
+                not.Cadastrar(nota);
+
+
+                //return RedirectToAction("Index", "Aluno");
+                return Json(aluno, JsonRequestBehavior.AllowGet);
 
             }
             else
             {
                 ViewBag.Aluno = aluno;
                 AlunoEntity db = new AlunoEntity();
-                return View("Cadastro");
+                //return View("Cadastro");
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
         }
 

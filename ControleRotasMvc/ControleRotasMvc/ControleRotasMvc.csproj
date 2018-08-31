@@ -263,111 +263,54 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MateriaController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
+    <Compile Include="Controllers\NotaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAO\AlunoEntity.cs" />
     <Compile Include="DAO\ControleRotasContext.cs" />
     <Compile Include="DAO\MateriaAlunoEntity.cs" />
     <Compile Include="DAO\MateriaEntity.cs" />
     <Compile Include="DAO\FinanceiroEntity.cs" />
+    <Compile Include="DAO\NotasEntity.cs" />
     <Compile Include="DAO\UsuarioEntity.cs" />
     <Compile Include="Filtros\AutorizacaoFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\FlashHelper.cs" />
-    <Compile Include="Migrations\20180603032224_Inicial.cs" />
-    <Compile Include="Migrations\20180603032224_Inicial.designer.cs">
-      <DependentUpon>20180603032224_Inicial.cs</DependentUpon>
+    <Compile Include="Migrations\20180815005041_Inicial.cs" />
+    <Compile Include="Migrations\20180815005041_Inicial.designer.cs">
+      <DependentUpon>20180815005041_Inicial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20180603032302_MateriaAluno.cs" />
-    <Compile Include="Migrations\20180603032302_MateriaAluno.designer.cs">
-      <DependentUpon>20180603032302_MateriaAluno.cs</DependentUpon>
+    <Compile Include="Migrations\20180815005548_Notas.cs" />
+    <Compile Include="Migrations\20180815005548_Notas.designer.cs">
+      <DependentUpon>20180815005548_Notas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20180604232417_MateriaEAluno.cs" />
-    <Compile Include="Migrations\20180604232417_MateriaEAluno.designer.cs">
-      <DependentUpon>20180604232417_MateriaEAluno.cs</DependentUpon>
+    <Compile Include="Migrations\20180815005706_Notas2.cs" />
+    <Compile Include="Migrations\20180815005706_Notas2.designer.cs">
+      <DependentUpon>20180815005706_Notas2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20180605002645_RemoverPessoa.cs" />
-    <Compile Include="Migrations\20180605002645_RemoverPessoa.designer.cs">
-      <DependentUpon>20180605002645_RemoverPessoa.cs</DependentUpon>
+    <Compile Include="Migrations\20180815013608_NotaAlunoMateria.cs" />
+    <Compile Include="Migrations\20180815013608_NotaAlunoMateria.designer.cs">
+      <DependentUpon>20180815013608_NotaAlunoMateria.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20180605213522_AlterarClasseMateriaAluno.cs" />
-    <Compile Include="Migrations\20180605213522_AlterarClasseMateriaAluno.designer.cs">
-      <DependentUpon>20180605213522_AlterarClasseMateriaAluno.cs</DependentUpon>
+    <Compile Include="Migrations\20180815014338_NotaAlunoMateria3.cs" />
+    <Compile Include="Migrations\20180815014338_NotaAlunoMateria3.designer.cs">
+      <DependentUpon>20180815014338_NotaAlunoMateria3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20180605215108_AlterarClasseMateriaAluno2.cs" />
-    <Compile Include="Migrations\20180605215108_AlterarClasseMateriaAluno2.designer.cs">
-      <DependentUpon>20180605215108_AlterarClasseMateriaAluno2.cs</DependentUpon>
+    <Compile Include="Migrations\20180815014414_NotaAlunoMateria4.cs" />
+    <Compile Include="Migrations\20180815014414_NotaAlunoMateria4.designer.cs">
+      <DependentUpon>20180815014414_NotaAlunoMateria4.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20180605222559_AlterarClasseMateriaAluno3.cs" />
-    <Compile Include="Migrations\20180605222559_AlterarClasseMateriaAluno3.designer.cs">
-      <DependentUpon>20180605222559_AlterarClasseMateriaAluno3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180605223427_ColocarMateriaAluno.cs" />
-    <Compile Include="Migrations\20180605223427_ColocarMateriaAluno.designer.cs">
-      <DependentUpon>20180605223427_ColocarMateriaAluno.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180605232944_ColocarMateriaAluno2.cs" />
-    <Compile Include="Migrations\20180605232944_ColocarMateriaAluno2.designer.cs">
-      <DependentUpon>20180605232944_ColocarMateriaAluno2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180606005500_ColocarMateriaAluno4.cs" />
-    <Compile Include="Migrations\20180606005500_ColocarMateriaAluno4.designer.cs">
-      <DependentUpon>20180606005500_ColocarMateriaAluno4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180606231541_Financeiro.cs" />
-    <Compile Include="Migrations\20180606231541_Financeiro.designer.cs">
-      <DependentUpon>20180606231541_Financeiro.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180606234225_Financeiro2.cs" />
-    <Compile Include="Migrations\20180606234225_Financeiro2.designer.cs">
-      <DependentUpon>20180606234225_Financeiro2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180722081429_VencimentoMensalidade.cs" />
-    <Compile Include="Migrations\20180722081429_VencimentoMensalidade.designer.cs">
-      <DependentUpon>20180722081429_VencimentoMensalidade.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180722081508_VencimentoMensalidadeInt.cs" />
-    <Compile Include="Migrations\20180722081508_VencimentoMensalidadeInt.designer.cs">
-      <DependentUpon>20180722081508_VencimentoMensalidadeInt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180722182925_AlterarFinanceiro2.cs" />
-    <Compile Include="Migrations\20180722182925_AlterarFinanceiro2.designer.cs">
-      <DependentUpon>20180722182925_AlterarFinanceiro2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180728164508_FinanceiroVencDate.cs" />
-    <Compile Include="Migrations\20180728164508_FinanceiroVencDate.designer.cs">
-      <DependentUpon>20180728164508_FinanceiroVencDate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180728164524_FinanceiroVencDate2.cs" />
-    <Compile Include="Migrations\20180728164524_FinanceiroVencDate2.designer.cs">
-      <DependentUpon>20180728164524_FinanceiroVencDate2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180728164555_FinanceiroVencDate3.cs" />
-    <Compile Include="Migrations\20180728164555_FinanceiroVencDate3.designer.cs">
-      <DependentUpon>20180728164555_FinanceiroVencDate3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180728210806_FinanceiroVencDate4.cs" />
-    <Compile Include="Migrations\20180728210806_FinanceiroVencDate4.designer.cs">
-      <DependentUpon>20180728210806_FinanceiroVencDate4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180728210833_FinanceiroVencDate5.cs" />
-    <Compile Include="Migrations\20180728210833_FinanceiroVencDate5.designer.cs">
-      <DependentUpon>20180728210833_FinanceiroVencDate5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180805122723_StatusUsuario.cs" />
-    <Compile Include="Migrations\20180805122723_StatusUsuario.designer.cs">
-      <DependentUpon>20180805122723_StatusUsuario.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180805124927_StatusUsuarioInt.cs" />
-    <Compile Include="Migrations\20180805124927_StatusUsuarioInt.designer.cs">
-      <DependentUpon>20180805124927_StatusUsuarioInt.cs</DependentUpon>
+    <Compile Include="Migrations\20180816010346_NotaeAluno.cs" />
+    <Compile Include="Migrations\20180816010346_NotaeAluno.designer.cs">
+      <DependentUpon>20180816010346_NotaeAluno.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ControleRotasContextModelSnapshot.cs" />
     <Compile Include="Models\Aluno.cs" />
     <Compile Include="Models\Financeiro.cs" />
     <Compile Include="Models\Materia.cs" />
     <Compile Include="Models\MateriaAlunos.cs" />
+    <Compile Include="Models\Nota.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\MensalidadeMateriaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -401,6 +344,7 @@
     <Content Include="Views\Financeiro\Index.cshtml" />
     <Content Include="Views\Usuario\Alterar.cshtml" />
     <Content Include="Views\Usuario\_Index.cshtml" />
+    <Content Include="Views\Aluno\_Cadastro.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -409,7 +353,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\MateriaeMensalidadeViewModel\" />
+    <Folder Include="Views\Nota\" />
+    <Folder Include="Views\TesteJquery\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

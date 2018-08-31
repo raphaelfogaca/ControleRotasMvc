@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ControleRotasMvc.Migrations
 {
-    public partial class ColocarMateriaAluno4 : Migration
+    public partial class NotaeAluno : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

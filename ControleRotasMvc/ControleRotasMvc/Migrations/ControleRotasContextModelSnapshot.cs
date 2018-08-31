@@ -69,7 +69,7 @@ namespace ControleRotasMvc.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Financeiros");
+                    b.ToTable("DocumentosFinanceiros");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.Materia", b =>
@@ -100,6 +100,28 @@ namespace ControleRotasMvc.Migrations
                     b.HasIndex("MateriaId");
 
                     b.ToTable("MateriaAlunos");
+                });
+
+            modelBuilder.Entity("ControleRotasMvc.Models.Nota", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AlunoId");
+
+                    b.Property<int>("Bimestre");
+
+                    b.Property<int>("MateriaId");
+
+                    b.Property<float>("ValorNota");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlunoId");
+
+                    b.HasIndex("MateriaId");
+
+                    b.ToTable("Notas");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.Usuario", b =>
@@ -135,6 +157,19 @@ namespace ControleRotasMvc.Migrations
 
                     b.HasOne("ControleRotasMvc.Models.Materia", "Materia")
                         .WithMany("MateriaAlunos")
+                        .HasForeignKey("MateriaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ControleRotasMvc.Models.Nota", b =>
+                {
+                    b.HasOne("ControleRotasMvc.Models.Aluno", "Aluno")
+                        .WithMany("Notas")
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ControleRotasMvc.Models.Materia", "Materia")
+                        .WithMany()
                         .HasForeignKey("MateriaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

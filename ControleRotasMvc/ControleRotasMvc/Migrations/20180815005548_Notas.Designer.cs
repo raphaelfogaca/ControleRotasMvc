@@ -11,8 +11,8 @@ using System;
 namespace ControleRotasMvc.Migrations
 {
     [DbContext(typeof(ControleRotasContext))]
-    [Migration("20180728164508_FinanceiroVencDate")]
-    partial class FinanceiroVencDate
+    [Migration("20180815005548_Notas")]
+    partial class Notas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,9 +66,11 @@ namespace ControleRotasMvc.Migrations
 
                     b.Property<float>("Valor");
 
+                    b.Property<DateTime>("Vencimento");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Financeiros");
+                    b.ToTable("DocumentosFinanceiros");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.Materia", b =>
@@ -101,16 +103,34 @@ namespace ControleRotasMvc.Migrations
                     b.ToTable("MateriaAlunos");
                 });
 
+            modelBuilder.Entity("ControleRotasMvc.Models.Nota", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Bimestre");
+
+                    b.Property<int?>("MateriaAlunosIdId");
+
+                    b.Property<float>("ValorNota");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MateriaAlunosIdId");
+
+                    b.ToTable("Notas");
+                });
+
             modelBuilder.Entity("ControleRotasMvc.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("Status");
+
                     b.Property<string>("UsuarioEmail");
 
-                    b.Property<string>("UsuarioLogin")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                    b.Property<string>("UsuarioLogin");
 
                     b.Property<string>("UsuarioNome");
 
@@ -136,6 +156,13 @@ namespace ControleRotasMvc.Migrations
                         .WithMany("MateriaAlunos")
                         .HasForeignKey("MateriaId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ControleRotasMvc.Models.Nota", b =>
+                {
+                    b.HasOne("ControleRotasMvc.Models.MateriaAlunos", "MateriaAlunosId")
+                        .WithMany()
+                        .HasForeignKey("MateriaAlunosIdId");
                 });
 #pragma warning restore 612, 618
         }
