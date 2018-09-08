@@ -15,14 +15,22 @@ namespace ControleRotasMvc.DAO
             return repo.Notas.ToList();
         }
 
-        public bool Gravar(Nota nota)
+        public bool Gravar(Nota[] nota)
         {
             try
             {
                 using (var repo = new ControleRotasContext())
                 {
-                    repo.Notas.Add(nota);
-                    repo.SaveChanges();
+                    int c = nota.Count() - 1;
+                    int i = 0;
+                    do
+                    {
+                        Nota nt = new Nota();
+                        nt = nota[i];
+                        repo.Notas.Add(nt);
+                        repo.SaveChanges();
+                        i++;
+                    } while (i <= c);
                     return true;
                 }
             }

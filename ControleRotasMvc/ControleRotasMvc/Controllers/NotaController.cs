@@ -16,18 +16,15 @@ namespace ControleRotasMvc.Controllers
             return View();
         }
 
-        public Nota[] Cadastrar(Nota[] nota)
+        public Nota Cadastrar(Nota[] nota)
         {
-            int qtdNotas = nota.Count();
-            int i = 0;
+           
             NotasEntity db = new NotasEntity();
-            while (qtdNotas > 0) { 
-            db.Gravar(nota[i]);
-                qtdNotas--;
-                i++;
-            }
-            return nota;
             
+            db.Gravar(nota);
+            return nota[0];
         }
+
+        
     }
 }

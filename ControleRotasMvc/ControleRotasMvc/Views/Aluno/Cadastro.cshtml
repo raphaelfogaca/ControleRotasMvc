@@ -2,6 +2,7 @@
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
 <head>
     <h3>CADASTRO DE ALUNO</h3>
@@ -162,7 +163,7 @@
             </div>
         </div>
 
-        <!--nova aba-->
+        <!--Notas-->
         <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
 
             <div class="panel panel-default">
@@ -177,22 +178,52 @@
                                     <td>Matéria&nbsp;</td>
                                     <td>1º Bimestre&nbsp;</td>
                                     <td>2º Bimestre&nbsp;</td>
+                                    <td>3º Bimestre&nbsp;</td>
+                                    <td>4º Bimestre&nbsp;</td>
 
 
                                 </tr>
 
                                 @{
                                     var i = 0;
+                                    var numeroBimestre = 1;
+                                    var i1 = 1;
+                                    var i2 = 2;
+                                    var i3 = 3;
+
+                                    var d = 0;
 
                                     foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>@item.Nome</td>
-                                            <td><input id="bimestre" name="nota[@i].Bimestre" /></td>
-                                            <td><input id="valorNota" name="nota[@i].ValorNota" /></td>
+                                        if (numeroBimestre == 4)
+                                        {
+                                            numeroBimestre = 1;
+                                        }
+                                <tr>
+                                    <td>@item.Nome</td>
+                                    <td><input id="valorNota" name="nota[@i].ValorNota" /></td>
+                                    <input type="hidden" id="materiaId" name="nota[@i].MateriaId" value="@item.Id" />
+                                    <input type="hidden" id="bimestre" name="nota[@i].Bimestre" value="1" />
+                                    
+                                    <td><input id="valorNota" name="nota[@i1].ValorNota" /></td> 
+                                    <input type="hidden" id="materiaId" name="nota[@i1].MateriaId" value="@item.Id" />
+                                    <input type="hidden" id="bimestre" name="nota[@i1].Bimestre" value="2" />
+                                    
 
-                                        </tr>
-                                        i++;
+                                    <td><input id="valorNota" name="nota[@i2].ValorNota" /></td> 
+                                    <input type="hidden" id="materiaId" name="nota[@i2].MateriaId" value="@item.Id" />
+                                    <input type="hidden" id="bimestre" name="nota[@i2].Bimestre" value="3" />
+                                    
+                                    <td><input id="valorNota" name="nota[@i3].ValorNota" /></td> 
+                                    <input type="hidden" id="materiaId" name="nota[@i3].MateriaId" value="@item.Id" />
+                                    <input type="hidden" id="bimestre" name="nota[@i3].Bimestre" value="4" />
+                                    
+                                </tr>
+                                        i = i+4;
+                                        i1 = i1 + 4;
+                                        i2 = i2 + 4;
+                                        i3 = i3 + 4;
+                                        d++;
 
                                     }
 
@@ -219,41 +250,11 @@
     <br />
 </form>
 
-@*<input class="btn btn-primary" id="btnSave" align-baseline="right" type="button" value="Salvar" />
-
-
-
 <script type="text/javascript">
 
-    $("#cad-aluno").submit(function (e) {
-
-        var form = $("#cad-aluno");
-        var url = form.attr('action');
-
-        data.push(
-            {
-                Bimestre: 1,
-                ValorNota: 2,
-            },
-            {
-                Bimestre: 2,
-                ValorNota: 3,
-            }
-        );
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: {
-                nota: data,
-                : $("#cad-aluino").serialize(),
-            },
-            success: function (data) {
-                alert(data); // show response from the php script.
-            }
-        });
-
-        e.preventDefault(); // avoid to execute the actual submit of the form.
+    $(document).ready(function () {
+        $('#Horario').mask('00:00');
     });
-</script>*@
+
+</script>
 

@@ -35,13 +35,15 @@ namespace ControleRotasMvc.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult Adiciona(Aluno aluno, int[] materias, Financeiro mensalidade, int qtdMaterias, Nota[] nota)
         {
+
+            
             ///cadastro automatico aluno///
-            aluno.Nome = "raphael";
+            /*aluno.Nome = "raphael";
             aluno.NomeResponsavel = "Jose";
-            aluno.Email = "raphael.fogaca@hotmail.com2";
+            aluno.Email = "raphael.fogaca@hotmail2.c2om";
             aluno.AulaSexta = 1;
             aluno.Telefone = "123456";
-            aluno.EmailResponsavel = "liliane@gmail.com";
+            aluno.EmailResponsavel = "liliane@gmail.com";*/
 
             AlunoEntity db2 = new AlunoEntity();
             //aluno.MateriaAlunos = materias.Select(n => new MateriaAlunos() { MateriaId = n }).ToList();
@@ -57,21 +59,29 @@ namespace ControleRotasMvc.Controllers
                 AlunoEntity db = new AlunoEntity();
                 db.Gravar(aluno);
                 mensalidade.AlunoId = aluno.Id;
+          
+
+                int c = nota.Count() - 1;
+                int abc = aluno.Id;
+
+                NotaController not = new NotaController();
+              
+
+                    while (c >= 0) { 
+                    nota[c].AlunoId = aluno.Id;
+                    c--;
+                }
+                not.Cadastrar(nota);
+                
+
 
                 FinanceiroController mens = new FinanceiroController();
                 mens.Cadastrar(mensalidade,qtdMaterias);
 
-                // gambiarra para buscar AlunoId e MateriaId
-                /*nota.AlunoId = aluno.Id;
-                MateriaAlunoEntity db3 = new MateriaAlunoEntity();
-                db3.BuscaMateriaPorAlunoId(aluno.Id);
-                MateriaAlunos materiaAlunos = new MateriaAlunos();
-                materiaAlunos = db3.BuscaMateriaPorAlunoId(aluno.Id);
-                nota.MateriaId = materiaAlunos.MateriaId;*/
-                ///////////////////////////////////////////////
 
-                NotaController not = new NotaController();
-                not.Cadastrar(nota);
+
+                
+                
 
 
                 //return RedirectToAction("Index", "Aluno");

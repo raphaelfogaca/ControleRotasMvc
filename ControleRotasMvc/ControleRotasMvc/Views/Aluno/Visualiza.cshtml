@@ -1,4 +1,6 @@
-﻿<script src="~/Scripts/jquery-3.3.1.js"></script>
+﻿
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
 
 <head>
@@ -36,10 +38,10 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
-                    <div class="col-md-4">
-                        <label for="nome">Nome:</label>
-                        <input id="nome" name="aluno.Nome" value="@ViewBag.Aluno.Nome" class="form-control" />
-                    </div>
+                        <div class="col-md-4">
+                            <label for="nome">Nome:</label>
+                            <input id="nome" name="aluno.Nome" value="@ViewBag.Aluno.Nome" class="form-control"/>
+                        </div>
 
                         <div class="col-md-4">
                             <label for="email">E-mail:</label>
@@ -55,24 +57,24 @@
                     <div class="row">
                         <!-- Responsável -->
                         <div class="col-md-4">
-                            
-                    <label for="responsavel">Nome Responsável:</label>
-                    <input id="responsavel" name="aluno.NomeResponsavel" class="form-control" value="@ViewBag.Aluno.NomeResponsavel" />
-                    </div>
 
-                            <div class="col-md-4">
-                                <label for="emailResponsavel">E-mail Responsável:</label>
-                                <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="" />
-                            </div>
-                            <div class="col-md-2">
-                                <label for="cpfResponsavel">CPF Responsável:</label>
-                                <input id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value="" />
-                            </div>
-                            <div class="col-md-2">
-                                <label for="telefone">Telefone Responsável:</label>
-                                <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
-                            </div>
+                            <label for="responsavel">Nome Responsável:</label>
+                            <input id="responsavel" name="aluno.NomeResponsavel" class="form-control" value="@ViewBag.Aluno.NomeResponsavel" />
                         </div>
+
+                        <div class="col-md-4">
+                            <label for="emailResponsavel">E-mail Responsável:</label>
+                            <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-2">
+                            <label for="cpfResponsavel">CPF Responsável:</label>
+                            <input class="mask-" id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-2">
+                            <label for="telefone">Telefone Responsável:</label>
+                            <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -83,13 +85,13 @@
 
 
                         @*@foreach (var item in Model)
-                        {
+                            {
 
-                            <div class="col-md-2">
-                                <input id="materias" type="checkbox" name="materias" class="form-check-input" value="@item.Id" />
-                                <label class="choice" for="element_1_1">@item.Nome</label>
-                            </div>
-                        }*@
+                                <div class="col-md-2">
+                                    <input id="materias" type="checkbox" name="materias" class="form-check-input" value="@item.Id" />
+                                    <label class="choice" for="element_1_1">@item.Nome</label>
+                                </div>
+                            }*@
                     </div>
                 </div>
             </div>
@@ -187,12 +189,12 @@
 
 
 <script type="text/javascript">
-            var i = 0;
-            function adiciona(materiaId) {
-                var url = ("/Materia/Adiciona");
-                var params = { id: materiaId };
-                $.post(url, params);
-            }
+    var i = 0;
+    function adiciona(materiaId) {
+        var url = ("/Materia/Adiciona");
+        var params = { id: materiaId };
+        $.post(url, params);
+    }
 
 
 </script>
