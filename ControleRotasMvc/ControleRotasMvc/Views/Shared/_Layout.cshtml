@@ -12,6 +12,8 @@
 
     <script src="~/Scripts/jquery-3.3.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.mask.min.js"></script>
+    <script src="~/Scripts/jquery.maskmoney.js"></script>
     <link rel="stylesheet" href="~/Content/Css/bootstrap.css" />
     <link rel="stylesheet" href="~/Content/Css/Site.css" />
 </head>
@@ -25,9 +27,10 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <span class="caret"></a>
                 <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("Alunos", "Cadastro", "Aluno")</li>
+                    <li>@Html.ActionLink("Alunos", "Index", "Aluno")</li>
                     <li>@Html.ActionLink("Usuários", "Index", "Usuario")</li>
                     <li>@Html.ActionLink("Matérias", "Cadastro", "Materia")</li>
+                    </ul>
             </li>
         </ul>
 

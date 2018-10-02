@@ -1,9 +1,5 @@
 ﻿@model IEnumerable<ControleRotasMvc.Models.Materia>
 
-<script src="~/Scripts/jquery-3.3.1.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-
 <head>
     <h3>CADASTRO DE ALUNO</h3>
 </head>
@@ -70,7 +66,7 @@
                         </div>
                         <div class="col-md-2">
                             <label for="telefone">Telefone Responsável:</label>
-                            <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
+                            <input id="telefoneResponsavel" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
                         </div>
                     </div>
                 </div>
@@ -133,7 +129,7 @@
                         </div>
                         <div class="col-md-2">
                             <input id="horario" name="aluno.Horario" placeholder="Ex: 00:00" class="form-control" value="" />
-                        </div>
+                        </div>                       
                     </div>
                 </div>
             </div>
@@ -171,7 +167,7 @@
                     <div class="container">
 
                         @*@Html.Partial("_Cadastro")*@
-
+                        @*boletim*@
                         <table>
                             <tbody>
                                 <tr>
@@ -253,8 +249,14 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        $('#Horario').mask('00:00');
+        $('#horario').mask('00:00'),
+            $('#diaVencimento').mask('99/99/9999', { placeholder: "mm/dd/aaaa" }),
+            $('#telefone').mask('(99) 99999-9999', { placeholder: "(99) 99999-9999" }),
+            $('#telefoneResponsavel').mask('(99) 99999-9999', { placeholder: "(99) 99999-9999" }),           
+        $('#mensalidadeValor').maskMoney({ symbol: 'R$ ', thousands: '.', decimal: ',', symbolStay: true })
     });
+
+
 
 </script>
 

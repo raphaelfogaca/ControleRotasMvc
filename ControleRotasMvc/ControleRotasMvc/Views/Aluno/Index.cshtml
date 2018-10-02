@@ -1,37 +1,56 @@
 ﻿
-@model IList<ControleRotasMvc.Models.Aluno>
+@model IQueryable<ControleRotasMvc.Models.Aluno>
 
-<script src="~/Scripts/jquery-3.3.1.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
+    <div align="right">
+        <br />
 
-
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Responsável</th>
-            <th>E-mail Responsável</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var aluno in Model)
+        @using (Ajax.BeginForm("BuscarAluno", "Aluno", new AjaxOptions
         {
-            <tr>
-                <td>@aluno.Id</td>
-                <td>@Html.RouteLink(aluno.Nome, "VisualizaAluno", new { id = aluno.Id })</td>
-                <td>@aluno.Email</td>
-                <td>@aluno.Telefone</td>
-                <td>@aluno.NomeResponsavel</td>
-                <td>@aluno.EmailResponsavel</td>
-            </tr>
+            HttpMethod = "Get",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "listaAlunos"
+        }))
+        {
+            @Html.TextBox("Pesquisa")
+            <input type="submit" value="Pesquisar" class="btn btn-default btn-sm" />           
+            <a href="/Aluno/Cadastro">
+                <input type="button" class="btn btn-success btn-sm" value="Novo Aluno" />
+            </a>
         }
-    </tbody>
-</table>
+        <br />
 
-@*/codigo java script*@
+        <br />
+    </div>
+
+    <div id="listaAlunos">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Responsável</th>
+                    <th>E-mail Responsável</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var aluno in Model)
+                {
+                    <tr>
+                        <td>@aluno.Id</td>
+                        <td>@Html.RouteLink(aluno.Nome, "VisualizaAluno", new { id = aluno.Id })</td>
+                        <td>@aluno.Email</td>
+                        <td>@aluno.Telefone</td>
+                        <td>@aluno.NomeResponsavel</td>
+                        <td>@aluno.EmailResponsavel</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>
+
+        @*/codigo java script*@
 
 
 

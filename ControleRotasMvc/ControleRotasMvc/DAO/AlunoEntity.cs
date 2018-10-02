@@ -9,10 +9,22 @@ namespace ControleRotasMvc.DAO
 {
     public class AlunoEntity : DbContext
     {
-        public IList<Aluno> Alunos()
+        //public IList<Aluno> Alunos()
+        //{
+        //    var repo = new ControleRotasContext();
+        //    return repo.Alunos.ToList();
+        //}
+
+        public IQueryable<Aluno> Alunos(string Pesquisa = "")
         {
-            var repo = new ControleRotasContext();
-            return repo.Alunos.ToList();
+            //var repo = new ControleRotasContext();
+            //return repo.Usuarios.ToList();
+
+            ControleRotasContext db = new ControleRotasContext();
+            var q = db.Alunos.AsQueryable();
+            q = q.Where(c => c.Nome.Contains(Pesquisa));
+            q.ToList();
+            return q;
         }
 
         public bool Gravar(Aluno aluno)
@@ -51,6 +63,15 @@ namespace ControleRotasMvc.DAO
                 else
                     return false;
             }
+        }
+
+        public IQueryable<Aluno> BuscarAlunoPorNome(string nome)
+        {
+            ControleRotasContext db = new ControleRotasContext();
+            var q = db.Alunos.AsQueryable();
+            q = q.Where(c => c.Nome.Contains(nome));
+            q.ToList();
+            return q;
         }
     }
 }

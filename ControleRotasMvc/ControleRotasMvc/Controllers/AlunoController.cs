@@ -15,7 +15,7 @@ namespace ControleRotasMvc.Controllers
         public ActionResult Index()
         {
             AlunoEntity dao = new AlunoEntity();
-            IList<Aluno> aluno = dao.Alunos();
+            IQueryable<Aluno> aluno = dao.Alunos();
 
             return View(aluno);
         }
@@ -104,6 +104,13 @@ namespace ControleRotasMvc.Controllers
             Aluno aluno = db.BuscaAlunoPorId(id);
             ViewBag.Aluno = aluno;
             return View(aluno);
+        }
+
+        public ActionResult BuscarAluno(string Pesquisa)
+        {
+            AlunoEntity dao = new AlunoEntity();
+            var listaAluno = dao.BuscarAlunoPorNome(Pesquisa);
+            return View("Index", listaAluno);
         }
 
 
