@@ -19,29 +19,45 @@
     <tbody>
         @foreach (var documento in Model)
         {
-        <tr>
-            <td>@documento.Id</td>
-            <td>@documento.AlunoId</td>
-            <td>R$@documento.Valor</td>
-            @*<td>@Html.TextBoxFor(model => documento.Vencimento, "{0:dd/MM/yyyy}", new { @class = "meuCampoDate" })</td>*@
-            <td>@documento.Vencimento</td>
-            
-            @if (documento.Situacao == 0)
-            {
-                <td>Aberto</td>
-                <td><button class="btn btn-primary">Liquidar</button></td>
-            }
-            else if (documento.Situacao == 1)
-            {
-                <td>Liquidado</td>
-            }
+            <tr>
+                <td>@documento.Id</td>
+                <td>@documento.AlunoId</td>
+                <td>R$@documento.Valor</td>
+                @*<td>@Html.TextBoxFor(model => documento.Vencimento, "{0:dd/MM/yyyy}", new { @class = "meuCampoDate" })</td>*@
+                <td>@documento.Vencimento</td>
 
-            <td><button class="btn btn-info">Alterar</button></td>
-            <td><button class="btn btn-danger">Excluir</button></td>
-            <td>@Html.ActionLink("Excluir", "Deletar", new { id = documento.Id })</td>
+                @if (documento.Situacao == 0)
+                {
+                    <td>Aberto</td>
 
-        </tr>
+                }
+                else if (documento.Situacao == 1)
+                {
+                    <td>Liquidado</td>
+                }
+
+                    <td>
+                        @if (documento.Situacao == 0)
+                        {
+                            @Html.ActionLink("Liquidar", "Liquidar", new { id = documento.Id }, new { @class = "btn btn-primary btn-sm" })
+                        }
+                        @Html.ActionLink("Alterar", "Alterar", new { id = documento.Id }, new { @class = "btn btn-info btn-sm" })
+                        @Html.ActionLink("Excluir", "Deletar", new { id = documento.Id }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                @*<td>@Html.ActionLink("Excluir", "Deletar", new { id = documento.Id })</td>*@
+
+            </tr>
 
         }
     </tbody>
 </table>
+
+<script>
+
+    function deletar(documentoId) {
+        var url = ("/Financeiro/Deletar");
+        var params = { id: documentoId };
+        $.post(url, params);
+    }
+
+</script>

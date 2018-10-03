@@ -35,12 +35,12 @@ namespace ControleRotasMvc.DAO
                 return false;
             }
         }
-        
+
         public bool Deletar(Financeiro docfin)
         {
-            try 
+            try
             {
-            using (var repo = new ControleRotasContext())
+                using (var repo = new ControleRotasContext())
                 {
                     repo.DocumentosFinanceiros.Remove(docfin);
                     repo.SaveChanges();
@@ -48,17 +48,18 @@ namespace ControleRotasMvc.DAO
                 }
             }
             catch (Exception EX)
-                {
-                    return false;
-                }
+            {
+                return false;
+            }
         }
-        
+
         public bool Alterar(Financeiro docfin)
         {
             try
             {
-            using (var repo = new ControleRotasContext())
+                using (var repo = new ControleRotasContext())
                 {
+
                     repo.DocumentosFinanceiros.Update(docfin);
                     repo.SaveChanges();
                     return true;
@@ -69,6 +70,16 @@ namespace ControleRotasMvc.DAO
                 return false;
             }
         }
-        
+        public Financeiro BuscarFinanceiroPorId(int id)
+        {
+            using (var repo = new ControleRotasContext())
+            {
+                return repo.DocumentosFinanceiros.Find(id);
+            }
+        }
+
     }
+
+ 
 }
+

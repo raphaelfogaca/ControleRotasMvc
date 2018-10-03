@@ -38,6 +38,17 @@ namespace ControleRotasMvc.Controllers
             dao.Deletar(docfin);
             return RedirectToAction("Index");
         }
+
+        //[Route("financeiro/liquidar/{id}", Name = "Liquidar")]
+
+        public ActionResult Liquidar(Financeiro docfin)
+        {
+            FinanceiroEntity dao = new FinanceiroEntity();
+            Financeiro documento = dao.BuscarFinanceiroPorId(docfin.Id);
+            documento.Situacao = 1;
+            dao.Alterar(documento);
+            return RedirectToAction("Index");
+        }
         
         public Financeiro Alterar(Financeiro docfin)
         {
