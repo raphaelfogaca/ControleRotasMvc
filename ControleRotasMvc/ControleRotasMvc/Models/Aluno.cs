@@ -21,6 +21,8 @@ namespace ControleRotasMvc.Models
         public String Email { get; set; }
         public String NomeResponsavel { get; set; }
         public String EmailResponsavel { get; set; }
+        public String CpfResponsavel { get; set; }
+        public String TelefoneResponsavel { get; set; }
         public int AulaSegunda { get; set; }
         public int AulaTerca { get; set; }
         public int AulaQuarta { get; set; }
@@ -28,6 +30,7 @@ namespace ControleRotasMvc.Models
         public int AulaSexta { get; set; }
         public int AulaSabado { get; set; }
         public int AulaDomingo { get; set; }
+        //public String DiasAulas { get; set; }
 
         public virtual IEnumerable<MateriaAlunos> MateriaAlunos { get; set; }
         public virtual IEnumerable<Nota> Notas { get; set; }

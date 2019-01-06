@@ -9,13 +9,17 @@ namespace ControleRotasMvc.DAO
 {
     public class MateriaAlunoEntity : DbContext
     {
-        public bool Gravar(MateriaAlunos materia)
+        public bool Gravar(IEnumerable<MateriaAlunos> materia, Aluno aluno)
         {
             try
             {
                 using (var repo = new ControleRotasContext())
                 {
-                    repo.MateriaAlunos.Add(materia);
+                    foreach (var item in materia)
+                        {
+                            item.AlunoId = aluno.Id;                        
+                        };
+                    repo.MateriaAlunos.AddRange(materia);
                     repo.SaveChanges();
                     return true;
                 }

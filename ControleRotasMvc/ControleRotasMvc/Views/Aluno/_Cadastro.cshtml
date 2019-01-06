@@ -1,31 +1,64 @@
-﻿@model IEnumerable<ControleRotasMvc.Models.Materia>
+﻿@model ControleRotasMvc.Models.Nota
+
 <script src="~/Scripts/jquery-3.3.1.js"></script>
-<table>
-    <tbody>
-        <tr>
-            <td>Matéria&nbsp;</td>
-            <td>1º Bimestre&nbsp;</td>
-            <td>2º Bimestre&nbsp;</td>
+
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Matéria&nbsp;</td>
+                            <td>1º Bimestre&nbsp;</td>
+                            <td>2º Bimestre&nbsp;</td>
+                            <td>3º Bimestre&nbsp;</td>
+                            <td>4º Bimestre&nbsp;</td>
 
 
-        </tr>
+                        </tr>
 
-        @{
-            int i = 0;
+                        @{
+                            var i = 0;
+                            var numeroBimestre = 1;
+                            var i1 = 1;
+                            var i2 = 2;
+                            var i3 = 3;
 
-            foreach (var item in Model)
-            {
-                <tr>
-                        <td>@item.Nome</td>
-                        <td><input id="bimestre" name="nota[i].Bimestre" /></td>
-                        <td><input id="valorNota" name="nota[i].ValorNota" /></td>
-                        
-                    </tr>
-                i++;
+                            var d = 0;
 
-            }
+                            foreach (var item in Model)
+                            {
+                                if (numeroBimestre == 4)
+                                {
+                                    numeroBimestre = 1;
+                                }
+                                <tr>
+                                    <td>@item.Nome</td>
+                                    <td><input id="valorNota" name="nota[@i].ValorNota" /></td>
+                                    <input type="hidden" id="materiaId" name="nota[@i].MateriaId" value="@item.Id" />
+                                    <input type="hidden" id="bimestre" name="nota[@i].Bimestre" value="1" />
 
-        }
-    </tbody>
-</table>
+                                    <td><input id="valorNota" name="nota[@i1].ValorNota" /></td>
+                                    <input type="hidden" id="materiaId" name="nota[@i1].MateriaId" value="@item.Id" />
+                                    <input type="hidden" id="bimestre" name="nota[@i1].Bimestre" value="2" />
+
+
+                                    <td><input id="valorNota" name="nota[@i2].ValorNota" /></td>
+                                    <input type="hidden" id="materiaId" name="nota[@i2].MateriaId" value="@item.Id" />
+                                    <input type="hidden" id="bimestre" name="nota[@i2].Bimestre" value="3" />
+
+                                    <td><input id="valorNota" name="nota[@i3].ValorNota" /></td>
+                                    <input type="hidden" id="materiaId" name="nota[@i3].MateriaId" value="@item.Id" />
+                                    <input type="hidden" id="bimestre" name="nota[@i3].Bimestre" value="4" />
+
+                                </tr>
+                                i = i + 4;
+                                i1 = i1 + 4;
+                                i2 = i2 + 4;
+                                i3 = i3 + 4;
+                                d++;
+
+                            }
+
+                        }
+                    </tbody>
+                </table>
+
 

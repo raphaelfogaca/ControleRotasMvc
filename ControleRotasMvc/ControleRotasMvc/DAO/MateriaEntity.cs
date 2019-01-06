@@ -10,11 +10,21 @@ namespace ControleRotasMvc.DAO
     public class MateriaEntity : DbContext
     {
 
-        public IList<Materia> Materias()
+        public IQueryable<Materia> Materias(string Pesquisa = "")
         {
-            var repo = new ControleRotasContext();            
-            return repo.Materias.ToList();
+            ControleRotasContext db = new ControleRotasContext();
+            var q = db.Materias.AsQueryable();
+            q = q.Where(c => c.Nome.Contains(Pesquisa));
+            q.ToList();
+            return q;
         }
+
+        //public IList<Materia> Materias()
+        //{
+        //    var repo = new ControleRotasContext();
+        //    return repo.Materias.ToList();
+        //}
+
         public bool Gravar(Materia materia)
         {
             try
@@ -42,7 +52,7 @@ namespace ControleRotasMvc.DAO
             }
         }
 
-        public bool BuscaMateriaPorNome(string nome)
+        public bool BuscaMateria(string nome)
         {
             using (ControleRotasContext db = new ControleRotasContext())
             {
@@ -50,6 +60,32 @@ namespace ControleRotasMvc.DAO
                     return true;
                 else
                     return false;
+            }
+        }
+
+        public IQueryable<Materia> BuscaMateriaPorNome(string Pesquisa = "")
+        {
+            ControleRotasContext db = new ControleRotasContext();
+            var q = db.Materias.AsQueryable();
+            q = q.Where(c => c.Nome.Contains(Pesquisa));
+            q.ToList();
+            return q;
+        }
+
+        public bool Deletar(Materia materia)
+        {
+            try
+            {
+                using (var repo = new ControleRotasContext())
+                {
+                    repo.Materias.Remove(materia);
+                    repo.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception EX)
+            {
+                return false;
             }
         }
     }

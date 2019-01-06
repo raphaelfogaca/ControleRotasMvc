@@ -1,4 +1,13 @@
-﻿<head>
+﻿@{
+    var materias = ViewBag.Materias as IEnumerable<ControleRotasMvc.Models.Materia>;
+    List<int> MateriasDoAluno = ViewBag.MateriasDoAluno as List<int>;
+    var notas = ViewBag.Notas as IList<ControleRotasMvc.Models.Nota>;
+    List<int> Notas = ViewBag.notas as List<int>;
+    var grupoNota = notas.GroupBy(a => a.MateriaId).ToDictionary(a => a.Key, b => b.ToList());
+
+
+}
+<head>
     <div align="left">
         <h3>CADASTRO DE ALUNO</h3>
     </div>
@@ -27,15 +36,16 @@
     <div class="tab-content">
         <!--ABA DADOS-->
         <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <!--dados-->
+
             <br />
+            <!--dados-->
             <label>Dados Pessoais:</label>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-4">
                             <label for="nome">Nome:</label>
-                            <input id="nome" name="aluno.Nome" value="@ViewBag.Aluno.Nome" class="form-control"/>
+                            <input id="nome" name="aluno.Nome" value="@ViewBag.Aluno.Nome" class="form-control" />
                         </div>
 
                         <div class="col-md-4">
@@ -44,7 +54,7 @@
                         </div>
                         <div class="col-md-2">
                             <label for="telefone">Telefone:</label>
-                            <input id="telefone" type="tel" name="aluno.Telefone" value="@ViewBag.Aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
+                            <input id="telefone" type="tel" name="aluno.Telefone" value="@ViewBag.Aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" />
                         </div>
                     </div>
 
@@ -59,34 +69,35 @@
 
                         <div class="col-md-4">
                             <label for="emailResponsavel">E-mail Responsável:</label>
-                            <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="" />
+                            <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="@ViewBag.Aluno.EmailResponsavel" />
                         </div>
                         <div class="col-md-2">
                             <label for="cpfResponsavel">CPF Responsável:</label>
-                            <input class="mask-" id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value="" />
+                            <input id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value="@ViewBag.Aluno.CpfResponsavel" />
                         </div>
                         <div class="col-md-2">
                             <label for="telefone">Telefone Responsável:</label>
-                            <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
+                            <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="@ViewBag.Aluno.TelefoneResponsavel" />
                         </div>
                     </div>
                 </div>
 
             </div>
+
             <label>Matérias:</label>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="container">
 
+                        @foreach (var item in materias)
+                        {
+                            var check = MateriasDoAluno.Contains(item.Id) ? "checked" : "";
 
-                        @*@foreach (var item in Model)
-                            {
-
-                                <div class="col-md-2">
-                                    <input id="materias" type="checkbox" name="materias" class="form-check-input" value="@item.Id" />
-                                    <label class="choice" for="element_1_1">@item.Nome</label>
-                                </div>
-                            }*@
+                            <div class="col-md-2">
+                                <input id="materias" type="checkbox" @check name="materias" class="form-check-input" value="@item.Id" />
+                                <label class="choice" for="element_1_1">@item.Nome</label>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -95,31 +106,32 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-1">
-                            <input id="aulaSegunda" type="checkbox" name="aluno.AulaSegunda" class="form-check-input" value="1" />
+                            <input id="aulaSegunda" type="checkbox" @(Model != null && Model.AulaSegunda == 1 ? "checked" : "") name="aluno.AulaSegunda" class="form-check-input" value="1" />
                             <label class="choice" for="aluno.AulaSegunda">SEG &nbsp;</label>
+
                         </div>
                         <div class="col-md-1">
-                            <input id="aulaTerca" type="checkbox" name="aluno.AulaTerca" class="form-check-input" value="1" />
+                            <input id="aulaTerca" type="checkbox" @(Model != null && Model.AulaTerca == 1 ? "checked" : "") name="aluno.AulaTerca" class="form-check-input" value="1" />
                             <label class="choice" for="aluno.AulaTerca">TER &nbsp;</label>
                         </div>
                         <div class="col-md-1">
-                            <input id="AulaQuarta" type="checkbox" name="aluno.AulaQuarta" class="form-check-input" value="1" />
+                            <input id="AulaQuarta" type="checkbox" @(Model != null && Model.AulaQuarta == 1 ? "checked" : "") name="aluno.AulaQuarta" class="form-check-input" value="1" />
                             <label class="choice" for="aluno.AulaQuarta"> QUA &nbsp;</label>
                         </div>
                         <div class="col-md-1">
-                            <input id="AulaQuinta" type="checkbox" name="aluno.AulaQuinta" class="form-check-input" value="1" />
+                            <input id="AulaQuinta" type="checkbox" @(Model != null && Model.AulaQuinta == 1 ? "checked" : "") name="aluno.AulaQuinta" class="form-check-input" value="1" />
                             <label class="choice" for="aluno.AulaQuinta"> QUI &nbsp;</label>
                         </div>
                         <div class="col-md-1">
-                            <input id="AulaSexta" type="checkbox" name="aluno.AulaSexta" class="form-check-input" value="1" />
+                            <input id="AulaSexta" type="checkbox" @(Model != null && Model.AulaSexta == 1 ? "checked" : "") name="aluno.AulaSexta" class="form-check-input" value="1" />
                             <label class="choice" for="aluno.AulaSexta"> SEX &nbsp;</label>
                         </div>
                         <div class="col-md-1">
-                            <input id="AulaSabado" type="checkbox" name="aluno.AulaSabado" class="form-check-input" value="1" />
+                            <input id="AulaSabado" type="checkbox" @(Model != null && Model.AulaSabado == 1 ? "checked" : "") name="aluno.AulaSabado" class="form-check-input" value="1" />
                             <label class="choice" for="aluno.AulaSabado"> SAB &nbsp;</label>
                         </div>
                         <div class="col-md-1">
-                            <input id="AulaDomingo" type="checkbox" name="aluno.AulaDomingo" class="form-check-input" value="1" />
+                            <input id="AulaDomingo" type="checkbox" @(Model != null && Model.AulaDomingo == 1 ? "checked" : "") name="aluno.AulaDomingo" class="form-check-input" value="1" />
                             <label class="choice" for="aluno.AulaDomingo"> DOM</label>
                         </div>
                     </div>
@@ -136,33 +148,60 @@
             </div>
         </div>
 
-        <!--financeiro-->
-        <br />
-        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <label>Adicionar Mensalidades:</label>
+        <!--nova aba-->
+        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <label for="mensalidadeValor">Valor Mensalidade:</label>
-                            <input id="mensalidadeValor" name="mensalidade.Valor" class="form-control" value="" />
-                        </div>
-                        <div class="col-md-1">
-                            <label for="mensalidadeQtd">Meses</label>
-                            <input id="mensalidadeQtd" name="qtdMaterias" class="form-control" value="" />
-                        </div>
-                        <div class="col-md-1">
-                            <label for="diaVencimento">Dia Venc.</label>
-                            <input id="diaVencimento" name="mensalidade.Vencimento" class="form-control" value="" />
-                        </div>
+                    <div class="container">
+
+                        <table>
+                            <tbody>
+                                
+        <tr>
+            <td>Matéria&nbsp;</td>
+            <td>1º Bimestre&nbsp;</td>
+            <td>2º Bimestre&nbsp;</td>
+            <td>3º Bimestre&nbsp;</td>
+            <td>4º Bimestre&nbsp;</td>
+        </tr>
+
+        @{
+            foreach (var item in grupoNota)
+            {
+                //var notas_ = item.Value.GroupBy(n => n.Bimestre).ToDictionary(n => n.Key, n => n.FirstOrDefault());
+        <tr>
+            <td>
+                <input id="materia" name="materia" value="@item.Key" />
+
+            </td>
+            <td>
+                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 1).Select(n => n.ValorNota).FirstOrDefault()" />
+            </td>
+            <td>
+                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 2).Select(n => n.ValorNota).FirstOrDefault()" />
+            </td>
+            <td>
+                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 3).Select(n => n.ValorNota).FirstOrDefault()" />
+            </td>
+            <td>
+                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 4).Select(n => n.ValorNota).FirstOrDefault()" />
+            </td>
+            @*<td>
+                <input id="nota" name="nota" value="@notas_[1].ValorNota" />
+            </td>*@
+        </tr>
+            }
+        }
+                               
+                         </tbody>                        
+                        </table>
+
+                        
+
+                        <br />
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!--nova aba-->
-        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-
         </div>
         <!--nova aba-->
         <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">

@@ -13,7 +13,22 @@ namespace ControleRotasMvc.DAO
         public IList<Financeiro> DocumentoFinanceiro()
         {
             var repo = new ControleRotasContext();
-            return repo.DocumentosFinanceiros.ToList();
+            var financeiros = (from f in repo.DocumentosFinanceiros
+                              join a in repo.Alunos on f.AlunoId equals a.Id
+                              select new
+                              {
+                                  f,
+                                  a.Nome
+                              }).ToList();
+
+            return financeiros.Select(n => new Financeiro()
+            {   Id = n.f.Id,
+                AlunoId = n.f.AlunoId,
+                AlunoNome = n.Nome,
+                Situacao = n.f.Situacao,
+                Valor = n.f.Valor,
+                Vencimento = n.f.Vencimento,
+            }).ToList();
         }
 
         public bool Gravar(Financeiro docfin)

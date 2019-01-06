@@ -1,5 +1,6 @@
 ﻿@model IList<ControleRotasMvc.Models.Financeiro>
 
+
 <head>
     <div align="left">
         <h3>OPERACIONAL</h3>
@@ -21,10 +22,10 @@
         {
             <tr>
                 <td>@documento.Id</td>
-                <td>@documento.AlunoId</td>
-                <td>R$@documento.Valor</td>
+                <td>@documento.AlunoNome</td>
+                <td>R$@documento.Valor.ToString("n2")</td>
                 @*<td>@Html.TextBoxFor(model => documento.Vencimento, "{0:dd/MM/yyyy}", new { @class = "meuCampoDate" })</td>*@
-                <td>@documento.Vencimento</td>
+                <td>@documento.Vencimento.ToShortDateString()</td>
 
                 @if (documento.Situacao == 0)
                 {
@@ -36,14 +37,15 @@
                     <td>Liquidado</td>
                 }
 
-                    <td>
-                        @if (documento.Situacao == 0)
-                        {
-                            @Html.ActionLink("Liquidar", "Liquidar", new { id = documento.Id }, new { @class = "btn btn-primary btn-sm" })
-                        }
-                        @Html.ActionLink("Alterar", "Alterar", new { id = documento.Id }, new { @class = "btn btn-info btn-sm" })
-                        @Html.ActionLink("Excluir", "Deletar", new { id = documento.Id }, new { @class = "btn btn-danger btn-sm" })
-                    </td>
+                <td>
+                    @if (documento.Situacao == 0)
+                    {
+                        @Html.ActionLink("Liquidar", "Liquidar", new { id = documento.Id }, new { @class = "btn btn-primary btn-sm" })
+                    }
+                    @Html.ActionLink("Alterar", "Alterar", new { id = documento.Id }, new { @class = "btn btn-info btn-sm" })
+                    @Html.ActionLink("Excluir", "Deletar", new { id = documento.Id }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+                <td></td>
                 @*<td>@Html.ActionLink("Excluir", "Deletar", new { id = documento.Id })</td>*@
 
             </tr>

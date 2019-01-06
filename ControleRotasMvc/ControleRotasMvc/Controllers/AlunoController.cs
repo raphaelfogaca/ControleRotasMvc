@@ -26,17 +26,21 @@ namespace ControleRotasMvc.Controllers
             //ViewBag.Aluno = new Aluno();
 
             MateriaEntity dao2 = new MateriaEntity();
-            IList<Materia> materia = dao2.Materias();
+            string pesquisa = "";
+            IQueryable<Materia> materia = dao2.Materias(pesquisa);
 
             return View(materia);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Adiciona(Aluno aluno, int[] materias, Financeiro mensalidade, int qtdMaterias, Nota[] nota)
+        //testando sem json
+        //public JsonResult Adiciona(Aluno aluno, int[] materias, Financeiro mensalidade, int qtdMaterias, Nota[] nota)
+        //testando sem json
+        public ActionResult Adiciona(Aluno aluno, int[] materias, Financeiro mensalidade, int qtdMaterias, Nota[] nota)
         {
 
-            
+
             ///cadastro automatico aluno///
             /*aluno.Nome = "raphael";
             aluno.NomeResponsavel = "Jose";
@@ -46,7 +50,7 @@ namespace ControleRotasMvc.Controllers
             aluno.EmailResponsavel = "liliane@gmail.com";*/
 
             AlunoEntity db2 = new AlunoEntity();
-            //aluno.MateriaAlunos = materias.Select(n => new MateriaAlunos() { MateriaId = n }).ToList();
+            aluno.MateriaAlunos = materias.Select(n => new MateriaAlunos() { MateriaId = n }).ToList();
 
 
             if (db2.BuscaAlunoPorEmail(aluno.Email))
@@ -59,50 +63,77 @@ namespace ControleRotasMvc.Controllers
                 AlunoEntity db = new AlunoEntity();
                 db.Gravar(aluno);
                 mensalidade.AlunoId = aluno.Id;
-          
+
+
+                MateriaAlunoEntity materiaAlunos = new MateriaAlunoEntity();
+                materiaAlunos.Gravar(aluno.MateriaAlunos, aluno);
 
                 int c = nota.Count() - 1;
                 int abc = aluno.Id;
 
                 NotaController not = new NotaController();
-              
 
-                    while (c >= 0) { 
+                while (c >= 0)
+                {
                     nota[c].AlunoId = aluno.Id;
                     c--;
                 }
                 not.Cadastrar(nota);
-                
-
 
                 FinanceiroController mens = new FinanceiroController();
-                mens.Cadastrar(mensalidade,qtdMaterias);
+                mens.Cadastrar(mensalidade, qtdMaterias);
 
-
-
-                
-                
-
-
-                //return RedirectToAction("Index", "Aluno");
-                return Json(aluno, JsonRequestBehavior.AllowGet);
+                return RedirectToAction("Index", "Aluno");
+                //testando sem json
+                //return Json(new
+                //{
+                //    Id = aluno.Id,
+                //    Nome = aluno.Nome
+                //});
+                //testando sem json
 
             }
             else
             {
-                ViewBag.Aluno = aluno;
-                AlunoEntity db = new AlunoEntity();
-                //return View("Cadastro");
-                return Json(true, JsonRequestBehavior.AllowGet);
+                return View("Cadastro");
+                //testando sem json
+                //var errors = ModelState.Values.SelectMany(v => v.Errors);
+                //ViewBag.Aluno = aluno;
+                //AlunoEntity db = new AlunoEntity();                
+                //return Json(true, JsonRequestBehavior.AllowGet);
+                //testando sem json
             }
         }
 
         [Route("alunos/{id}", Name = "VisualizaAluno")]
         public ActionResult Visualiza(int id)
         {
-            AlunoEntity db = new AlunoEntity();
-            Aluno aluno = db.BuscaAlunoPorId(id);
+            //AlunoEntity db = new AlunoEntity();
+            ControleRotasContext db = new ControleRotasContext();
+            Aluno aluno = db.Alunos.Where(n => n.Id == id).FirstOrDefault();
+            aluno.MateriaAlunos = db.MateriaAlunos.Where(n => n.AlunoId == aluno.Id).ToList();//porque tenho que ter este? e tbm o [2]
+
+            aluno.Notas = db.Notas.Where(n => n.AlunoId == aluno.Id).ToList();
             ViewBag.Aluno = aluno;
+            ViewBag.Materias = db.Materias.ToList();
+            ViewBag.Notas = db.Notas.ToList();
+
+            List<int> MateriasDoAluno = new List<int>();
+            if (aluno != null && aluno.MateriaAlunos != null)
+            {
+                MateriasDoAluno = aluno.MateriaAlunos.Select(n => n.MateriaId).ToList(); //[2]
+            }
+
+            //List<int> NotasDoAluno = new List<int>();
+            //if (aluno != null && aluno.Notas != null)
+            //{
+            //    NotasDoAluno = aluno.Notas.Select(n => n.AlunoId).ToList();
+            //}
+
+            //ViewBag.NotasDoAluno = Nota;
+            ViewBag.MateriasDoAluno = MateriasDoAluno;
+
+
             return View(aluno);
         }
 

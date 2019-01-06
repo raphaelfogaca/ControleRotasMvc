@@ -14,22 +14,29 @@ namespace ControleRotasMvc.Controllers
         public ActionResult Index()
         {
             MateriaEntity dao = new MateriaEntity();
-            IEnumerable<Materia> materia = dao.Materias();
+            IQueryable<Materia> materia = dao.Materias();
             return View(materia);
         }
 
         public ActionResult Cadastro()
         {
             MateriaEntity dao = new MateriaEntity();
-            IEnumerable<Materia> materia = dao.Materias();
+            IQueryable<Materia> materia = dao.Materias();
             return View(materia);
 
+        }
+
+        public ActionResult BuscarMateria (string Pesquisa)
+        {
+            MateriaEntity dao = new MateriaEntity();
+            var listaMaterias = dao.BuscaMateriaPorNome(Pesquisa);
+            return View("Index", listaMaterias);
         }
 
         public ActionResult Adiciona(Materia materia)
         {
             MateriaEntity db2 = new MateriaEntity();
-            if (db2.BuscaMateriaPorNome(materia.Nome))
+            if (db2.BuscaMateria(materia.Nome))
             {
                 ModelState.AddModelError("materia.MateriaExistente", "Esta matéria já está cadastrada");
             }
@@ -37,7 +44,7 @@ namespace ControleRotasMvc.Controllers
             {
                 MateriaEntity db = new MateriaEntity();
                 db.Gravar(materia);
-                return RedirectToAction("Cadastro", "Materia");
+                return RedirectToAction("Index", "Materia");
 
             }
             else
@@ -46,6 +53,13 @@ namespace ControleRotasMvc.Controllers
                 MateriaEntity db = new MateriaEntity();
                 return View("Cadastro");
             }
+        }
+
+        public ActionResult Deletar (Materia materia)
+        {
+            MateriaEntity dao = new MateriaEntity();
+            dao.Deletar(materia);
+            return RedirectToAction("Index");
         }
     }
 }

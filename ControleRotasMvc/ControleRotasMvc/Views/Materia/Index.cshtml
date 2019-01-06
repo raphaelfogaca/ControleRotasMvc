@@ -1,1 +1,48 @@
-﻿
+﻿@model IQueryable<ControleRotasMvc.Models.Materia>
+
+<head>
+    <h3>CADASTRO DE MATÉRIAS</h3>
+</head>
+<div align="right">
+    <br />
+
+    @using (Ajax.BeginForm("BuscarMateria", "Materia", new AjaxOptions
+    {
+        HttpMethod = "Get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "listaMaterias"
+    }))
+    {
+        @Html.TextBox("Pesquisa")
+        <input type="submit" value="Pesquisar" class="btn btn-default btn-sm" />
+        <a href="/Materia/Cadastro">
+            <input type="button" class="btn btn-success btn-sm" value="Nova Matéria" />
+        </a>
+    }
+    <br />
+
+    <br />
+</div>
+
+<div id="listaMaterias">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var materia in Model)
+            {
+                <tr>
+                    <td>@materia.Id</td>
+                    <td>@materia.Nome</td>
+                    <td>
+                    @Html.ActionLink("Excluir", "Deletar", new { id = materia.Id }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

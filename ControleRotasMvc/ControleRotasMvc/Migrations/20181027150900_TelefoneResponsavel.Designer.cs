@@ -11,9 +11,10 @@ using System;
 namespace ControleRotasMvc.Migrations
 {
     [DbContext(typeof(ControleRotasContext))]
-    partial class ControleRotasContextModelSnapshot : ModelSnapshot
+    [Migration("20181027150900_TelefoneResponsavel")]
+    partial class TelefoneResponsavel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,22 +57,6 @@ namespace ControleRotasMvc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Alunos");
-                });
-
-            modelBuilder.Entity("ControleRotasMvc.Models.Evento", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Fim");
-
-                    b.Property<string>("Inicio");
-
-                    b.Property<string>("NomeAluno");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Eventos");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.Financeiro", b =>

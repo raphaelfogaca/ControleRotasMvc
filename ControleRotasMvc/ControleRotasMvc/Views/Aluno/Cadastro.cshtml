@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ControleRotasMvc.Models.Materia>
+﻿@model IQueryable<ControleRotasMvc.Models.Materia>
 
 <head>
     <h3>CADASTRO DE ALUNO</h3>
@@ -231,8 +231,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
         <!--nova aba-->
         <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
@@ -255,8 +253,6 @@
             $('#telefoneResponsavel').mask('(99) 99999-9999', { placeholder: "(99) 99999-9999" }),           
         $('#mensalidadeValor').maskMoney({ symbol: 'R$ ', thousands: '.', decimal: ',', symbolStay: true })
     });
-
-
 
 </script>
 

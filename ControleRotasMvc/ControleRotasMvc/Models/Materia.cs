@@ -9,7 +9,7 @@ namespace ControleRotasMvc.Models
     public class Materia
     {
 
-        public Materia()
+       public Materia()
         {
             MateriaAlunos = new HashSet<MateriaAlunos>();
 

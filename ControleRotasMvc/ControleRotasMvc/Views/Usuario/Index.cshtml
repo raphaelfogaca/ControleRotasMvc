@@ -72,14 +72,14 @@
                         {
                             <td>Ativo</td>
                         }
-                        <td>
-                            @Html.ActionLink(
-                      "Alterar",
-                      "VisualizaUsuario",                         // controller action
-                      "Usuario",        // controller
-                      new { id = usuario.Id },         // action parameters aka route values
-                      new { @class = "btn btn-info btn-sm" })
-                        </td>
+                            <td>
+                                @Html.ActionLink(
+                          "Alterar",
+                          "VisualizaUsuario",                         // controller action
+                          "Usuario",        // controller
+                          new { id = usuario.Id },         // action parameters aka route values
+                          new { @class = "btn btn-info btn-sm" })
+                            </td>
                     </tr>
                 }
             </tbody>

@@ -266,6 +266,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlunoController.cs" />
+    <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MateriaController.cs" />
@@ -274,6 +275,7 @@
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAO\AlunoEntity.cs" />
     <Compile Include="DAO\ControleRotasContext.cs" />
+    <Compile Include="DAO\EventoEntity.cs" />
     <Compile Include="DAO\MateriaAlunoEntity.cs" />
     <Compile Include="DAO\MateriaEntity.cs" />
     <Compile Include="DAO\FinanceiroEntity.cs" />
@@ -312,8 +314,21 @@
     <Compile Include="Migrations\20180816010346_NotaeAluno.designer.cs">
       <DependentUpon>20180816010346_NotaeAluno.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20181027145113_CpfResponsavel.cs" />
+    <Compile Include="Migrations\20181027145113_CpfResponsavel.designer.cs">
+      <DependentUpon>20181027145113_CpfResponsavel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20181027150900_TelefoneResponsavel.cs" />
+    <Compile Include="Migrations\20181027150900_TelefoneResponsavel.designer.cs">
+      <DependentUpon>20181027150900_TelefoneResponsavel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20181112221719_Eventos.cs" />
+    <Compile Include="Migrations\20181112221719_Eventos.designer.cs">
+      <DependentUpon>20181112221719_Eventos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ControleRotasContextModelSnapshot.cs" />
     <Compile Include="Models\Aluno.cs" />
+    <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\Financeiro.cs" />
     <Compile Include="Models\Materia.cs" />
     <Compile Include="Models\MateriaAlunos.cs" />
@@ -352,6 +367,7 @@
     <Content Include="Views\Usuario\Alterar.cshtml" />
     <Content Include="Views\Usuario\_Index.cshtml" />
     <Content Include="Views\Aluno\_Cadastro.cshtml" />
+    <Content Include="Views\Evento\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
