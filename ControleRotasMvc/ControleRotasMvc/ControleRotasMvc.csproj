@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +36,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -109,6 +112,7 @@
     <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.SqlClient, Version=4.2.0.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Data.SqlClient.4.4.3\lib\net461\System.Data.SqlClient.dll</HintPath>
     </Reference>
@@ -168,16 +172,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
     </Reference>
@@ -210,7 +212,7 @@
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap-def.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Css\bootstrap.css" />
     <Content Include="Content\Css\Site.css" />
@@ -238,18 +240,12 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="App_Code\Flash.cshtml" />
+    <None Include="Properties\PublishProfiles\MeuAluno - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <Content Include="Scripts\jquery.inputmask\inputmask.date.extensions.js" />
-    <Content Include="Scripts\jquery.inputmask\inputmask.extensions.js" />
-    <Content Include="Scripts\jquery.inputmask\inputmask.js" />
-    <Content Include="Scripts\jquery.inputmask\inputmask.numeric.extensions.js" />
-    <Content Include="Scripts\jquery.inputmask\inputmask.phone.extensions.js" />
-    <Content Include="Scripts\jquery.inputmask\inputmask.regex.extensions.js" />
-    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -266,6 +262,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlunoController.cs" />
+    <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -275,6 +272,8 @@
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAO\AlunoEntity.cs" />
     <Compile Include="DAO\ControleRotasContext.cs" />
+    <Compile Include="DAO\EmpresaEntity.cs" />
+    <Compile Include="DAO\EnderecoEntity.cs" />
     <Compile Include="DAO\EventoEntity.cs" />
     <Compile Include="DAO\MateriaAlunoEntity.cs" />
     <Compile Include="DAO\MateriaEntity.cs" />
@@ -286,55 +285,21 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\FlashHelper.cs" />
-    <Compile Include="Migrations\20180815005041_Inicial.cs" />
-    <Compile Include="Migrations\20180815005041_Inicial.designer.cs">
-      <DependentUpon>20180815005041_Inicial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180815005548_Notas.cs" />
-    <Compile Include="Migrations\20180815005548_Notas.designer.cs">
-      <DependentUpon>20180815005548_Notas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180815005706_Notas2.cs" />
-    <Compile Include="Migrations\20180815005706_Notas2.designer.cs">
-      <DependentUpon>20180815005706_Notas2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180815013608_NotaAlunoMateria.cs" />
-    <Compile Include="Migrations\20180815013608_NotaAlunoMateria.designer.cs">
-      <DependentUpon>20180815013608_NotaAlunoMateria.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180815014338_NotaAlunoMateria3.cs" />
-    <Compile Include="Migrations\20180815014338_NotaAlunoMateria3.designer.cs">
-      <DependentUpon>20180815014338_NotaAlunoMateria3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180815014414_NotaAlunoMateria4.cs" />
-    <Compile Include="Migrations\20180815014414_NotaAlunoMateria4.designer.cs">
-      <DependentUpon>20180815014414_NotaAlunoMateria4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20180816010346_NotaeAluno.cs" />
-    <Compile Include="Migrations\20180816010346_NotaeAluno.designer.cs">
-      <DependentUpon>20180816010346_NotaeAluno.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20181027145113_CpfResponsavel.cs" />
-    <Compile Include="Migrations\20181027145113_CpfResponsavel.designer.cs">
-      <DependentUpon>20181027145113_CpfResponsavel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20181027150900_TelefoneResponsavel.cs" />
-    <Compile Include="Migrations\20181027150900_TelefoneResponsavel.designer.cs">
-      <DependentUpon>20181027150900_TelefoneResponsavel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20181112221719_Eventos.cs" />
-    <Compile Include="Migrations\20181112221719_Eventos.designer.cs">
-      <DependentUpon>20181112221719_Eventos.cs</DependentUpon>
+    <Compile Include="Migrations\20190920193231_Boletos.cs" />
+    <Compile Include="Migrations\20190920193231_Boletos.designer.cs">
+      <DependentUpon>20190920193231_Boletos.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ControleRotasContextModelSnapshot.cs" />
     <Compile Include="Models\Aluno.cs" />
+    <Compile Include="Models\Empresa.cs" />
+    <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\Financeiro.cs" />
     <Compile Include="Models\Materia.cs" />
     <Compile Include="Models\MateriaAlunos.cs" />
     <Compile Include="Models\Nota.cs" />
     <Compile Include="Models\Usuario.cs" />
-    <Compile Include="Models\MensalidadeMateriaViewModel.cs" />
+    <Compile Include="ViewModel\FinanceiroViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -368,6 +333,8 @@
     <Content Include="Views\Usuario\_Index.cshtml" />
     <Content Include="Views\Aluno\_Cadastro.cshtml" />
     <Content Include="Views\Evento\Index.cshtml" />
+    <Content Include="Views\Empresa\Index.cshtml" />
+    <Content Include="Views\Financeiro\Cadastro.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -376,8 +343,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Endereco\" />
     <Folder Include="Views\Nota\" />
-    <Folder Include="Views\TesteJquery\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

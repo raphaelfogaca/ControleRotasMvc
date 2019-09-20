@@ -23,5 +23,7 @@ namespace ControleRotasMvc.Models
         public int Status { get; set; }
 
         public int Id { get; set; } 
+
+        public int EmpresaId { get; set; }
     }
 }

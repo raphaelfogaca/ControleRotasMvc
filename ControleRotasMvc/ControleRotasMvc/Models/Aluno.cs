@@ -30,10 +30,12 @@ namespace ControleRotasMvc.Models
         public int AulaSexta { get; set; }
         public int AulaSabado { get; set; }
         public int AulaDomingo { get; set; }
-        //public String DiasAulas { get; set; }
+       // public String DiasAulas { get; set; }
+        public int EmpresaId { get; set; }
 
         public virtual IEnumerable<MateriaAlunos> MateriaAlunos { get; set; }
         public virtual IEnumerable<Nota> Notas { get; set; }
+
     }
 
 

@@ -19,6 +19,7 @@ namespace ControleRotasMvc.Models
         public String Nome { get; set; }
        // public IList<MateriaAluno> Materias { get; set; }
         public virtual IEnumerable<MateriaAlunos> MateriaAlunos { get; set; }
+        public int EmpresaId { get; set; }
        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ControleRotasMvc.DAO;
+using ControleRotasMvc.Filtros;
 using ControleRotasMvc.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace ControleRotasMvc.Controllers
 {
+    [AutorizacaoFilter]
     public class MateriaController : Controller
     {
         // GET: Materia
@@ -43,6 +45,12 @@ namespace ControleRotasMvc.Controllers
             if (ModelState.IsValid)
             {
                 MateriaEntity db = new MateriaEntity();
+
+                //armazenar objeto Empresa na sessão//
+                var empresaLogada = Session["empresaLogada"];
+                Empresa empresa = (Empresa)Session["empresaLogada"];
+                materia.EmpresaId = empresa.Id;
+
                 db.Gravar(materia);
                 return RedirectToAction("Index", "Materia");
 

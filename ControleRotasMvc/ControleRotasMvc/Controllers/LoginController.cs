@@ -19,9 +19,15 @@ namespace ControleRotasMvc.Controllers
         {
             UsuarioEntity db = new UsuarioEntity();
             Usuario usuario = db.ValidaUsuario(login, senha);
+
             if (usuario != null)
             {
-                Session["usuarioLogado"] = usuario;
+                Session["usuarioLogado"] = usuario.UsuarioNome;
+
+                EmpresaEntity db2 = new EmpresaEntity();
+                Empresa empresa = db2.BuscaEmpresaPorId(usuario.EmpresaId);
+
+                Session["empresaLogada"] = empresa;
                 return RedirectToAction("Index", "Home");
             }
             else return RedirectToAction("Index", "Login");            

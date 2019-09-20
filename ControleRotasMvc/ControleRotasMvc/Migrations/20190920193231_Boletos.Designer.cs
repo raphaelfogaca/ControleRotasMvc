@@ -11,8 +11,8 @@ using System;
 namespace ControleRotasMvc.Migrations
 {
     [DbContext(typeof(ControleRotasContext))]
-    [Migration("20180815005041_Inicial")]
-    partial class Inicial
+    [Migration("20190920193231_Boletos")]
+    partial class Boletos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,9 +40,13 @@ namespace ControleRotasMvc.Migrations
 
                     b.Property<int>("AulaTerca");
 
+                    b.Property<string>("CpfResponsavel");
+
                     b.Property<string>("Email");
 
                     b.Property<string>("EmailResponsavel");
+
+                    b.Property<int>("EmpresaId");
 
                     b.Property<string>("Nome");
 
@@ -50,9 +54,65 @@ namespace ControleRotasMvc.Migrations
 
                     b.Property<string>("Telefone");
 
+                    b.Property<string>("TelefoneResponsavel");
+
                     b.HasKey("Id");
 
                     b.ToTable("Alunos");
+                });
+
+            modelBuilder.Entity("ControleRotasMvc.Models.Empresa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Nome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Empresas");
+                });
+
+            modelBuilder.Entity("ControleRotasMvc.Models.Endereco", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AlunoId");
+
+                    b.Property<string>("Bairro");
+
+                    b.Property<string>("Cep");
+
+                    b.Property<string>("Cidade");
+
+                    b.Property<string>("Estado");
+
+                    b.Property<string>("Logradouro");
+
+                    b.Property<string>("Numero");
+
+                    b.Property<int>("UsuarioId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Enderecos");
+                });
+
+            modelBuilder.Entity("ControleRotasMvc.Models.Evento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Fim");
+
+                    b.Property<string>("Inicio");
+
+                    b.Property<string>("NomeAluno");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Eventos");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.Financeiro", b =>
@@ -61,6 +121,18 @@ namespace ControleRotasMvc.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AlunoId");
+
+                    b.Property<string>("BoletoBarcode");
+
+                    b.Property<string>("BoletoCode");
+
+                    b.Property<string>("BoletoPaymentLink");
+
+                    b.Property<string>("BoletoVencimento");
+
+                    b.Property<int>("EmpresaId");
+
+                    b.Property<int>("FormaRecebimento");
 
                     b.Property<int>("Situacao");
 
@@ -77,6 +149,8 @@ namespace ControleRotasMvc.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EmpresaId");
 
                     b.Property<string>("Nome");
 
@@ -103,10 +177,34 @@ namespace ControleRotasMvc.Migrations
                     b.ToTable("MateriaAlunos");
                 });
 
+            modelBuilder.Entity("ControleRotasMvc.Models.Nota", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AlunoId");
+
+                    b.Property<int>("Bimestre");
+
+                    b.Property<int>("MateriaId");
+
+                    b.Property<float>("ValorNota");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlunoId");
+
+                    b.HasIndex("MateriaId");
+
+                    b.ToTable("Notas");
+                });
+
             modelBuilder.Entity("ControleRotasMvc.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EmpresaId");
 
                     b.Property<int>("Status");
 
@@ -136,6 +234,19 @@ namespace ControleRotasMvc.Migrations
 
                     b.HasOne("ControleRotasMvc.Models.Materia", "Materia")
                         .WithMany("MateriaAlunos")
+                        .HasForeignKey("MateriaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ControleRotasMvc.Models.Nota", b =>
+                {
+                    b.HasOne("ControleRotasMvc.Models.Aluno", "Aluno")
+                        .WithMany("Notas")
+                        .HasForeignKey("AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ControleRotasMvc.Models.Materia", "Materia")
+                        .WithMany()
                         .HasForeignKey("MateriaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

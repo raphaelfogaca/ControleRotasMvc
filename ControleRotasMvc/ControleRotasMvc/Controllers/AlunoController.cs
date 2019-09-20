@@ -1,53 +1,52 @@
 ﻿using ControleRotasMvc.DAO;
+using ControleRotasMvc.Filtros;
 using ControleRotasMvc.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
 
 namespace ControleRotasMvc.Controllers
 {
+    [AutorizacaoFilter]
     public class AlunoController : Controller
     {
         // GET: Aluno
         [Route("alunos", Name = "ListaAlunos")]
         public ActionResult Index()
-        {
+        {            
             AlunoEntity dao = new AlunoEntity();
             IQueryable<Aluno> aluno = dao.Alunos();
-
             return View(aluno);
         }
 
         public ActionResult Cadastro()
         {
-            //var viewmod = new MateriaAlunos(); comentada 21/07
-            //ViewBag.Aluno = new Aluno();
-
             MateriaEntity dao2 = new MateriaEntity();
             string pesquisa = "";
             IQueryable<Materia> materia = dao2.Materias(pesquisa);
-
             return View(materia);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //testando sem json
-        //public JsonResult Adiciona(Aluno aluno, int[] materias, Financeiro mensalidade, int qtdMaterias, Nota[] nota)
-        //testando sem json
-        public ActionResult Adiciona(Aluno aluno, int[] materias, Financeiro mensalidade, int qtdMaterias, Nota[] nota)
+        public ActionResult Adiciona(Aluno aluno, int[] materias, Nota[] nota, Endereco endereco)
         {
 
-
             ///cadastro automatico aluno///
-            /*aluno.Nome = "raphael";
-            aluno.NomeResponsavel = "Jose";
-            aluno.Email = "raphael.fogaca@hotmail2.c2om";
-            aluno.AulaSexta = 1;
-            aluno.Telefone = "123456";
-            aluno.EmailResponsavel = "liliane@gmail.com";*/
+            //aluno.Nome = "raphael";
+            //aluno.NomeResponsavel = "Jose";
+            //aluno.Email = "raphael.fogaca@hotmail2.c23om";
+            //aluno.AulaSexta = 1;
+            //aluno.Telefone = "123456";
+            //aluno.EmailResponsavel = "liliane@gmail.com";
+
+            //armazenar objeto Empresa na sessão//
+            var empresaLogada = Session["empresaLogada"];
+            Empresa empresa = (Empresa)Session["empresaLogada"];
+            aluno.EmpresaId = empresa.Id;
 
             AlunoEntity db2 = new AlunoEntity();
             aluno.MateriaAlunos = materias.Select(n => new MateriaAlunos() { MateriaId = n }).ToList();
@@ -61,12 +60,14 @@ namespace ControleRotasMvc.Controllers
             {
 
                 AlunoEntity db = new AlunoEntity();
-                db.Gravar(aluno);
-                mensalidade.AlunoId = aluno.Id;
-
-
+                db.Gravar(aluno);          
+           
                 MateriaAlunoEntity materiaAlunos = new MateriaAlunoEntity();
                 materiaAlunos.Gravar(aluno.MateriaAlunos, aluno);
+
+                endereco.AlunoId = aluno.Id;
+                EnderecoEntity dbEndereco = new EnderecoEntity();
+                dbEndereco.Gravar(endereco);
 
                 int c = nota.Count() - 1;
                 int abc = aluno.Id;
@@ -79,19 +80,7 @@ namespace ControleRotasMvc.Controllers
                     c--;
                 }
                 not.Cadastrar(nota);
-
-                FinanceiroController mens = new FinanceiroController();
-                mens.Cadastrar(mensalidade, qtdMaterias);
-
                 return RedirectToAction("Index", "Aluno");
-                //testando sem json
-                //return Json(new
-                //{
-                //    Id = aluno.Id,
-                //    Nome = aluno.Nome
-                //});
-                //testando sem json
-
             }
             else
             {

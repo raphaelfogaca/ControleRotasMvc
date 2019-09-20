@@ -13,14 +13,8 @@
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">DADOS</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">PAGAMENTOS</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">NOTAS</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">PRESENÇA</a>
-        </li>
+        </li>        
     </ul>
 
     <!-- Tab panes -->
@@ -29,7 +23,6 @@
         <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <!--dados-->
             <br />
-            <label>Dados Pessoais:</label>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
@@ -69,14 +62,48 @@
                             <input id="telefoneResponsavel" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
                         </div>
                     </div>
+                    @*        
+        public string Cep { get; set; } // "postalCode": "01046010",
+        public string Logradouro { get; set; } // "street": "Av. Ipiranga",
+        public string Numero { get; set; } // "number": "100",
+        public string Bairro { get; set; } //  "district": "Republica",
+        public string Cidade { get; set; } // "city": "Sao Paulo",
+        public string Estado { get; set; } // "state": "SP"
+                        *@
+                    <!-- ENDEREÇO-->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="logradouro">Logradouro:</label>
+                            <input id="logradouro" name="endereco.logradouro" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-1">
+                            <label for="numero">nº:</label>
+                            <input id="numero" name="endereco.numero" type="number" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-2">
+                            <label for="bairro">Bairro:</label>
+                            <input id="bairro" name="endereco.bairro" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-2">
+                            <label for="cidade">Cidade:</label>
+                            <input id="cidade" type="tel" name="endereco.cidade" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-2">
+                            <label for="estado">Estado:</label>
+                            <input id="estado" type="tel" name="endereco.estado" class="form-control" value="" />
+                        </div>
+                        <div class="col-md-2">
+                            <label for="cep">CEP:</label>
+                            <input id="cep" type="tel" name="endereco.cep" class="form-control" value="" />
+                        </div>
+                    </div>
                 </div>
-
             </div>
+
             <label>Matérias:</label>
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="container">
-
 
                         @foreach (var item in Model)
                         {
@@ -129,14 +156,14 @@
                         </div>
                         <div class="col-md-2">
                             <input id="horario" name="aluno.Horario" placeholder="Ex: 00:00" class="form-control" value="" />
-                        </div>                       
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!--financeiro-->
-        <br />
+        @*<br />
         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <label>Adicionar Mensalidades:</label>
             <div class="panel panel-default">
@@ -157,7 +184,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <!--Notas-->
         <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
@@ -195,27 +222,27 @@
                                         {
                                             numeroBimestre = 1;
                                         }
-                                <tr>
-                                    <td>@item.Nome</td>
-                                    <td><input id="valorNota" name="nota[@i].ValorNota" /></td>
-                                    <input type="hidden" id="materiaId" name="nota[@i].MateriaId" value="@item.Id" />
-                                    <input type="hidden" id="bimestre" name="nota[@i].Bimestre" value="1" />
-                                    
-                                    <td><input id="valorNota" name="nota[@i1].ValorNota" /></td> 
-                                    <input type="hidden" id="materiaId" name="nota[@i1].MateriaId" value="@item.Id" />
-                                    <input type="hidden" id="bimestre" name="nota[@i1].Bimestre" value="2" />
-                                    
+                                        <tr>
+                                            <td>@item.Nome</td>
+                                            <td><input id="valorNota" name="nota[@i].ValorNota" /></td>
+                                            <input type="hidden" id="materiaId" name="nota[@i].MateriaId" value="@item.Id" />
+                                            <input type="hidden" id="bimestre" name="nota[@i].Bimestre" value="1" />
 
-                                    <td><input id="valorNota" name="nota[@i2].ValorNota" /></td> 
-                                    <input type="hidden" id="materiaId" name="nota[@i2].MateriaId" value="@item.Id" />
-                                    <input type="hidden" id="bimestre" name="nota[@i2].Bimestre" value="3" />
-                                    
-                                    <td><input id="valorNota" name="nota[@i3].ValorNota" /></td> 
-                                    <input type="hidden" id="materiaId" name="nota[@i3].MateriaId" value="@item.Id" />
-                                    <input type="hidden" id="bimestre" name="nota[@i3].Bimestre" value="4" />
-                                    
-                                </tr>
-                                        i = i+4;
+                                            <td><input id="valorNota" name="nota[@i1].ValorNota" /></td>
+                                            <input type="hidden" id="materiaId" name="nota[@i1].MateriaId" value="@item.Id" />
+                                            <input type="hidden" id="bimestre" name="nota[@i1].Bimestre" value="2" />
+
+
+                                            <td><input id="valorNota" name="nota[@i2].ValorNota" /></td>
+                                            <input type="hidden" id="materiaId" name="nota[@i2].MateriaId" value="@item.Id" />
+                                            <input type="hidden" id="bimestre" name="nota[@i2].Bimestre" value="3" />
+
+                                            <td><input id="valorNota" name="nota[@i3].ValorNota" /></td>
+                                            <input type="hidden" id="materiaId" name="nota[@i3].MateriaId" value="@item.Id" />
+                                            <input type="hidden" id="bimestre" name="nota[@i3].Bimestre" value="4" />
+
+                                        </tr>
+                                        i = i + 4;
                                         i1 = i1 + 4;
                                         i2 = i2 + 4;
                                         i3 = i3 + 4;
@@ -250,8 +277,8 @@
         $('#horario').mask('00:00'),
             $('#diaVencimento').mask('99/99/9999', { placeholder: "mm/dd/aaaa" }),
             $('#telefone').mask('(99) 99999-9999', { placeholder: "(99) 99999-9999" }),
-            $('#telefoneResponsavel').mask('(99) 99999-9999', { placeholder: "(99) 99999-9999" }),           
-        $('#mensalidadeValor').maskMoney({ symbol: 'R$ ', thousands: '.', decimal: ',', symbolStay: true })
+            $('#telefoneResponsavel').mask('(99) 99999-9999', { placeholder: "(99) 99999-9999" }),
+            $('#mensalidadeValor').maskMoney({ symbol: 'R$ ', thousands: '.', decimal: ',', symbolStay: true })
     });
 
 </script>

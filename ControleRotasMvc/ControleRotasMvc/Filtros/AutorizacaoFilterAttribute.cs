@@ -21,5 +21,10 @@ namespace ControleRotasMvc.Filtros
                      ));
             }
         }
+
+        public void OnAuthentication(AuthorizationContext filterContext)
+        {
+            throw new NotImplementedException();
+        }
     }    
 }

@@ -14,7 +14,7 @@ using ControleRotasMvc.Helpers;
 
 namespace ControleRotasMvc.Controllers
 {
-    //[AutorizacaoFilter]
+    [AutorizacaoFilter]
     public class UsuarioController : Controller
     {
         // GET: Usuario

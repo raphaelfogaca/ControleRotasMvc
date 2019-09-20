@@ -1,34 +1,38 @@
 ﻿using ControleRotasMvc.DAO;
+using ControleRotasMvc.Filtros;
 using ControleRotasMvc.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace ControleRotasMvc.Controllers
 {
+    //[AutorizacaoFilter]
     public class FinanceiroController : Controller
     {
-        // GET: Mensalidade
+        //GET: Mensalidade
         public ActionResult Index()
         {
             FinanceiroEntity dao = new FinanceiroEntity();
-            IList<Financeiro> docfin = dao.DocumentoFinanceiro();
+            IList<FinanceiroViewModel> docfin = dao.DocumentoFinanceiro();
+
+            AlunoEntity dbAluno = new AlunoEntity();
+            IQueryable<Aluno> aluno = dbAluno.Alunos();
+            ViewBag.Aluno = aluno;
+
+
             return View(docfin);
         }
 
-        public Financeiro Cadastrar(Financeiro docfin, int qtdMaterias)
+        [Route("Financeiro/Cadastro", Name = "Cadastro")]
+        public ActionResult Cadastro()
         {
-            FinanceiroEntity db3 = new FinanceiroEntity();            
-            docfin.Situacao = 0;
-
-            while (qtdMaterias > 0)
-            { 
-                db3.Gravar(docfin);
-                docfin.Vencimento = docfin.Vencimento.AddMonths(1);
-                qtdMaterias--;
-                docfin.Id = 0;
-            }
-            return (docfin);
+            AlunoEntity dbAluno = new AlunoEntity();
+            IQueryable<Aluno> aluno = dbAluno.Alunos();
+            ViewBag.Aluno = aluno; 
+            
+            return View(aluno);
         }
 
         [Route("financeiro/{id}", Name = "Deletar")]
@@ -39,8 +43,7 @@ namespace ControleRotasMvc.Controllers
             return RedirectToAction("Index");
         }
 
-        //[Route("financeiro/liquidar/{id}", Name = "Liquidar")]
-
+        [Route("financeiro/liquidar/{id}", Name = "Liquidar")]
         public ActionResult Liquidar(Financeiro docfin)
         {
             FinanceiroEntity dao = new FinanceiroEntity();
@@ -49,12 +52,47 @@ namespace ControleRotasMvc.Controllers
             dao.Alterar(documento);
             return RedirectToAction("Index");
         }
-        
-        public Financeiro Alterar(Financeiro docfin)
+
+        [Route("Financeiro/Adiciona", Name = "Adiciona")]
+        public ActionResult Adiciona(Financeiro docfin, int qtdProvisionar, Aluno aluno)
         {
-             FinanceiroEntity dao = new FinanceiroEntity();
-             dao.Alterar(docfin);
-             return(docfin);
+
+            FinanceiroEntity db = new FinanceiroEntity();
+            IList<FinanceiroViewModel> financeiro = db.DocumentoFinanceiro();
+
+            //armazenar objeto Empresa na sessão//
+            var empresaLogada = Session["empresaLogada"];
+            Empresa empresa = (Empresa)Session["empresaLogada"];
+            docfin.EmpresaId = empresa.Id;
+
+            while (qtdProvisionar > 0)
+            {
+                db.Gravar(docfin);
+                docfin.Vencimento = docfin.Vencimento.AddMonths(1);
+                qtdProvisionar--;
+                docfin.Id = 0;
+            }
+            return RedirectToAction("Index", "Financeiro");
+        }
+
+        //public Financeiro Alterar(Financeiro docfin)
+        //{
+        //    FinanceiroEntity dao = new FinanceiroEntity();
+        //    dao.Alterar(docfin);
+        //    return (docfin);
+        //}
+
+        [Route("Financeiro/Buscar", Name = "Buscar")]
+        public ActionResult BuscarFinanceiro(int Pesquisa)
+        {
+            FinanceiroEntity dao = new FinanceiroEntity();
+            var listaFinanceiro = dao.DocumentosPorAluno(Pesquisa);
+
+            AlunoEntity dbAluno = new AlunoEntity();
+            IQueryable<Aluno> aluno = dbAluno.Alunos();
+            ViewBag.Aluno = aluno;
+
+            return View("Index", listaFinanceiro);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ControleRotasMvc.Models;
+﻿using ControleRotasMvc.Controllers;
+using ControleRotasMvc.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,27 +10,36 @@ namespace ControleRotasMvc.DAO
 {
     public class FinanceiroEntity : DbContext
     {
-
-        public IList<Financeiro> DocumentoFinanceiro()
+        public IList<FinanceiroViewModel> DocumentoFinanceiro()
         {
             var repo = new ControleRotasContext();
             var financeiros = (from f in repo.DocumentosFinanceiros
-                              join a in repo.Alunos on f.AlunoId equals a.Id
-                              select new
-                              {
-                                  f,
-                                  a.Nome
-                              }).ToList();
+                               join a in repo.Alunos on f.AlunoId equals a.Id
+                               select new
+                               {
+                                   f,
+                                   a.Nome
+                               }).ToList();
 
-            return financeiros.Select(n => new Financeiro()
-            {   Id = n.f.Id,
+            return financeiros.Select(n => new FinanceiroViewModel()
+            {   Nome = n.Nome,
+                Id = n.f.Id,
                 AlunoId = n.f.AlunoId,
-                AlunoNome = n.Nome,
                 Situacao = n.f.Situacao,
                 Valor = n.f.Valor,
                 Vencimento = n.f.Vencimento,
             }).ToList();
         }
+
+        public IQueryable<Financeiro> Documentos(int Pesquisa = 0)
+        {            
+            ControleRotasContext db = new ControleRotasContext();
+            var q = db.DocumentosFinanceiros.AsQueryable();
+            q = q.Where(c => c.Id >(Pesquisa));
+            q.ToList();
+            return q;
+        }
+
 
         public bool Gravar(Financeiro docfin)
         {
@@ -73,8 +83,7 @@ namespace ControleRotasMvc.DAO
             try
             {
                 using (var repo = new ControleRotasContext())
-                {
-
+                {                  
                     repo.DocumentosFinanceiros.Update(docfin);
                     repo.SaveChanges();
                     return true;
@@ -85,12 +94,37 @@ namespace ControleRotasMvc.DAO
                 return false;
             }
         }
-        public Financeiro BuscarFinanceiroPorId(int id)
+
+
+        public Financeiro BuscarFinanceiroPorId(int Pesquisa)
         {
-            using (var repo = new ControleRotasContext())
+            ControleRotasContext db = new ControleRotasContext();
+            return db.DocumentosFinanceiros.Find(Pesquisa);
+
+        }
+
+        public IList<FinanceiroViewModel> DocumentosPorAluno(int Pesquisa)
+        {
+            var repo = new ControleRotasContext();
+            var financeiros = (from f in repo.DocumentosFinanceiros
+                               join a in repo.Alunos on f.AlunoId equals a.Id                              
+                               where f.AlunoId == Pesquisa
+                               select new
+                               {
+                                   f,
+                                   a.Nome
+                               }).ToList();
+
+            return financeiros.Select(n => new FinanceiroViewModel()
             {
-                return repo.DocumentosFinanceiros.Find(id);
-            }
+                Nome = n.Nome,
+                Id = n.f.Id,
+                AlunoId = n.f.AlunoId,
+                Situacao = n.f.Situacao,
+                Valor = n.f.Valor,
+                Vencimento = n.f.Vencimento,      
+                
+            }).ToList();
         }
 
     }

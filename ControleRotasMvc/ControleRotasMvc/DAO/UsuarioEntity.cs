@@ -45,7 +45,7 @@ namespace ControleRotasMvc.DAO
         {
             using (var db = new ControleRotasContext())
             {
-                return db.Usuarios.Where(o => o.UsuarioLogin == login && o.UsuarioSenha == senha).FirstOrDefault();               
+                return db.Usuarios.Where(o => o.UsuarioLogin == login && o.UsuarioSenha == senha).FirstOrDefault();
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using ControleRotasMvc.DAO;
+using ControleRotasMvc.Filtros;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ControleRotasMvc.Controllers
 {
+    [AutorizacaoFilter]
     public class EventoController : Controller
     {
         // GET: Evento

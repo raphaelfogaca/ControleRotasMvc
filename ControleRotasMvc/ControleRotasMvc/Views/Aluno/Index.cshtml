@@ -1,5 +1,6 @@
 ﻿
 @model IQueryable<ControleRotasMvc.Models.Aluno>
+
 <head>
     <h3>CADASTRO DE ALUNOS</h3>
 </head>
@@ -13,7 +14,7 @@
             UpdateTargetId = "listaAlunos"
         }))
         {
-            @Html.TextBox("Pesquisa")
+            @Html.TextBox("Pesquisa")                      
             <input type="submit" value="Pesquisar" class="btn btn-default btn-sm" />           
             <a href="/Aluno/Cadastro">
                 <input type="button" class="btn btn-success btn-sm" value="Novo Aluno" />

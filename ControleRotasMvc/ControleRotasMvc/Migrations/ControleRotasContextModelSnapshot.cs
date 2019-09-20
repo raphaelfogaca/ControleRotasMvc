@@ -45,6 +45,8 @@ namespace ControleRotasMvc.Migrations
 
                     b.Property<string>("EmailResponsavel");
 
+                    b.Property<int>("EmpresaId");
+
                     b.Property<string>("Nome");
 
                     b.Property<string>("NomeResponsavel");
@@ -56,6 +58,44 @@ namespace ControleRotasMvc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Alunos");
+                });
+
+            modelBuilder.Entity("ControleRotasMvc.Models.Empresa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Nome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Empresas");
+                });
+
+            modelBuilder.Entity("ControleRotasMvc.Models.Endereco", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AlunoId");
+
+                    b.Property<string>("Bairro");
+
+                    b.Property<string>("Cep");
+
+                    b.Property<string>("Cidade");
+
+                    b.Property<string>("Estado");
+
+                    b.Property<string>("Logradouro");
+
+                    b.Property<string>("Numero");
+
+                    b.Property<int>("UsuarioId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Enderecos");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.Evento", b =>
@@ -81,6 +121,18 @@ namespace ControleRotasMvc.Migrations
 
                     b.Property<int>("AlunoId");
 
+                    b.Property<string>("BoletoBarcode");
+
+                    b.Property<string>("BoletoCode");
+
+                    b.Property<string>("BoletoPaymentLink");
+
+                    b.Property<string>("BoletoVencimento");
+
+                    b.Property<int>("EmpresaId");
+
+                    b.Property<int>("FormaRecebimento");
+
                     b.Property<int>("Situacao");
 
                     b.Property<float>("Valor");
@@ -96,6 +148,8 @@ namespace ControleRotasMvc.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EmpresaId");
 
                     b.Property<string>("Nome");
 
@@ -148,6 +202,8 @@ namespace ControleRotasMvc.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EmpresaId");
 
                     b.Property<int>("Status");
 

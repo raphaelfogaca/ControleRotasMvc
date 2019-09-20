@@ -33,6 +33,7 @@ namespace ControleRotasMvc.DAO
             {
                 using (var repo = new ControleRotasContext())
                 {
+
                     repo.Alunos.Add(aluno);
                     repo.SaveChanges();
                     return true;

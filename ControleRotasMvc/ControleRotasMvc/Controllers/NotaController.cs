@@ -1,4 +1,5 @@
 ﻿using ControleRotasMvc.DAO;
+using ControleRotasMvc.Filtros;
 using ControleRotasMvc.Models;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace ControleRotasMvc.Controllers
 {
+    [AutorizacaoFilter]
     public class NotaController : Controller
     {
         // GET: Nota

@@ -1,80 +1,80 @@
 ﻿
 @{
     Layout = null;
+
 }
 
+
 <!DOCTYPE html>
-@*<script src="~/Scripts/jquery-3.3.1.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-<script src="~/Scripts/jquery.mask.min.js"></script>
-<script src="~/Scripts/jquery.maskmoney.js"></script>
-<script src="~/Scripts/modernizr-2.6.2.js"></script>*@
 <html>
+
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
-
-    <link rel="stylesheet" href="~/Content/Css/bootstrap.css" type="text/css"  />
-    <link rel="stylesheet" href="~/Content/Css/Site.css" />
-
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <link href="~/Content/Css/bootstrap.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>*@
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
-
 <body>
     @*<link href="~/Content/Css/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />*@
-    <nav class="navbar navbar-inverse">
-        <a class="navbar-brand" href="#">SISTEMA</a>
-        <ul class="nav navbar-nav">
-            @*<li>@Html.ActionLink("Usuarios", "Index", "Usuario")</li>*@
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros <span class="caret"></a>
-                <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("Alunos", "Index", "Aluno")</li>
-                    <li>@Html.ActionLink("Usuários", "Index", "Usuario")</li>
-                    <li>@Html.ActionLink("Matérias", "Index", "Materia")</li>
-                </ul>
-            </li>
-        </ul>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />*@
 
-        <ul class="nav navbar-nav">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alunos <span class="caret"></a>
-                <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("Controle", "Index", "Aluno")</li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Financeiro <span class="caret"></a>
-                <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("Operacional", "Index", "Financeiro")</li>
-                </ul>
-            </li>
-        </ul>
 
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Logout    </a></li>
-        </ul>
+    @if (Session["usuarioLogado"] != null)
+    {
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-    </nav>
-    <div class="container">
-        <div id="body" role="alert">
-            @Flash.FlashMessage(TempData)
-            <div id="flash"></div>
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix"></section>
+            <a class="navbar-brand" href="#">SISTEMA</a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastros</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Alunos", "Index", "Aluno")</li>
+                            <li>@Html.ActionLink("Usuários", "Index", "Usuario")</li>
+                            <li>@Html.ActionLink("Matérias", "Index", "Materia")</li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alunos</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Controle", "Index", "Aluno")</li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Financeiro</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Operacional", "Index", "Financeiro")</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Session["usuarioLogado"]</li>
+                    <li>@Session["empresaLogada"]</li>
+                </ul>
+            </div>
+        </nav>
+    }
+        <div class="container">
+            <div id="body" role="alert">
+                @Flash.FlashMessage(TempData)
+                <div id="flash"></div>
+                @RenderSection("featured", required: false)
+                <section class="content-wrapper main-content clear-fix"></section>
+            </div>
+            <div id="conteudo">
+                @RenderBody()
+            </div>
+
         </div>
-        <div id="conteudo">
-            @RenderBody()
-        </div>
+        @*<script src="~/Scripts/jquery-3.3.1.js"></script>
+            <script src="~/Scripts/bootstrap.min.js"></script>*@
+    
+        @RenderSection("Scripts", false)
 
-    </div>
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    @RenderSection("Scripts", false)
-</body>
+    </body>
 </html>
