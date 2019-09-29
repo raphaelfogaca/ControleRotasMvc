@@ -48,6 +48,7 @@ namespace ControleRotasMvc.Controllers
             {
                 UsuarioEntity db = new UsuarioEntity();
                 db.Gravar(usuario);
+
                 this.FlashInfo("Usuário cadastrado com sucesso"); //M001
                 return RedirectToAction("Index", "Usuario");       
                 

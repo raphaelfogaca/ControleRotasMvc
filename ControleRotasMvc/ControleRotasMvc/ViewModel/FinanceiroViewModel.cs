@@ -15,5 +15,7 @@ namespace ControleRotasMvc.Models
         public DateTime Vencimento { get; set; }
         public Endereco Endereco { get; set; }
 
+        public string BoletoPaymentLink { get; set; }
+
     }
 }

@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace ControleRotasMvc.Controllers
 {
-    [AutorizacaoFilter]
+    //[AutorizacaoFilter]
     public class AlunoController : Controller
     {
         // GET: Aluno
@@ -27,12 +27,15 @@ namespace ControleRotasMvc.Controllers
             MateriaEntity dao2 = new MateriaEntity();
             string pesquisa = "";
             IQueryable<Materia> materia = dao2.Materias(pesquisa);
+            DiasAulaEntity diasAula = new DiasAulaEntity();
+            ViewBag.DiasAula = diasAula.DiasAula();
+
             return View(materia);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Adiciona(Aluno aluno, int[] materias, Nota[] nota, Endereco endereco)
+        public ActionResult Adiciona(Aluno aluno, int[] materias, Nota[] nota, Endereco endereco, string[] diasAula)
         {
 
             ///cadastro automatico aluno///
@@ -42,6 +45,11 @@ namespace ControleRotasMvc.Controllers
             //aluno.AulaSexta = 1;
             //aluno.Telefone = "123456";
             //aluno.EmailResponsavel = "liliane@gmail.com";
+
+            foreach (var item in diasAula)
+            {
+                aluno.DiasAula = aluno.DiasAula + "," + item;
+            }
 
             //armazenar objeto Empresa na sessão//
             var empresaLogada = Session["empresaLogada"];

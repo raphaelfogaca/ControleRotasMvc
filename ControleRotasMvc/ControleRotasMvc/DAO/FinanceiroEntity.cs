@@ -28,6 +28,7 @@ namespace ControleRotasMvc.DAO
                 Situacao = n.f.Situacao,
                 Valor = n.f.Valor,
                 Vencimento = n.f.Vencimento,
+                BoletoPaymentLink = n.f.BoletoPaymentLink,
             }).ToList();
         }
 

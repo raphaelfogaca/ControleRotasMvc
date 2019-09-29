@@ -1,4 +1,8 @@
 ﻿@model IQueryable<ControleRotasMvc.Models.Materia>
+
+@{
+    var diasAula = ViewBag.DiasAula as IQueryable<ControleRotasMvc.Models.DiasAula>;
+}
 <!--removerrrr-->
 <head>
     <h3>CADASTRO DE ALUNO</h3>
@@ -14,7 +18,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">NOTAS</a>
-        </li>        
+        </li>
     </ul>
 
     <!-- Tab panes -->
@@ -62,14 +66,14 @@
                             <input id="telefoneResponsavel" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
                         </div>
                     </div>
-                    @*        
-        public string Cep { get; set; } // "postalCode": "01046010",
-        public string Logradouro { get; set; } // "street": "Av. Ipiranga",
-        public string Numero { get; set; } // "number": "100",
-        public string Bairro { get; set; } //  "district": "Republica",
-        public string Cidade { get; set; } // "city": "Sao Paulo",
-        public string Estado { get; set; } // "state": "SP"
-                        *@
+                    @*
+                        public string Cep { get; set; } // "postalCode": "01046010",
+                        public string Logradouro { get; set; } // "street": "Av. Ipiranga",
+                        public string Numero { get; set; } // "number": "100",
+                        public string Bairro { get; set; } //  "district": "Republica",
+                        public string Cidade { get; set; } // "city": "Sao Paulo",
+                        public string Estado { get; set; } // "state": "SP"
+                    *@
                     <!-- ENDEREÇO-->
                     <div class="row">
                         <div class="col-md-4">
@@ -119,36 +123,36 @@
             <label>Aulas:</label>
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="row">
+                    @*<div class="row">
                         <div class="col-md-1">
-                            <input id="aulaSegunda" type="checkbox" name="aluno.AulaSegunda" class="form-check-input" value="1" />
+                            <input id="DiasAula" type="checkbox" name="diasAula[0]" class="form-check-input" value="1" />
                             <label class="choice" for="aluno.AulaSegunda">SEG &nbsp;</label>
                         </div>
                         <div class="col-md-1">
-                            <input id="aulaTerca" type="checkbox" name="aluno.AulaTerca" class="form-check-input" value="1" />
+                            <input id="aulaTerca" type="checkbox" name="diasAula[1]" class="form-check-input" value="2" />
                             <label class="choice" for="aluno.AulaTerca">TER &nbsp;</label>
                         </div>
                         <div class="col-md-1">
-                            <input id="AulaQuarta" type="checkbox" name="aluno.AulaQuarta" class="form-check-input" value="1" />
+                            <input id="DiasAula" type="checkbox" name="diasAula[2]" class="form-check-input" value="3" />
                             <label class="choice" for="aluno.AulaQuarta"> QUA &nbsp;</label>
                         </div>
                         <div class="col-md-1">
-                            <input id="AulaQuinta" type="checkbox" name="aluno.AulaQuinta" class="form-check-input" value="1" />
+                            <input id="AulaQuinta" type="checkbox" name="diasAula[3]" class="form-check-input" value="4" />
                             <label class="choice" for="aluno.AulaQuinta"> QUI &nbsp;</label>
                         </div>
                         <div class="col-md-1">
-                            <input id="AulaSexta" type="checkbox" name="aluno.AulaSexta" class="form-check-input" value="1" />
+                            <input id="AulaSexta" type="checkbox" name="diasAula[4]" class="form-check-input" value="5" />
                             <label class="choice" for="aluno.AulaSexta"> SEX &nbsp;</label>
                         </div>
                         <div class="col-md-1">
-                            <input id="AulaSabado" type="checkbox" name="aluno.AulaSabado" class="form-check-input" value="1" />
+                            <input id="AulaSabado" type="checkbox" name="diasAula[5]" class="form-check-input" value="6" />
                             <label class="choice" for="aluno.AulaSabado"> SAB &nbsp;</label>
                         </div>
                         <div class="col-md-1">
-                            <input id="AulaDomingo" type="checkbox" name="aluno.AulaDomingo" class="form-check-input" value="1" />
+                            <input id="AulaDomingo" type="checkbox" name="diasAula[6]" class="form-check-input" value="7" />
                             <label class="choice" for="aluno.AulaDomingo"> DOM</label>
                         </div>
-                    </div>
+                    </div>*@
                     <br />
                     <div class="row">
                         <div class="col-md-1">
@@ -158,33 +162,44 @@
                             <input id="horario" name="aluno.Horario" placeholder="Ex: 00:00" class="form-control" value="" />
                         </div>
                     </div>
-                </div>
-            </div>
+
+                    @foreach (var item in diasAula)
+                        {
+                            int a = 0;
+                        <div class="row">
+                            <div class="col-md-1">
+                                <input id="diasAula" type="checkbox" name="diasAula" class="form-check-input" value="@item.Descricao" />
+                                <label class="choice" for="aluno.AulaSegunda">@item.Descricao &nbsp;</label>
+                            </div>
+                        </div>        
+                    }
+                        </div>
+                    </div>
         </div>
 
         <!--financeiro-->
         @*<br />
-        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <label>Adicionar Mensalidades:</label>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <label for="mensalidadeValor">Valor Mensalidade:</label>
-                            <input id="mensalidadeValor" name="mensalidade.Valor" class="form-control" value="" />
-                        </div>
-                        <div class="col-md-1">
-                            <label for="mensalidadeQtd">Meses</label>
-                            <input id="mensalidadeQtd" name="qtdMaterias" class="form-control" value="" />
-                        </div>
-                        <div class="col-md-2">
-                            <label for="diaVencimento">1º Venc.</label>
-                            <input id="diaVencimento" name="mensalidade.Vencimento" class="form-control" value="" />
+            <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <label>Adicionar Mensalidades:</label>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="mensalidadeValor">Valor Mensalidade:</label>
+                                <input id="mensalidadeValor" name="mensalidade.Valor" class="form-control" value="" />
+                            </div>
+                            <div class="col-md-1">
+                                <label for="mensalidadeQtd">Meses</label>
+                                <input id="mensalidadeQtd" name="qtdMaterias" class="form-control" value="" />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="diaVencimento">1º Venc.</label>
+                                <input id="diaVencimento" name="mensalidade.Vencimento" class="form-control" value="" />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
 
         <!--Notas-->
         <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
@@ -280,6 +295,19 @@
             $('#telefoneResponsavel').mask('(99) 99999-9999', { placeholder: "(99) 99999-9999" }),
             $('#mensalidadeValor').maskMoney({ symbol: 'R$ ', thousands: '.', decimal: ',', symbolStay: true })
     });
+
+//    $('#DiasAula').click(function() {
+//    DiasAula = document.getElementById("DiasAula"); //searches for and detects the input element from the 'myButton' id
+//    DiasAula.value = "I'm a changed button" //changes the value
+//})
+
+            $('input[type=checkbox]').each(function () {  
+            if (this.checked) {  
+                abc = abc + $(this).val() + ","  
+                //assign set value to hidden field   
+                 $('#diasAula').val(abc);  
+            }  
+        });
 
 </script>
 

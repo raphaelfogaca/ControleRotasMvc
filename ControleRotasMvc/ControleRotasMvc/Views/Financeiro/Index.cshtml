@@ -11,6 +11,7 @@
         <h3>OPERACIONAL</h3>
     </div>
     <script src=~/Scripts/jquery.maskMoney.js type="text/javascript"></script>
+    
 
 </head>
 
@@ -40,6 +41,7 @@
 
 <br />
 <body>
+    @*NOVO DOCUMENTO FINANCEIRO*@
     <div id="NovoFinanceiro" class="modal fade modal-lg" tabindex="-1" role="form" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -121,7 +123,7 @@
     </div>
 
 
-
+    @*LISTA DE DOCUMENTOS FINANCEIROS*@
     <div id="listaFinanceiro">
         <table class="table table-hover">
             <thead>
@@ -154,19 +156,28 @@
                         <td>Liquidado</td>
                     }
 
-                    <td>
-                        @if (documento.Situacao == 0)
-                        {
-                            @Html.ActionLink("Liquidar", "Liquidar", new { id = documento.Id }, new { @class = "btn btn-primary btn-sm" })
-                        }
-                        @Html.ActionLink("Alterar", "Alterar", new { id = documento.Id }, new { @class = "btn btn-info btn-sm" })
-                        @Html.ActionLink("Excluir", "Deletar", new { id = documento.Id }, new { @class = "btn btn-danger btn-sm" })
-                    </td>
-                    <td></td>
+                <td></td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Opções
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            @if (documento.Situacao == 0)
+                            {
+                                @Html.ActionLink("Liquidar", "Liquidar", new { id = documento.Id }, new { @class = "dropdown-item" })
+                            }
+
+                            <a href="@documento.BoletoPaymentLink" target="_blank" class="dropdown-item">Ver Boleto</a>
+
+                            @Html.ActionLink("Alterar", "Alterar", new { id = documento.Id }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Excluir", "Deletar", new { id = documento.Id }, new { @class = "dropdown-item" })
+                          </div>
+                    </div>
+                </td>
                     @*<td>@Html.ActionLink("Excluir", "Deletar", new { id = documento.Id })</td>*@
 
                 </tr>
-
                 }
             </tbody>
         </table>

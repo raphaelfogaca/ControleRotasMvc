@@ -114,6 +114,9 @@
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
@@ -260,6 +263,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\vistodb.mdf" />
+    <Content Include="App_Data\vistodb_log.ldf">
+      <DependentUpon>vistodb.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -324,6 +331,7 @@
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAO\AlunoEntity.cs" />
     <Compile Include="DAO\ControleRotasContext.cs" />
+    <Compile Include="DAO\DiasAulaEntity.cs" />
     <Compile Include="DAO\EmpresaEntity.cs" />
     <Compile Include="DAO\EnderecoEntity.cs" />
     <Compile Include="DAO\EventoEntity.cs" />
@@ -343,6 +351,7 @@
     </Compile>
     <Compile Include="Migrations\ControleRotasContextModelSnapshot.cs" />
     <Compile Include="Models\Aluno.cs" />
+    <Compile Include="Models\DiasAula.cs" />
     <Compile Include="Models\Empresa.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\Evento.cs" />
