@@ -1,12 +1,17 @@
 ﻿@model IQueryable<ControleRotasMvc.Models.Usuario>
+    @{ 
+        var empresas = ViewBag.Empresa;
+    }
+
+@*PORQUE ESTÁ SEM Html.AntiForgeryToken()????????????*@
+
 
 <head>
-        <h3>CADASTRO DE USUÁRIOS</h3>
+    <h3>CADASTRO DE USUÁRIOS</h3>
 </head>
 <body>
     <div align="right">
         <br />
-
         @using (Ajax.BeginForm("BuscarUsuario", "Usuario", new AjaxOptions
         {
             HttpMethod = "Get",
@@ -16,18 +21,69 @@
         {
             @Html.TextBox("Pesquisa")
             <input type="submit" value="Pesquisar" class="btn btn-default btn-sm" />
-            @*<input type="button" class="btn btn-success btn-sm" value="Cadastrar" onclick="~/Usuario/Form" />*@
-            <a href="/Usuario/Form">
-                <input type="button" class="btn btn-success btn-sm" value="Novo Usuário" />
-            </a>
+            <input type="button" class="btn btn-success btn-sm" value="Novo Usuário" data-toggle="modal" data-target="#NovoUsuario" />
+
         }
-
-
-
         <br />
-
         <br />
     </div>
+
+    <div id="NovoUsuario" class="modal fade modal-lg" tabindex="-1" role="form" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Novo Usuário</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+
+                        <form id="cad-usuario" action="/Usuario/Adiciona" method="post" class="active">
+                            <label for="Empresa">Empresa:</label>
+                            <select class="form-control" name="usuario.EmpresaId">
+                                <option hidden selected value=""> -- Selecione -- </option>
+                                @{
+                                    foreach (var items in empresas)
+                                    {
+                                        <option value="@items.Id">
+                                            @items.Nome
+                                        </option>
+                                    }
+                                }
+                            </select>                           
+
+                            <label for="nome">Nome:</label>
+                            <input id="nome" name="usuario.UsuarioNome" value="@ViewBag.Usuario.UsuarioNome" class="form-control" />
+
+                            <label for="sobrenome">Sobrenome:</label>
+                            <input id="sobrenome" name="usuario.UsuarioSobrenome" value="@ViewBag.Usuario.UsuarioSobrenome" class="form-control" />
+
+                            <label for="email">E-mail:</label>
+                            <input id="email" name="usuario.UsuarioEmail" value="@ViewBag.Usuario.UsuarioEmail" class="form-control" />
+                            @Html.ValidationMessage("usuario.UsuarioLogin")
+                            @Html.ValidationMessage("usuario.LoginExistente")
+
+                            <label for="senha">Senha:</label>
+                            <input id="senha" name="usuario.UsuarioSenha" value="@ViewBag.Usuario.UsuarioSenha" class="form-control" />
+
+                            <label for="tipo">Tipo [0-Contrante  1-ADM  2-Responsável]</label>
+                            <input id="tipo" name="usuario.UsuarioTipo" value="@ViewBag.Usuario.UsuarioTipo" class="form-control">
+
+
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <input class="btn btn-primary" form="cad-usuario" id="btnSave" align-baseline="right" type="submit" value="Cadastrar" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <div id="listaUsuarios">
         <table class="table table-hover">
@@ -72,14 +128,14 @@
                         {
                             <td>Ativo</td>
                         }
-                            <td>
-                                @Html.ActionLink(
-                          "Alterar",
-                          "VisualizaUsuario",                         // controller action
-                          "Usuario",        // controller
-                          new { id = usuario.Id },         // action parameters aka route values
-                          new { @class = "btn btn-info btn-sm" })
-                            </td>
+                        <td>
+                            @Html.ActionLink(
+                      "Alterar",
+                      "VisualizaUsuario",                         // controller action
+                      "Usuario",        // controller
+                      new { id = usuario.Id },         // action parameters aka route values
+                      new { @class = "btn btn-info btn-sm" })
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -94,7 +150,7 @@
 
 <script type="text/javascript">
 
-    function buscarUsuario() {       
+    function buscarUsuario() {
         var url = ("/Usuario/BuscarUsuario");
         //var params = document.getElementById("nomedousuario");
         var nome = "Raphael";
@@ -108,10 +164,10 @@
     }
 
 
-        function validar() {
-            alert('hello!');
-        };
-    
+    function validar() {
+        alert('hello!');
+    };
+
     function atualiza(resposta) {
         var elemento = $("#usuariotipo" + resposta.Id);
         elemento.html(resposta.UsuarioTipo);

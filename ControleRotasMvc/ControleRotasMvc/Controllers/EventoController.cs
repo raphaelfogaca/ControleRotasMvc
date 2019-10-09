@@ -24,12 +24,6 @@ namespace ControleRotasMvc.Controllers
                 var events = db.Eventos.ToList();
                 return new JsonResult { Data = events, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
-
-            //EventoEntity db = new EventoEntity();
-            //var eventos = db.Eventos();
-            //return new JsonResult { Data = eventos, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-
-
         }
     }
 }

@@ -1,24 +1,9 @@
-﻿
-@*<div>
-    Id: @ViewBag.Usuario.Id<br />
-    Login: @ViewBag.Usuario.UsuarioLogin<br />
-    Nome: @ViewBag.Usuario.UsuarioNome<br />
-    Sobrenome: @ViewBag.Usuario.UsuarioSobrenome<br />
-    Email: @ViewBag.Usuario.UsuarioEmail<br />
-    Senha: @ViewBag.Usuario.UsuarioSenha<br />
-    TIpo: @ViewBag.Usuario.UsuarioTipo<br />
-    @Html.RouteLink("Voltar para a lista de usuários", "ListaUsuarios")
-</div>*@
-
-
-@model ControleRotasMvc.Models.Usuario
-
-<form action="/Usuario/Alterar" method="post">
+﻿<form action="/Usuario/Alterar" method="post">
     @*@Html.AntiForgeryToken()*@
-    @*<label for="id">ID</label>
-        <input form="id" name="usuario.Id" value="@ViewBag.Usuario.Id" class="form-control" />*@
 
-    @Html.HiddenFor(model => model.Id)
+    <label for="empresa">Empresa:</label>
+    <input id="empresaId" name="usuario.EmpresaId" value="@ViewBag.Usuario.EmpresaId" readonly class="form-control" />
+
 
     <label for="nome">Nome:</label>
     <input id="nome" name="usuario.UsuarioNome" value="@ViewBag.Usuario.UsuarioNome" class="form-control" />
@@ -40,17 +25,26 @@
     <label for="tipo">Tipo [0-Contrante  1-ADM  2-Responsável]</label>
     <input id="tipo" name="usuario.UsuarioTipo" value="@ViewBag.Usuario.UsuarioTipo" class="form-control">
 
-   
+
     <label for="usuarioStatus">Ativo</label>
     @if (@ViewBag.Usuario.Status == 1)
     {
-        <input id="status" type="checkbox" name="usuario.Status" value="@ViewBag.Usuario.Status" class="form-check" checked />
+        <input id="status" type="checkbox" name="usuario.Status" value="@ViewBag.Usuario.Status" class="form-check"/>
     }
     else if (@ViewBag.Usuario.Status == 0)
     {
-        <input id="status" type="checkbox" name="usuario.Status" value="@ViewBag.Usuario.Status" class="form-check" /> }
-
-    @*<td>@Html.ActionLink("Alterar", "Alterar", new { id = usuario.Id })</td>*@
-    <p></p>
+        <input id="status" type="checkbox" name="usuario.Status" value="@ViewBag.Usuario.Status" class="form-check"/> }
+       <p></p>
     <input type="submit" value="Salvar" class="btn btn-success btn-sm" />
 </form>
+
+<script>
+    $("#status").click(function () { 
+        
+        if (document.getElementById("status").checked = true) {
+            document.getElementById("status").value = "1";
+        } else if (document.getElementById("status").checked = false) {
+            document.getElementById("status").value = "0";
+        }       
+    });
+</script>

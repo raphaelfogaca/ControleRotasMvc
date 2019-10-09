@@ -3,7 +3,18 @@
 </head>
 <br />
 <body>
-    <form action="/Usuario/Adiciona" method="post">
+
+    <div id="NovoUsuario" class="modal fade modal-lg" tabindex="-1" role="form" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Novo Usuário</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        
+    <form id="cad-usuario" action="/Usuario/Adiciona" method="post">
         @Html.AntiForgeryToken()
         <label for="nome">Nome:</label>
         <input id="nome" name="usuario.UsuarioNome" value="@ViewBag.Usuario.UsuarioNome" class="form-control" />
@@ -20,8 +31,14 @@
         <input id="senha" name="usuario.UsuarioSenha" value="@ViewBag.Usuario.UsuarioSenha" class="form-control" />
 
         <label for="tipo">Tipo [0-Contrante  1-ADM  2-Responsável]</label>
-        <input id="tipo" name="usuario.UsuarioTipo" value="@ViewBag.Usuario.UsuarioTipo" class="form-control">       
+        <input id="tipo" name="usuario.UsuarioTipo" value="@ViewBag.Usuario.UsuarioTipo" class="form-control">
 
         <input type="submit" value="Cadastrar" />
     </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 </body>

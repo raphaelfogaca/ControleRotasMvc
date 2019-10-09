@@ -263,10 +263,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\vistodb.mdf" />
-    <Content Include="App_Data\vistodb_log.ldf">
-      <DependentUpon>vistodb.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -299,6 +295,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="App_Code\Flash.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\MeuAluno - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -345,9 +342,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\FlashHelper.cs" />
-    <Compile Include="Migrations\20190920193231_Boletos.cs" />
-    <Compile Include="Migrations\20190920193231_Boletos.designer.cs">
-      <DependentUpon>20190920193231_Boletos.cs</DependentUpon>
+    <Compile Include="Migrations\20191002224546_Eventos.cs" />
+    <Compile Include="Migrations\20191002224546_Eventos.designer.cs">
+      <DependentUpon>20191002224546_Eventos.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ControleRotasContextModelSnapshot.cs" />
     <Compile Include="Models\Aluno.cs" />
@@ -396,6 +393,7 @@
     <Content Include="Views\Evento\Index.cshtml" />
     <Content Include="Views\Empresa\Index.cshtml" />
     <Content Include="Views\Financeiro\Cadastro.cshtml" />
+    <Content Include="Views\Shared\_LayoutBackup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -404,6 +402,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\Endereco\" />
     <Folder Include="Views\Nota\" />
   </ItemGroup>

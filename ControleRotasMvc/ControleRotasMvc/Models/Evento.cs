@@ -8,9 +8,14 @@ namespace ControleRotasMvc.Models
     public class Evento
     {
         public int Id { get; set; }
-        public string NomeAluno { get; set; }
-        public string Inicio { get; set; }
-        public string Fim { get; set; }
+        public string Titulo { get; set; }
+        public string Descricao { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        public string Cor { get; set; }
+        public bool IsFullDay { get; set; }
+        public int EmpresaId { get; set; }
+        public int AlunoId { get; set; }
 
     }
 }

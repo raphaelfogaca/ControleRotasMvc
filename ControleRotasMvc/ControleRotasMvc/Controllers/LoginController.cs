@@ -25,12 +25,21 @@ namespace ControleRotasMvc.Controllers
                 Session["usuarioLogado"] = usuario.UsuarioNome;
 
                 EmpresaEntity db2 = new EmpresaEntity();
-                Empresa empresa = db2.BuscaEmpresaPorId(usuario.EmpresaId);
+                Empresa empresa = new Empresa();
+                empresa = db2.BuscaEmpresaPorId(usuario.EmpresaId);
 
-                Session["empresaLogada"] = empresa;
+                Session["empresaLogada"] = empresa.Id;
                 return RedirectToAction("Index", "Home");
             }
             else return RedirectToAction("Index", "Login");            
         }
+
+        public ActionResult Sair()        {
+            Session["usuarioLogado"] = null;
+            Session["empresaLogada"] = null;
+            return RedirectToAction("Index", "Login");
+        }
+
+
     }
 }

@@ -8,13 +8,14 @@
 
     <div class="row">
         <div class="col-md-1" align="justify">
-            <label for="nome">Nome:</label>           
+            <label for="nome">Nome:</label>
         </div>
         <div class="col-md-4">
             <input id="nome" name="materia.Nome" value="" class="form-control" />
         </div>
-            <div class="col-md-4">
-                <input class="btn btn-primary" id="btnSave" align-baseline="right" type="submit" value="Cadastrar" />
-            </div>
+        <div class="col-md-4">
+            <input class="btn btn-primary" id="btnSave" align-baseline="right" type="submit" value="Cadastrar" />
         </div>
+    </div>
+    <input type="hidden" id="materia.EmpresaId" name="materia.EmpresaId" value="@Session["empresaLogada"]" />
 </form>

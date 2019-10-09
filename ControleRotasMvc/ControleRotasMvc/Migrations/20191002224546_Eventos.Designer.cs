@@ -11,8 +11,8 @@ using System;
 namespace ControleRotasMvc.Migrations
 {
     [DbContext(typeof(ControleRotasContext))]
-    [Migration("20190920193231_Boletos")]
-    partial class Boletos
+    [Migration("20191002224546_Eventos")]
+    partial class Eventos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,21 +26,9 @@ namespace ControleRotasMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AulaDomingo");
-
-                    b.Property<int>("AulaQuarta");
-
-                    b.Property<int>("AulaQuinta");
-
-                    b.Property<int>("AulaSabado");
-
-                    b.Property<int>("AulaSegunda");
-
-                    b.Property<int>("AulaSexta");
-
-                    b.Property<int>("AulaTerca");
-
                     b.Property<string>("CpfResponsavel");
+
+                    b.Property<string>("DiasAula");
 
                     b.Property<string>("Email");
 
@@ -59,6 +47,18 @@ namespace ControleRotasMvc.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Alunos");
+                });
+
+            modelBuilder.Entity("ControleRotasMvc.Models.DiasAula", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Descricao");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DiasAula");
                 });
 
             modelBuilder.Entity("ControleRotasMvc.Models.Empresa", b =>
@@ -104,11 +104,21 @@ namespace ControleRotasMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Fim");
+                    b.Property<int>("AlunoId");
 
-                    b.Property<string>("Inicio");
+                    b.Property<string>("Cor");
 
-                    b.Property<string>("NomeAluno");
+                    b.Property<string>("Descricao");
+
+                    b.Property<int>("EmpresaId");
+
+                    b.Property<DateTime>("End");
+
+                    b.Property<bool>("IsFullDay");
+
+                    b.Property<DateTime>("Start");
+
+                    b.Property<string>("Titulo");
 
                     b.HasKey("Id");
 

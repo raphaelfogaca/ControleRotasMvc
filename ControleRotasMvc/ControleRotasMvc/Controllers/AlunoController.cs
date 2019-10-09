@@ -48,13 +48,14 @@ namespace ControleRotasMvc.Controllers
 
             foreach (var item in diasAula)
             {
-                aluno.DiasAula = aluno.DiasAula + "," + item;
+                aluno.DiasAula = item + "," + aluno.DiasAula;
             }
 
             //armazenar objeto Empresa na sessão//
-            var empresaLogada = Session["empresaLogada"];
-            Empresa empresa = (Empresa)Session["empresaLogada"];
-            aluno.EmpresaId = empresa.Id;
+            //var empresaLogada = Session["empresaLogada"];
+            //Empresa empresa = (Empresa)Session["empresaLogada"];
+            //aluno.EmpresaId = empresa.Id;
+            //aluno.EmpresaId = 1;
 
             AlunoEntity db2 = new AlunoEntity();
             aluno.MateriaAlunos = materias.Select(n => new MateriaAlunos() { MateriaId = n }).ToList();

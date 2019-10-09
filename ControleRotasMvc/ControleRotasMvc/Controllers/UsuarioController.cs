@@ -19,11 +19,16 @@ namespace ControleRotasMvc.Controllers
     {
         // GET: Usuario
         [Route("usuarios", Name = "ListaUsuarios")]
-
         public ActionResult Index()
         {
             UsuarioEntity dao = new UsuarioEntity();
             IQueryable<Usuario> usuario = dao.Usuarios();
+            ViewBag.Usuario = new Usuario();
+
+            EmpresaEntity dbEmpresa = new EmpresaEntity();
+            IQueryable<Empresa> empresa = dbEmpresa.Empresas();
+            ViewBag.Empresa = empresa;
+
             return View(usuario);
         }
 
@@ -34,7 +39,6 @@ namespace ControleRotasMvc.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Adiciona(Usuario usuario)
         {
             usuario.UsuarioLogin = usuario.UsuarioEmail;
@@ -75,8 +79,6 @@ namespace ControleRotasMvc.Controllers
             UsuarioEntity db = new UsuarioEntity();
             Usuario usuario = db.BuscaUsuarioPorId(id);
             ViewBag.Usuario = usuario;
-            TempData["UsuarioId"] = usuario.Id;
-            TempData.Keep();
             return View(usuario);
         }
 
@@ -102,10 +104,7 @@ namespace ControleRotasMvc.Controllers
         //[Route("usuarios/{id}", Name = "Alterar")]
         public ActionResult Alterar(Usuario usuario)
         {
-            int usuarioId = (int)TempData["UsuarioId"];
-            usuario.Id = usuarioId;
-            UsuarioEntity dao = new UsuarioEntity();
-            //Usuario usuario = dao.BuscaUsuarioPorId(id);
+            UsuarioEntity dao = new UsuarioEntity();               
             if (dao.Alterar(usuario))
             {
                 this.FlashInfo("Usuário alterado com sucesso"); //M002
@@ -117,12 +116,17 @@ namespace ControleRotasMvc.Controllers
         }
 
         //[HttpGet]
-       // [Route("Usuario/BuscarUsuario", Name = "BuscarUsuario")]
+        [Route("Usuario/BuscarUsuario", Name = "BuscarUsuario")]
         public ActionResult BuscarUsuario(string Pesquisa)
         {
             UsuarioEntity dao = new UsuarioEntity();            
-            var listaUsuario = dao.BuscarUsuarioPorNome(Pesquisa);            
-            return View("Index", listaUsuario);
+            var listaUsuario = dao.BuscarUsuarioPorNome(Pesquisa);
+
+            EmpresaEntity dbEmpresa = new EmpresaEntity();
+            IQueryable<Empresa> empresa = dbEmpresa.Empresas();
+            ViewBag.Empresa = empresa;
+
+            return View("index",listaUsuario);
         }
 
 

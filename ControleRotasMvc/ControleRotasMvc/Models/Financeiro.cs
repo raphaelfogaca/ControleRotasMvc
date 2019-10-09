@@ -11,7 +11,7 @@ namespace ControleRotasMvc.Models
     public class Financeiro
     {
         public int Id { get; set; }
-        public int Valor { get; set; }
+        public float Valor { get; set; }
         public DateTime Vencimento { get; set; }
         public int AlunoId { get; set; }
         public int Situacao { get; set; }

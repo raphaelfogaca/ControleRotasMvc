@@ -45,12 +45,6 @@ namespace ControleRotasMvc.Controllers
             if (ModelState.IsValid)
             {
                 MateriaEntity db = new MateriaEntity();
-
-                //armazenar objeto Empresa na sessão//
-                var empresaLogada = Session["empresaLogada"];
-                Empresa empresa = (Empresa)Session["empresaLogada"];
-                materia.EmpresaId = empresa.Id;
-
                 db.Gravar(materia);
                 return RedirectToAction("Index", "Materia");
 

@@ -52,7 +52,7 @@
                 <div class="modal-body">
                     <div class="container-fluid">
 
-                        <form id="cad-financeiro" action="/Financeiro/Adiciona" method="post" class="active">
+                        <form id="cad-financeiro" action="/Financeiro/Adiciona" method="post" class="active">                            
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="Aluno">Aluno:</label>
@@ -64,7 +64,7 @@
                                             {
                                                 <option value="@items.Id">
                                                     @items.Nome
-                                                </option>
+                                                </option>                                                
                                             }
                                         }
                                     </select>
@@ -168,11 +168,19 @@
                                 @Html.ActionLink("Liquidar", "Liquidar", new { id = documento.Id }, new { @class = "dropdown-item" })
                             }
 
-                            <a href="@documento.BoletoPaymentLink" target="_blank" class="dropdown-item">Ver Boleto</a>
+
+                            @if (documento.BoletoPaymentLink == null)
+                            {
+                                @Html.ActionLink("Gerar Boleto", "GerarBoleto", new { id = documento.Id }, new { @class = "dropdown-item" })
+                            }
+                            else
+                            {
+                                <a href="@documento.BoletoPaymentLink" target="_blank" class="dropdown-item">Ver Boleto</a>
+                            }
 
                             @Html.ActionLink("Alterar", "Alterar", new { id = documento.Id }, new { @class = "dropdown-item" })
                             @Html.ActionLink("Excluir", "Deletar", new { id = documento.Id }, new { @class = "dropdown-item" })
-                          </div>
+                        </div>
                     </div>
                 </td>
                     @*<td>@Html.ActionLink("Excluir", "Deletar", new { id = documento.Id })</td>*@
