@@ -1,9 +1,12 @@
 ﻿@{
+    
+
     var materias = ViewBag.Materias as IEnumerable<ControleRotasMvc.Models.Materia>;
     List<int> MateriasDoAluno = ViewBag.MateriasDoAluno as List<int>;
     var notas = ViewBag.Notas as IList<ControleRotasMvc.Models.Nota>;
     List<int> Notas = ViewBag.notas as List<int>;
     var grupoNota = notas.GroupBy(a => a.MateriaId).ToDictionary(a => a.Key, b => b.ToList());
+    var diasAula = ViewBag.DiasAula as string;
 
 
 }
@@ -101,39 +104,21 @@
                     </div>
                 </div>
             </div>
+
             <label>Aulas:</label>
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <label>Aulas:</label>
                     <div class="row">
-                        <div class="col-md-1">
-                            <input id="aulaSegunda" type="checkbox" @(Model != null && Model.AulaSegunda == 1 ? "checked" : "") name="aluno.AulaSegunda" class="form-check-input" value="1" />
-                            <label class="choice" for="aluno.AulaSegunda">SEG &nbsp;</label>
+                        @foreach (var item in diasAula)
+                        {
+                            var check = ViewBag.Aluno.DiasAula.Contains("Seg") ? "checked" : "";
 
-                        </div>
-                        <div class="col-md-1">
-                            <input id="aulaTerca" type="checkbox" @(Model != null && Model.AulaTerca == 1 ? "checked" : "") name="aluno.AulaTerca" class="form-check-input" value="1" />
-                            <label class="choice" for="aluno.AulaTerca">TER &nbsp;</label>
-                        </div>
-                        <div class="col-md-1">
-                            <input id="AulaQuarta" type="checkbox" @(Model != null && Model.AulaQuarta == 1 ? "checked" : "") name="aluno.AulaQuarta" class="form-check-input" value="1" />
-                            <label class="choice" for="aluno.AulaQuarta"> QUA &nbsp;</label>
-                        </div>
-                        <div class="col-md-1">
-                            <input id="AulaQuinta" type="checkbox" @(Model != null && Model.AulaQuinta == 1 ? "checked" : "") name="aluno.AulaQuinta" class="form-check-input" value="1" />
-                            <label class="choice" for="aluno.AulaQuinta"> QUI &nbsp;</label>
-                        </div>
-                        <div class="col-md-1">
-                            <input id="AulaSexta" type="checkbox" @(Model != null && Model.AulaSexta == 1 ? "checked" : "") name="aluno.AulaSexta" class="form-check-input" value="1" />
-                            <label class="choice" for="aluno.AulaSexta"> SEX &nbsp;</label>
-                        </div>
-                        <div class="col-md-1">
-                            <input id="AulaSabado" type="checkbox" @(Model != null && Model.AulaSabado == 1 ? "checked" : "") name="aluno.AulaSabado" class="form-check-input" value="1" />
-                            <label class="choice" for="aluno.AulaSabado"> SAB &nbsp;</label>
-                        </div>
-                        <div class="col-md-1">
-                            <input id="AulaDomingo" type="checkbox" @(Model != null && Model.AulaDomingo == 1 ? "checked" : "") name="aluno.AulaDomingo" class="form-check-input" value="1" />
-                            <label class="choice" for="aluno.AulaDomingo"> DOM</label>
-                        </div>
+                            <div class="col-md-auto">
+                                <input id="diasAula" type="checkbox" name="diasAula" value="@item.Descricao" required />
+                                <label class="choice" for="aluno.AulaSegunda">@item.Descricao &nbsp;</label>
+                            </div>
+                        }
                     </div>
                     <br />
                     <div class="row">
@@ -156,47 +141,47 @@
 
                         <table>
                             <tbody>
-                                
-        <tr>
-            <td>Matéria&nbsp;</td>
-            <td>1º Bimestre&nbsp;</td>
-            <td>2º Bimestre&nbsp;</td>
-            <td>3º Bimestre&nbsp;</td>
-            <td>4º Bimestre&nbsp;</td>
-        </tr>
 
-        @{
-            foreach (var item in grupoNota)
-            {
-                //var notas_ = item.Value.GroupBy(n => n.Bimestre).ToDictionary(n => n.Key, n => n.FirstOrDefault());
-        <tr>
-            <td>
-                <input id="materia" name="materia" value="@item.Key" />
+                                <tr>
+                                    <td>Matéria&nbsp;</td>
+                                    <td>1º Bimestre&nbsp;</td>
+                                    <td>2º Bimestre&nbsp;</td>
+                                    <td>3º Bimestre&nbsp;</td>
+                                    <td>4º Bimestre&nbsp;</td>
+                                </tr>
 
-            </td>
-            <td>
-                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 1).Select(n => n.ValorNota).FirstOrDefault()" />
-            </td>
-            <td>
-                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 2).Select(n => n.ValorNota).FirstOrDefault()" />
-            </td>
-            <td>
-                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 3).Select(n => n.ValorNota).FirstOrDefault()" />
-            </td>
-            <td>
-                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 4).Select(n => n.ValorNota).FirstOrDefault()" />
-            </td>
-            @*<td>
-                <input id="nota" name="nota" value="@notas_[1].ValorNota" />
-            </td>*@
-        </tr>
-            }
-        }
-                               
-                         </tbody>                        
+                                @{
+                                    foreach (var item in grupoNota)
+                                    {
+                                        //var notas_ = item.Value.GroupBy(n => n.Bimestre).ToDictionary(n => n.Key, n => n.FirstOrDefault());
+                                        <tr>
+                                            <td>
+                                                <input id="materia" name="materia" value="@item.Key" />
+
+                                            </td>
+                                            <td>
+                                                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 1).Select(n => n.ValorNota).FirstOrDefault()" />
+                                            </td>
+                                            <td>
+                                                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 2).Select(n => n.ValorNota).FirstOrDefault()" />
+                                            </td>
+                                            <td>
+                                                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 3).Select(n => n.ValorNota).FirstOrDefault()" />
+                                            </td>
+                                            <td>
+                                                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 4).Select(n => n.ValorNota).FirstOrDefault()" />
+                                            </td>
+                                            @*<td>
+                                                    <input id="nota" name="nota" value="@notas_[1].ValorNota" />
+                                                </td>*@
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
                         </table>
 
-                        
+
 
                         <br />
                     </div>

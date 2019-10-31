@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
+using System.Globalization;
 
 namespace ControleRotasMvc.Controllers
 {
@@ -90,22 +91,20 @@ namespace ControleRotasMvc.Controllers
         [Route("Financeiro/GerarBoleto", Name = "GerarBoleto")]
         public Financeiro GerarBoleto(Financeiro docfin)
         {
-            //teste de boleto
-            //FinanceiroEntity dao = new FinanceiroEntity();
-            //Boleto boleto = new Boleto();
+            FinanceiroEntity dbFin = new FinanceiroEntity();
+            Financeiro dadosDocFin = new Financeiro();
+            dadosDocFin = dbFin.BuscarFinanceiroPorId(docfin.Id);
+            AlunoEntity dbAlun = new AlunoEntity();
+            Aluno dadosAluno = new Aluno();
+            dadosAluno = dbAlun.BuscaAlunoPorId(dadosDocFin.AlunoId);
+            EnderecoEntity dbEnd = new EnderecoEntity();
+            Endereco dadosEnd = new Endereco();
+            dadosEnd = dbEnd.BuscarEnderecoPorAlunoId(dadosAluno.Id);
+
+            //string url = "https://ptsv2.com/t/yq6or-1572481983/post";
             string url = "https://ws.pagseguro.uol.com.br/recurring-payment/boletos?email=raphael15br@gmail.com&token=9ccbe1da-b415-4104-8d08-df3557a8aaed028209b24eb7bcffd83fb2a512fff607323b-a793-4f24-8c48-d6524e9c1b0a";
-            PostRequest(url,docfin);
 
-
-            //teste de boleto
-            //docfin = dao.BuscarFinanceiroPorId(docfin.Id);
-            //boleto = GerarBoletoPagSeguro(docfin.Id);
-            //docfin.BoletoBarcode = boleto.Barcode;
-            //docfin.BoletoCode = boleto.Code;
-            //docfin.BoletoPaymentLink = boleto.PaymentLink;
-            //docfin.BoletoVencimento = boleto.DueDate;
-            //dao.Alterar(docfin);
-
+            PostRequest(url, dadosDocFin, dadosAluno, dadosEnd);
             return (docfin);
         }
 
@@ -122,16 +121,17 @@ namespace ControleRotasMvc.Controllers
             return View("Index", listaFinanceiro);
         }
 
-        async static void PostRequest(string url, Financeiro docfin)
+        async static void PostRequest(string url, Financeiro docfin, Aluno dadosAluno, Endereco dadosEnd)
         {
             //falta buscar dados do boleto para preencher as variaveis
             var obj = new BoletoTeste()
             {
+
                 reference = "1",
-                firstDueDate = "2019-10-09",
+                firstDueDate = docfin.Vencimento.ToString("yyyy-MM-dd"), //vencimento
                 numberOfPayments = "1",
                 periodicity = "monthly",
-                amount = "30",
+                amount = docfin.Valor.ToString("000.00",CultureInfo.InvariantCulture),
                 instructions = "juros de 1% ao dia e mora de 5,00",
                 description = "aula particular",
                 customer = new Cliente
@@ -139,26 +139,28 @@ namespace ControleRotasMvc.Controllers
                     document = new Document
                     {
                         type = "CPF",
-                        value = "02496340150"
+                        value = dadosAluno.CpfResponsavel
                     },
-                    name = "Raphael Fogaca",
-                    email = "pedro@gmail.com",
+                    name = dadosAluno.NomeResponsavel,
+                    email = dadosAluno.EmailResponsavel,
                     phone = new Phone
                     {
-                        areaCode = "11",
-                        number = "999383956"
+                        areaCode = dadosAluno.TelefoneResponsavel.Substring(0,2),
+                        number = dadosAluno.TelefoneResponsavel.Substring(2),
                     },
                     address = new Address
                     {
-                        postalCode = "01046010",
-                        street = "Av. Ipiranga",
-                        number = "13",
-                        city = "Taguatinga",
-                        district = "DF",
-                        state = "DF"
+                        postalCode = dadosEnd.Cep,
+                        street = dadosEnd.Logradouro,
+                        number = dadosEnd.Numero,
+                        city = dadosEnd.Cidade,
+                        district = dadosEnd.Bairro,
+                        state = dadosEnd.Estado
                     }
                 }
             };
+
+
 
             //transformando em Json
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
@@ -176,9 +178,9 @@ namespace ControleRotasMvc.Controllers
                         RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(mycontent);
                         Boleto boleto = rootObject.Boletos.FirstOrDefault();
 
-                        FinanceiroEntity dao = new FinanceiroEntity();  
-                        
-                        docfin = dao.BuscarFinanceiroPorId(docfin.Id);                        
+                        FinanceiroEntity dao = new FinanceiroEntity();
+
+                        docfin = dao.BuscarFinanceiroPorId(docfin.Id);
                         docfin.BoletoBarcode = boleto.Barcode;
                         docfin.BoletoCode = boleto.Code;
                         docfin.BoletoPaymentLink = boleto.PaymentLink;

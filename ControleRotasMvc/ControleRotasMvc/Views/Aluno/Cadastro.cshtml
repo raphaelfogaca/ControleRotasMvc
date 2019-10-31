@@ -33,15 +33,15 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label for="nome">Nome:</label>
-                            <input id="nome" name="aluno.Nome" value="" class="form-control" />
+                            <input id="nome" name="aluno.Nome" value="" class="form-control" oninput="this.value = this.value.toUpperCase()" required/>
                         </div>
                         <div class="col-md-4">
                             <label for="email">E-mail:</label>
-                            <input id="email" type="email" name="aluno.Email" value="" placeholder="Ex: email@email.com" class="form-control" />
+                            <input id="email" type="email" name="aluno.Email" value="" placeholder="Ex: email@email.com" class="form-control" oninput="this.value = this.value.toUpperCase()" required/>
                         </div>
                         <div class="col-md-2">
                             <label for="telefone">Telefone:</label>
-                            <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
+                            <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" required/>
                         </div>
                     </div>
 
@@ -50,19 +50,19 @@
 
                         <div class="col-md-4">
                             <label for="responsavel">Nome Responsável:</label>
-                            <input id="responsavel" name="aluno.NomeResponsavel" class="form-control" value="" />
+                            <input id="responsavel" name="aluno.NomeResponsavel" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" required/>
                         </div>
                         <div class="col-md-4">
                             <label for="emailResponsavel">E-mail Responsável:</label>
-                            <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="" />
+                            <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" required/>
                         </div>
                         <div class="col-md-2">
                             <label for="cpfResponsavel">CPF Responsável:</label>
-                            <input id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value="" />
+                            <input id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value="" required/>
                         </div>
                         <div class="col-md-2">
                             <label for="telefone">Telefone Responsável:</label>
-                            <input id="telefoneResponsavel" type="tel" name="aluno.TelefoneResponsavel" placeholder="Ex: 00 00000-0000" class="form-control" value="" />
+                            <input id="telefoneResponsavel" type="tel" name="aluno.TelefoneResponsavel" placeholder="Ex: 00 00000-0000" class="form-control" value="" required/>
                         </div>
                     </div>
 
@@ -70,27 +70,56 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label for="logradouro">Logradouro:</label>
-                            <input id="logradouro" name="endereco.logradouro" class="form-control" value="" />
+                            <input id="logradouro" name="endereco.logradouro" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" required/>
                         </div>
                         <div class="col-md-1">
                             <label for="numero">nº:</label>
-                            <input id="numero" name="endereco.numero" type="text" class="form-control" value="" />
+                            <input id="numero" name="endereco.numero" type="text" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" required/>
                         </div>
                         <div class="col-md-2">
                             <label for="bairro">Bairro:</label>
-                            <input id="bairro" name="endereco.bairro" class="form-control" value="" />
+                            <input id="bairro" name="endereco.bairro" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" required/>
                         </div>
                         <div class="col-md-2">
                             <label for="cidade">Cidade:</label>
-                            <input id="cidade" type="tel" name="endereco.cidade" class="form-control" value="" />
+                            <input id="cidade" type="tel" name="endereco.cidade" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" required/>
                         </div>
                         <div class="col-md-2">
-                            <label for="estado">Estado:</label>
-                            <input id="estado" type="tel" name="endereco.estado" class="form-control" value="" />
+                            <label for="estado">Estado:</label>                           
+                            <select name="endereco.estado" class="form-control" required>
+                                <option value="">Selecione</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
                         </div>
                         <div class="col-md-2">
                             <label for="cep">CEP:</label>
-                            <input id="cep" type="tel" name="endereco.cep" class="form-control" value="" />
+                            <input id="cep" type="tel" name="endereco.cep" class="form-control" value="" required/>
                         </div>
                     </div>
                 </div>
@@ -105,7 +134,7 @@
                         {
 
                             <div class="col-md-auto">
-                                <input id="materias" type="checkbox" name="materias" value="@item.Id" />
+                                <input id="materias" type="checkbox" name="materias" value="@item.Id" required/>
                                 <label class="choice" for="element_1_1">@item.Nome</label>
                             </div>
                         }
@@ -116,7 +145,7 @@
                         @foreach (var item in diasAula)
                         {
                             <div class="col-md-auto">
-                                <input id="diasAula" type="checkbox" name="diasAula" value="@item.Descricao" />
+                                <input id="diasAula" type="checkbox" name="diasAula" value="@item.Descricao" required/>
                                 <label class="choice" for="aluno.AulaSegunda">@item.Descricao &nbsp;</label>
                             </div>
                         }

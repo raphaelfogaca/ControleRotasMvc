@@ -25,5 +25,16 @@ namespace ControleRotasMvc.DAO
                 return false;
             }
         }
+
+        public Endereco BuscarEnderecoPorAlunoId (int id)
+        {
+            using (var contexto = new ControleRotasContext())
+            {
+                var q = contexto.Enderecos
+                                    .Where(c => c.AlunoId == id)
+                                    .FirstOrDefault();
+                return q;              
+            }
+        }
     }
 }

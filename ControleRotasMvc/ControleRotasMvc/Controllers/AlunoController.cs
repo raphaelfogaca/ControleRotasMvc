@@ -46,11 +46,13 @@ namespace ControleRotasMvc.Controllers
             //aluno.Telefone = "123456";
             //aluno.EmailResponsavel = "liliane@gmail.com";
 
-            foreach (var item in diasAula)
+            if (diasAula != null)
             {
-                aluno.DiasAula = item + "," + aluno.DiasAula;
+                foreach (var item in diasAula)
+                {
+                    aluno.DiasAula = item + "," + aluno.DiasAula;
+                }
             }
-
             //armazenar objeto Empresa na sessão//
             //var empresaLogada = Session["empresaLogada"];
             //Empresa empresa = (Empresa)Session["empresaLogada"];
@@ -58,6 +60,7 @@ namespace ControleRotasMvc.Controllers
             //aluno.EmpresaId = 1;
 
             AlunoEntity db2 = new AlunoEntity();
+            
             aluno.MateriaAlunos = materias.Select(n => new MateriaAlunos() { MateriaId = n }).ToList();
 
 
@@ -122,6 +125,9 @@ namespace ControleRotasMvc.Controllers
                 MateriasDoAluno = aluno.MateriaAlunos.Select(n => n.MateriaId).ToList(); //[2]
             }
 
+            ViewBag.MateriasDoAluno = MateriasDoAluno;
+            ViewBag.DiasAula = aluno.DiasAula;
+
             //List<int> NotasDoAluno = new List<int>();
             //if (aluno != null && aluno.Notas != null)
             //{
@@ -129,8 +135,6 @@ namespace ControleRotasMvc.Controllers
             //}
 
             //ViewBag.NotasDoAluno = Nota;
-            ViewBag.MateriasDoAluno = MateriasDoAluno;
-
 
             return View(aluno);
         }
