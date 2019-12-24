@@ -36,5 +36,34 @@ namespace ControleRotasMvc.DAO
                 return q;              
             }
         }
+
+        public int BuscarEnderecoId(int id)
+        {
+            using (var contexto = new ControleRotasContext())
+            {
+                var q = contexto.Enderecos
+                                    .Where(c => c.AlunoId == id)
+                                    .FirstOrDefault();
+                return q.Id;
+            }
+        }
+
+        public bool Alterar(Endereco endereco)
+        {
+            try
+            {
+                using (var repo = new ControleRotasContext())
+                {
+                    repo.Enderecos.Update(endereco);
+                    repo.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception EX)
+            {
+                string erro = "" + EX.InnerException.Message;
+                return false;
+            }
+        }
     }
 }

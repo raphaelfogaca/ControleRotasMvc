@@ -11,9 +11,10 @@ using System;
 namespace ControleRotasMvc.Migrations
 {
     [DbContext(typeof(ControleRotasContext))]
-    partial class ControleRotasContextModelSnapshot : ModelSnapshot
+    [Migration("20191106013820_Notas")]
+    partial class Notas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

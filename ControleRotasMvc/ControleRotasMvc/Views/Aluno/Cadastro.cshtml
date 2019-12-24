@@ -9,169 +9,168 @@
     <h3>CADASTRO DE ALUNO</h3>
 </head>
 <br />
-<form id="cad-aluno" action="/Aluno/Adiciona" method="post" class="active">
-    @Html.AntiForgeryToken()
+<body>
+    <form id="cad-aluno" action="/Aluno/Adiciona" method="post" class="active">
+        @Html.AntiForgeryToken()
 
-    <!--nav tabs-->
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">DADOS</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">NOTAS</a>
-        </li>
-    </ul>
+        <!--nav tabs-->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">DADOS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false" onclick="exibirMaterias()">NOTAS</a>
+            </li>
+        </ul>
 
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <!--ABA DADOS-->
-        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <!--dados-->
-            <br />
-            <div class="panel panel-default border">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="nome">Nome:</label>
-                            <input id="nome" name="aluno.Nome" value="" class="form-control" oninput="this.value = this.value.toUpperCase()" required/>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!--ABA DADOS-->
+            <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <!--dados-->
+                <br />
+                <div class="panel panel-default border">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="nome">Nome:</label>
+                                <input id="nome" name="aluno.Nome" value="" class="form-control" oninput="this.value = this.value.toUpperCase()" />
+                            </div>
+                            <div class="col-md-4">
+                                <label for="email">E-mail:</label>
+                                <input id="email" type="email" name="aluno.Email" value="" placeholder="Ex: email@email.com" class="form-control" oninput="this.value = this.value.toUpperCase()"  />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="telefone">Telefone:</label>
+                                <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value=""  />
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="email">E-mail:</label>
-                            <input id="email" type="email" name="aluno.Email" value="" placeholder="Ex: email@email.com" class="form-control" oninput="this.value = this.value.toUpperCase()" required/>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="telefone">Telefone:</label>
-                            <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="" required/>
-                        </div>
-                    </div>
 
-                    <!-- Responsável -->
-                    <div class="row">
+                        <!-- Responsável -->
+                        <div class="row">
 
-                        <div class="col-md-4">
-                            <label for="responsavel">Nome Responsável:</label>
-                            <input id="responsavel" name="aluno.NomeResponsavel" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" required/>
+                            <div class="col-md-4">
+                                <label for="responsavel">Nome Responsável:</label>
+                                <input id="responsavel" name="aluno.NomeResponsavel" class="form-control" value="" oninput="this.value = this.value.toUpperCase()"  />
+                            </div>
+                            <div class="col-md-4">
+                                <label for="emailResponsavel">E-mail Responsável:</label>
+                                <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="" oninput="this.value = this.value.toUpperCase()"  />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="cpfResponsavel">CPF Responsável:</label>
+                                <input id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value=""  />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="telefone">Telefone Responsável:</label>
+                                <input id="telefoneResponsavel" type="tel" name="aluno.TelefoneResponsavel" placeholder="Ex: 00 00000-0000" class="form-control" value=""  />
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="emailResponsavel">E-mail Responsável:</label>
-                            <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" required/>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="cpfResponsavel">CPF Responsável:</label>
-                            <input id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value="" required/>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="telefone">Telefone Responsável:</label>
-                            <input id="telefoneResponsavel" type="tel" name="aluno.TelefoneResponsavel" placeholder="Ex: 00 00000-0000" class="form-control" value="" required/>
-                        </div>
-                    </div>
 
-                    <!--ENDEREÇO-->
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="logradouro">Logradouro:</label>
-                            <input id="logradouro" name="endereco.logradouro" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" required/>
-                        </div>
-                        <div class="col-md-1">
-                            <label for="numero">nº:</label>
-                            <input id="numero" name="endereco.numero" type="text" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" required/>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="bairro">Bairro:</label>
-                            <input id="bairro" name="endereco.bairro" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" required/>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="cidade">Cidade:</label>
-                            <input id="cidade" type="tel" name="endereco.cidade" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" required/>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="estado">Estado:</label>                           
-                            <select name="endereco.estado" class="form-control" required>
-                                <option value="">Selecione</option>
-                                <option value="AC">Acre</option>
-                                <option value="AL">Alagoas</option>
-                                <option value="AM">Amazonas</option>
-                                <option value="AP">Amapá</option>
-                                <option value="BA">Bahia</option>
-                                <option value="CE">Ceará</option>
-                                <option value="DF">Distrito Federal</option>
-                                <option value="ES">Espírito Santo</option>
-                                <option value="GO">Goiás</option>
-                                <option value="MA">Maranhão</option>
-                                <option value="MT">Mato Grosso</option>
-                                <option value="MS">Mato Grosso do Sul</option>
-                                <option value="MG">Minas Gerais</option>
-                                <option value="PA">Pará</option>
-                                <option value="PB">Paraíba</option>
-                                <option value="PR">Paraná</option>
-                                <option value="PE">Pernambuco</option>
-                                <option value="PI">Piauí</option>
-                                <option value="RJ">Rio de Janeiro</option>
-                                <option value="RN">Rio Grande do Norte</option>
-                                <option value="RO">Rondônia</option>
-                                <option value="RS">Rio Grande do Sul</option>
-                                <option value="RR">Roraima</option>
-                                <option value="SC">Santa Catarina</option>
-                                <option value="SE">Sergipe</option>
-                                <option value="SP">São Paulo</option>
-                                <option value="TO">Tocantins</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="cep">CEP:</label>
-                            <input id="cep" type="tel" name="endereco.cep" class="form-control" value="" required/>
+                        <!--ENDEREÇO-->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="logradouro">Logradouro:</label>
+                                <input id="logradouro" name="endereco.logradouro" class="form-control" value="" oninput="this.value = this.value.toUpperCase()"  />
+                            </div>
+                            <div class="col-md-1">
+                                <label for="numero">nº:</label>
+                                <input id="numero" name="endereco.numero" type="text" class="form-control" value="" oninput="this.value = this.value.toUpperCase()"  />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="bairro">Bairro:</label>
+                                <input id="bairro" name="endereco.bairro" class="form-control" value="" oninput="this.value = this.value.toUpperCase()"  />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="cidade">Cidade:</label>
+                                <input id="cidade" type="tel" name="endereco.cidade" class="form-control" value="" oninput="this.value = this.value.toUpperCase()"  />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="estado">Estado:</label>
+                                <select name="endereco.estado" class="form-control" >
+                                    <option value="">Selecione</option>
+                                    <option value="AC">Acre</option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="PE">Pernambuco</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                    <option value="RR">Roraima</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="TO">Tocantins</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="cep">CEP:</label>
+                                <input id="cep" type="tel" name="endereco.cep" class="form-control" value=""  />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            </br>
-            <!--MATÉRIAS-->   <!--AULAS-->
-            <div class="panel panel-default border">
-                <div class="panel-body">
-                    <label>Matérias:</label>
-                    <div class="row">
-                        @foreach (var item in Model)
-                        {
+                </br>
+                <!--MATÉRIAS-->   <!--AULAS-->
+                <div class="panel panel-default border">
+                    <div class="panel-body">
+                        <label>Matérias:</label>
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
 
-                            <div class="col-md-auto">
-                                <input id="materias" type="checkbox" name="materias" value="@item.Id" required/>
-                                <label class="choice" for="element_1_1">@item.Nome</label>
+                                <div class="col-md-auto" id="checkMaterias">
+                                    <input id="materias" type="checkbox" name="materias" value="@item.Id" class="materias" />
+                                    <label class="choice" for="element_1_1">@item.Nome</label>
+                                </div>
+                            }
+                        </div>
+
+                        <label>Aulas:</label>
+                        <div class="row">
+                            @foreach (var item in diasAula)
+                            {
+                                <div class="col-md-auto">
+                                    <input id="diasAula" type="checkbox" name="diasAula" value="@item.Id" />
+                                    <label class="choice" for="aluno.AulaSegunda">@item.Descricao &nbsp;</label>
+                                </div>
+                            }
+                        </div>
+
+                        <label>Horário:</label>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <input id="horario" name="horarioStart" class="form-control" value="" />
+                                <input id="horario" name="horarioEnd" class="form-control" value="" />
                             </div>
-                        }
-                    </div>
-
-                    <label>Aulas:</label>
-                    <div class="row">
-                        @foreach (var item in diasAula)
-                        {
-                            <div class="col-md-auto">
-                                <input id="diasAula" type="checkbox" name="diasAula" value="@item.Descricao" required/>
-                                <label class="choice" for="aluno.AulaSegunda">@item.Descricao &nbsp;</label>
-                            </div>
-                        }
-                    </div>
-
-                    <label>Horário:</label>
-                    <div class="row">
-                        <div class="col-md-auto">
-                            <input id="horario" name="aluno.Horario" placeholder="Ex: 00:00" class="form-control" value="" />
                         </div>
                     </div>
                 </div>
+
             </div>
 
-        </div>
 
-     
-                
-
-        <!--Notas-->
-        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-
+            <!--Notas-->
+            <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="container">
-                            <table>
+                            <table id="tabelaNotas">
                                 <tbody>
                                     <tr>
                                         <td>Matéria&nbsp;</td>
@@ -196,27 +195,27 @@
                                             {
                                                 numeroBimestre = 1;
                                             }
-                                            <tr>
-                                                <td>@item.Nome</td>
-                                                <td><input id="valorNota" name="nota[@i].ValorNota" class="form-control col-sm-7" /></td>
-                                                <input type="hidden" id="materiaId" name="nota[@i].MateriaId" value="@item.Id" />
-                                                <input type="hidden" id="bimestre" name="nota[@i].Bimestre" value="1" />
+                                    <tr class="tabelaNotas" style="display:none">
+                                        <td>@item.Nome</td>
+                                        <td><input id="[@i]valorNota1" name="nota[@i].Bimestre1" class="form-control col-sm-7" disabled="disabled" /></td>
+                                        <input type="hidden" id="[@i]materiaId" name="nota[@i].MateriaId" value="@item.Id" disabled="disabled" />
+                                        <input type="hidden" id="bimestre" name="nota[@i].Bimestre1" value="1" disabled="disabled" />
+                                        <input type="hidden" id="materia" name="nota[@i].Materia" value="@item.Nome" disabled="disabled" />
 
-                                                <td><input id="valorNota" name="nota[@i1].ValorNota" class="form-control col-sm-7"/></td>
-                                                <input type="hidden" id="materiaId" name="nota[@i1].MateriaId" value="@item.Id" />
-                                                <input type="hidden" id="bimestre" name="nota[@i1].Bimestre" value="2" />
+                                        <td><input id="[@i]valorNota2" name="nota[@i].Bimestre2" class="form-control col-sm-7" disabled="disabled" /></td>
+                                        <input type="hidden" id="[@i]materiaId" name="nota[@i].MateriaId" value="@item.Id" disabled="disabled" />
+                                        <input type="hidden" id="bimestre" name="nota[@i].Bimestre2" value="2" disabled="disabled" />
 
+                                        <td><input id="[@i]valorNota3" name="nota[@i].Bimestre3" class="form-control col-sm-7" disabled="disabled" /></td>
+                                        <input type="hidden" id="[@i]materiaId" name="nota[@i].MateriaId" value="@item.Id" disabled="disabled" />
+                                        <input type="hidden" id="bimestre" name="nota[@i].Bimestre3" value="3" disabled="disabled" />
 
-                                                <td><input id="valorNota" name="nota[@i2].ValorNota" class="form-control col-sm-7"/></td>
-                                                <input type="hidden" id="materiaId" name="nota[@i2].MateriaId" value="@item.Id" />
-                                                <input type="hidden" id="bimestre" name="nota[@i2].Bimestre" value="3" />
+                                        <td><input id="[@i]valorNota4" name="nota[@i].Bimestre4" class="form-control col-sm-7" disabled="disabled" /></td>
+                                        <input type="hidden" id="[@i]materiaId" name="nota[@i].MateriaId" value="@item.Id" disabled="disabled" />
+                                        <input type="hidden" id="bimestre" name="nota[@i].Bimestre4" value="4" disabled="disabled" />
 
-                                                <td><input id="valorNota" name="nota[@i3].ValorNota" class="form-control col-sm-7"/></td>
-                                                <input type="hidden" id="materiaId" name="nota[@i3].MateriaId" value="@item.Id" />
-                                                <input type="hidden" id="bimestre" name="nota[@i3].Bimestre" value="4" />
-
-                                            </tr>
-                                            i = i + 4;
+                                    </tr>
+                                            i++;
                                             i1 = i1 + 4;
                                             i2 = i2 + 4;
                                             i3 = i3 + 4;
@@ -232,38 +231,93 @@
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
 
-    </div>
-    <br />
-    <br />
-    <input type="hidden" id="aluno.EmpresaId" name="aluno.EmpresaId" value="@Session["empresaLogada"]" />
-    <input class="btn btn-primary" id="btnSave" align-baseline="right" type="submit" value="Cadastrar" />
-    <br />
-</form>
-
+        </div>
+        <br />
+        <br />
+        <input type="hidden" id="aluno.EmpresaId" name="aluno.EmpresaId" value="@Session["empresaLogada"]" />
+        <input class="btn btn-primary" id="btnSave" align-baseline="right" type="submit" value="Cadastrar" />
+        <br />
+    </form>
+</body>
 <script type="text/javascript">
 
     $(document).ready(function () {
-        $('#horario').mask('00:00'),
+        $('#valorNota1').mask('#0,00'),
+            $('#valorNota2').mask('#0,00'),
+            $('#valorNota3').mask('#0,00'),
+            $('#valorNota4').mask('#0,00'),
+            $('#cpfResponsavel').mask('000.000.000-00'),
+            $('#cep').mask('00000-000'),
+            $('#horario').mask('00:00'),
             $('#diaVencimento').mask('99/99/9999', { placeholder: "mm/dd/aaaa" }),
-            $('#telefone').mask('(99) 99999-9999', { placeholder: "(99) 99999-9999" }),
-            $('#telefoneResponsavel').mask('(99) 99999-9999', { placeholder: "(99) 99999-9999" }),
+            $('#telefone').mask('(99) #-999-9999', { placeholder: "(99) 99999-9999" }),
+            $('#telefoneResponsavel').mask('(99) #-999-9999', { placeholder: "(99) 99999-9999" }),
             $('#mensalidadeValor').maskMoney({ symbol: 'R$ ', thousands: '.', decimal: ',', symbolStay: true })
     });
 
-//    $('#DiasAula').click(function() {
-//    DiasAula = document.getElementById("DiasAula"); //searches for and detects the input element from the 'myButton' id
-//    DiasAula.value = "I'm a changed button" //changes the value
-//})
+    $('input[type=checkbox]').each(function () {
+        if (this.checked) {
+            abc = abc + $(this).val() + ","
+            //assign set value to hidden field
+            $('#diasAula').val(abc);
+        }
+    });
 
-            $('input[type=checkbox]').each(function () {  
-            if (this.checked) {  
-                abc = abc + $(this).val() + ","  
-                //assign set value to hidden field   
-                 $('#diasAula').val(abc);  
-            }  
-        });
+    function exibirMaterias() {
 
+        var checkBox = document.getElementsByClassName("materias");
+        var divMaterias = document.getElementsByClassName("tabelaNotas");
+        var divNotasPanel = document.getElementById("tabelaNotas");
+
+        var Materia = new Array();
+
+        for (var i = 0; i < (checkBox.length); i++)
+        {
+            var x = 0;
+            if (checkBox[i].checked == true) {
+                Materia.push(checkBox[i].value);
+                divMaterias[i].style.display = "";
+
+                var valorNota1 = document.getElementById("[" + i + "]valorNota1");
+                var valorNota2 = document.getElementById("[" + i + "]valorNota2");
+                var valorNota3 = document.getElementById("[" + i + "]valorNota3");
+                var valorNota4 = document.getElementById("[" + i + "]valorNota4");
+                var materiaId = document.getElementById("[" + i + "]materiaId");
+
+                $(valorNota1).prop("disabled", false);
+                $(valorNota2).prop("disabled", false);
+                $(valorNota3).prop("disabled", false);
+                $(valorNota4).prop("disabled", false);
+                $(materiaId).prop("disabled", false);
+
+                //alterando índice dos campos de nota quando, precisa quando não seleciona todas materias
+                document.getElementById("[" + i + "]valorNota1").setAttribute("name", "nota[" + x + "].Bimestre1");
+                document.getElementById("[" + i + "]valorNota2").setAttribute("name", "nota[" + x + "].Bimestre2");
+                document.getElementById("[" + i + "]valorNota3").setAttribute("name", "nota[" + x + "].Bimestre3");
+                document.getElementById("[" + i + "]valorNota4").setAttribute("name", "nota[" + x + "].Bimestre4");
+                document.getElementById("[" + i + "]materiaId").setAttribute("name", "nota[" + x + "].MateriaId");
+
+                //document.getElementById("[" + i + "]valorNota1").id = "[" + x + "]valorNota1";
+                //document.getElementById("[" + i + "]valorNota2").id = "[" + x + "]valorNota2";
+                //document.getElementById("[" + i + "]valorNota3").id = "[" + x + "]valorNota3";
+                //document.getElementById("[" + i + "]valorNota4").id = "[" + x + "]valorNota4";
+                x++;
+            }
+        }
+            @* ENVIANDO POST JSON USANDO AJAX
+                var postData = { values: Materia }
+                $.ajax({
+            type: "POST",
+            url: '@Url.Action("BuscarAluno2")',
+                dataType: "json",
+                data: postData,
+            success: function (msg) {
+                alert('ok');
+            }
+        });*@
+
+    }
 </script>
 

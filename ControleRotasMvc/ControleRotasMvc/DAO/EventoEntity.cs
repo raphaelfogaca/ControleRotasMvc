@@ -14,5 +14,13 @@ namespace ControleRotasMvc.DAO
             ControleRotasContext db = new ControleRotasContext();
             return db.Eventos.ToList();
         }
+
+        public Evento AdicionarEvento(Evento evento)
+        {
+            var db = new ControleRotasContext();
+            db.Eventos.Add(evento);
+            db.SaveChanges();
+            return evento;
+        }
     }
 }

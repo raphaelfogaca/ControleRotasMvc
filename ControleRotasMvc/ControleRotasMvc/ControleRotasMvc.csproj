@@ -346,6 +346,10 @@
     <Compile Include="Migrations\20191002224546_Eventos.designer.cs">
       <DependentUpon>20191002224546_Eventos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20191106013820_Notas.cs" />
+    <Compile Include="Migrations\20191106013820_Notas.designer.cs">
+      <DependentUpon>20191106013820_Notas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ControleRotasContextModelSnapshot.cs" />
     <Compile Include="Models\Aluno.cs" />
     <Compile Include="Models\DiasAula.cs" />

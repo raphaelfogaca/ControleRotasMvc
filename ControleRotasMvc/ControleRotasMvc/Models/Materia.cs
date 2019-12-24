@@ -9,7 +9,7 @@ namespace ControleRotasMvc.Models
     public class Materia
     {
 
-       public Materia()
+        public Materia()
         {
             MateriaAlunos = new HashSet<MateriaAlunos>();
 
@@ -17,7 +17,7 @@ namespace ControleRotasMvc.Models
 
         public int Id { get; set; }
         public String Nome { get; set; }
-       // public IList<MateriaAluno> Materias { get; set; }
+        // public IList<MateriaAluno> Materias { get; set; }
         public virtual IEnumerable<MateriaAlunos> MateriaAlunos { get; set; }
         public int EmpresaId { get; set; }
        

@@ -42,6 +42,7 @@
 <br />
 <body>
     @*NOVO DOCUMENTO FINANCEIRO*@
+
     <div id="NovoFinanceiro" class="modal fade modal-lg" tabindex="-1" role="form" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -52,7 +53,7 @@
                 <div class="modal-body">
                     <div class="container-fluid">
 
-                        <form id="cad-financeiro" action="/Financeiro/Adiciona" method="post" class="active">                            
+                        <form id="cad-financeiro" action="/Financeiro/Adiciona" method="post" class="active">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="Aluno">Aluno:</label>
@@ -64,7 +65,7 @@
                                             {
                                                 <option value="@items.Id">
                                                     @items.Nome
-                                                </option>                                                
+                                                </option>
                                             }
                                         }
                                     </select>
@@ -105,7 +106,7 @@
                                         <option>10</option>
                                         <option>11</option>
                                         <option>12</option>
-                                    </select>                                  
+                                    </select>
                                 </div>
                             </div>
 
@@ -138,54 +139,54 @@
             <tbody>
                 @foreach (var documento in Model)
                 {
-                <tr>
-                    <td>@documento.Id</td>
-                    <td>@documento.Nome</td>                
-                    
-                    <td>R$@documento.Valor.ToString("n2")</td>
-                    @*<td>@Html.TextBoxFor(model => documento.Vencimento, "{0:dd/MM/yyyy}", new { @class = "meuCampoDate" })</td>*@
-                    <td>@documento.Vencimento.ToShortDateString()</td>
+                    <tr>
+                        <td>@documento.Id</td>
+                        <td>@documento.Nome</td>
 
-                    @if (documento.Situacao == 0)
-                    {
-                        <td>Aberto</td>
+                        <td>R$@documento.Valor.ToString("n2")</td>
+                        @*<td>@Html.TextBoxFor(model => documento.Vencimento, "{0:dd/MM/yyyy}", new { @class = "meuCampoDate" })</td>*@
+                        <td>@documento.Vencimento.ToShortDateString()</td>
 
-                    }
-                    else if (documento.Situacao == 1)
-                    {
-                        <td>Liquidado</td>
-                    }
+                        @if (documento.Situacao == 0)
+                        {
+                            <td>Aberto</td>
 
-                <td></td>
-                <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Opções
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            @if (documento.Situacao == 0)
-                            {
-                                @Html.ActionLink("Liquidar", "Liquidar", new { id = documento.Id }, new { @class = "dropdown-item" })
-                            }
+                        }
+                        else if (documento.Situacao == 1)
+                        {
+                            <td>Liquidado</td>
+                        }
+
+                        <td></td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Opções
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @if (documento.Situacao == 0)
+                                    {
+                                        @Html.ActionLink("Liquidar", "Liquidar", new { id = documento.Id }, new { @class = "dropdown-item" })
+                                    }
 
 
-                            @if (documento.BoletoPaymentLink == null)
-                            {
-                                @Html.ActionLink("Gerar Boleto", "GerarBoleto", new { id = documento.Id }, new { @class = "dropdown-item" })
-                            }
-                            else
-                            {
-                                <a href="@documento.BoletoPaymentLink" target="_blank" class="dropdown-item">Ver Boleto</a>
-                            }
+                                    @if (documento.BoletoPaymentLink == null)
+                                    {
+                                        @Html.ActionLink("Gerar Boleto", "GerarBoleto", new { id = documento.Id }, new { @class = "dropdown-item" })
+                                    }
+                                    else
+                                    {
+                                        <a href="@documento.BoletoPaymentLink" target="_blank" class="dropdown-item">Ver Boleto</a>
+                                    }
 
-                            @Html.ActionLink("Alterar", "Alterar", new { id = documento.Id }, new { @class = "dropdown-item" })
-                            @Html.ActionLink("Excluir", "Deletar", new { id = documento.Id }, new { @class = "dropdown-item" })
-                        </div>
-                    </div>
-                </td>
-                    @*<td>@Html.ActionLink("Excluir", "Deletar", new { id = documento.Id })</td>*@
+                                    @Html.ActionLink("Alterar", "Alterar", new { id = documento.Id }, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Excluir", "Deletar", new { id = documento.Id }, new { @class = "dropdown-item" })
+                                </div>
+                            </div>
+                        </td>
+                        @*<td>@Html.ActionLink("Excluir", "Deletar", new { id = documento.Id })</td>*@
 
-                </tr>
+                    </tr>
                 }
             </tbody>
         </table>

@@ -1,12 +1,14 @@
 ﻿@{
-    
+
 
     var materias = ViewBag.Materias as IEnumerable<ControleRotasMvc.Models.Materia>;
     List<int> MateriasDoAluno = ViewBag.MateriasDoAluno as List<int>;
-    var notas = ViewBag.Notas as IList<ControleRotasMvc.Models.Nota>;
-    List<int> Notas = ViewBag.notas as List<int>;
+    var notas = ViewBag.Notas as IQueryable<ControleRotasMvc.Models.Nota>;
     var grupoNota = notas.GroupBy(a => a.MateriaId).ToDictionary(a => a.Key, b => b.ToList());
-    var diasAula = ViewBag.DiasAula as string;
+    var diasAula = ViewBag.DiasAula as IQueryable<ControleRotasMvc.Models.DiasAula>;
+    var diasAulaAluno = ViewBag.DiasAulaAluno;
+    var endereco = ViewBag.Endereco;
+    var financeiro = ViewBag.Financeiro;
 
 
 }
@@ -16,198 +18,388 @@
     </div>
 </head>
 <br />
-<form id="cad-aluno" action="/Aluno/Visualiza" method="post" class="active">
-    @Html.AntiForgeryToken()
+<body>
 
-    <!--nav tabs-->
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">DADOS</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">PAGAMENTOS</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages" aria-selected="false">NOTAS</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">PRESENÇA</a>
-        </li>
-    </ul>
 
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <!--ABA DADOS-->
-        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="container">
+
+        @if (TempData["UserMessage"] != null)
+        {
+
+            <div id="myModal" class="modal fade" style="display: block; margin-left: -300px;" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title float-left">Alerta!</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <strong>@TempData["UserMessage"]</strong>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+
+        <form id="cad-aluno" action="/Aluno/Alterar" method="post" class="active">
+            @Html.AntiForgeryToken()
+
+            <!--nav tabs-->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="tab-dados" data-toggle="tab" href="#dados" role="tab" aria-controls="dados" aria-selected="true">DADOS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab-notas" data-toggle="tab" href="#notas" role="tab" aria-controls="notas" aria-selected="false">NOTAS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab-presenca" data-toggle="tab" href="#presenca" role="tab" aria-controls="presenca" aria-selected="false">PRESENÇA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab-pagamentos" data-toggle="tab" href="#pagamentos" role="tab" aria-controls="pagamentos" aria-selected="false">PAGAMENTOS</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!--ABA DADOS-->
+                <div class="tab-pane active" id="dados" role="tabpanel" aria-labelledby="tab-dados">
+                    <br />
+                    <!--dados-->
+                    <label>Dados Pessoais:</label>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="nome">Nome:</label>
+                                    <input id="nome" name="aluno.Nome" value="@ViewBag.Aluno.Nome" class="form-control" />
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="email">E-mail:</label>
+                                    <input id="email" type="email" name="aluno.Email" value="@ViewBag.Aluno.Email" placeholder="Ex: email@email.com" class="form-control" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="telefone">Telefone:</label>
+                                    <input id="telefone" type="tel" name="aluno.Telefone" value="@ViewBag.Aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" />
+                                </div>
+                            </div>
+                            <!-- Responsável -->
+                            <div class="row">
+
+                                <div class="col-md-4">
+
+                                    <label for="responsavel">Nome Responsável:</label>
+                                    <input id="responsavel" name="aluno.NomeResponsavel" class="form-control" value="@ViewBag.Aluno.NomeResponsavel" />
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label for="emailResponsavel">E-mail Responsável:</label>
+                                    <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="@ViewBag.Aluno.EmailResponsavel" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="cpfResponsavel">CPF Responsável:</label>
+                                    <input id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value="@ViewBag.Aluno.CpfResponsavel" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="telefone">Telefone Responsável:</label>
+                                    <input id="telefoneResponsavel" type="tel" name="aluno.TelefoneResponsavel" placeholder="Ex: 00 00000-0000" class="form-control" value="@ViewBag.Aluno.TelefoneResponsavel" />
+                                </div>
+                            </div>
+
+                            <!-- Endereço -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="logradouro">Logradouro:</label>
+                                    <input id="logradouro" name="endereco.logradouro" class="form-control" value="@ViewBag.Endereco.Logradouro" oninput="this.value = this.value.toUpperCase()" required />
+                                </div>
+                                <div class="col-md-1">
+                                    <label for="numero">nº:</label>
+                                    <input id="numero" name="endereco.numero" type="text" class="form-control" value="@ViewBag.Endereco.Numero" oninput="this.value = this.value.toUpperCase()" required />
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="bairro">Bairro:</label>
+                                    <input id="bairro" name="endereco.bairro" class="form-control" value="@ViewBag.Endereco.Bairro" oninput="this.value = this.value.toUpperCase()" required />
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="cidade">Cidade:</label>
+                                    <input id="cidade" type="tel" name="endereco.cidade" class="form-control" value="@ViewBag.Endereco.Cidade" oninput="this.value = this.value.toUpperCase()" required />
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="estado">Estado:</label>
+                                    <select name="endereco.estado" class="form-control" value="@ViewBag.Endereco.Estado" required>
+                                        <option value="@ViewBag.Endereco.Estado">@ViewBag.Endereco.Estado</option>
+                                        <option value="AC">Acre</option>
+                                        <option value="AL">Alagoas</option>
+                                        <option value="AM">Amazonas</option>
+                                        <option value="AP">Amapá</option>
+                                        <option value="BA">Bahia</option>
+                                        <option value="CE">Ceará</option>
+                                        <option value="DF">Distrito Federal</option>
+                                        <option value="ES">Espírito Santo</option>
+                                        <option value="GO">Goiás</option>
+                                        <option value="MA">Maranhão</option>
+                                        <option value="MT">Mato Grosso</option>
+                                        <option value="MS">Mato Grosso do Sul</option>
+                                        <option value="MG">Minas Gerais</option>
+                                        <option value="PA">Pará</option>
+                                        <option value="PB">Paraíba</option>
+                                        <option value="PR">Paraná</option>
+                                        <option value="PE">Pernambuco</option>
+                                        <option value="PI">Piauí</option>
+                                        <option value="RJ">Rio de Janeiro</option>
+                                        <option value="RN">Rio Grande do Norte</option>
+                                        <option value="RO">Rondônia</option>
+                                        <option value="RS">Rio Grande do Sul</option>
+                                        <option value="RR">Roraima</option>
+                                        <option value="SC">Santa Catarina</option>
+                                        <option value="SE">Sergipe</option>
+                                        <option value="SP">São Paulo</option>
+                                        <option value="TO">Tocantins</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="cep">CEP:</label>
+                                    <input id="cep" type="tel" name="endereco.cep" class="form-control" value="@ViewBag.Endereco.Cep" required />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <label>Matérias:</label>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="container">
+
+                                @foreach (var item in materias)
+                                {
+                                    var check = MateriasDoAluno.Contains(item.Id) ? "checked" : "";
+
+                                    <div class="col-md-2">
+                                        <input id="materias" type="checkbox" @check name="materias" class="form-check-input" value="@item.Id" />
+                                        <label class="choice" for="element_1_1">@item.Nome</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <label>Aulas:</label>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                @{
+
+
+
+                                    foreach (var item in diasAula)
+                                    {
+                                        var checkDia = "";
+                                        if (diasAulaAluno.Contains("Seg") && (item.Id == 1))
+                                        {
+                                            checkDia = "checked";
+                                        }
+                                        else if (diasAulaAluno.Contains("Ter") && (item.Id == 2))
+                                        {
+                                            checkDia = "checked";
+                                        }
+                                        else if (diasAulaAluno.Contains("Qua") && (item.Id == 3))
+                                        {
+                                            checkDia = "checked";
+                                        }
+                                        else if (diasAulaAluno.Contains("Qui") && (item.Id == 4))
+                                        {
+                                            checkDia = "checked";
+                                        }
+                                        else if (diasAulaAluno.Contains("Sex") && (item.Id == 5))
+                                        {
+                                            checkDia = "checked";
+                                        }
+                                        else if (diasAulaAluno.Contains("Sab") && (item.Id == 6))
+                                        {
+                                            checkDia = "checked";
+                                        }
+                                        else if (diasAulaAluno.Contains("Dom") && (item.Id == 0))
+                                        {
+                                            checkDia = "checked";
+                                        }
+
+                                        <div class="col-md-auto">
+                                            <input id="diasAula" type="checkbox" @checkDia name="diasAula" value="@item.Descricao" />
+                                            <label class="choice" for="aluno.AulaSegunda">@item.Descricao &nbsp;</label>
+                                        </div>
+
+                                    }
+
+                                }
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <label for="horario">Horário:</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <input id="horario" name="aluno.Horario" placeholder="Ex: 00:00" class="form-control" value="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--nova aba: NOTAS-->
+                <div class="tab-pane" id="notas" role="tabpanel" aria-labelledby="tab-notas">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="container">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Matéria&nbsp;</td>
+                                            <td>1º Bimestre&nbsp;</td>
+                                            <td>2º Bimestre&nbsp;</td>
+                                            <td>3º Bimestre&nbsp;</td>
+                                            <td>4º Bimestre&nbsp;</td>
+                                        </tr>
+
+                                        @{
+                                            var i = 0;
+                                            var numeroBimestre = 1;
+                                            var i1 = 1;
+                                            var i2 = 2;
+                                            var i3 = 3;
+
+                                            var d = 0;
+
+                                            foreach (var item in notas)
+                                            {
+                                                if (numeroBimestre == 4)
+                                                {
+                                                    numeroBimestre = 1;
+                                                }
+                                                <tr>
+                                                    <td>@item.Materia</td>
+                                                    <td><input id="valorNota1" name="nota[@i].Bimestre1" class="form-control col-sm-7" value="@item.Bimestre1" /></td>
+                                                    <input type="hidden" id="materiaId" name="nota[@i].MateriaId" value="@item.MateriaId" />
+                                                    <input type="hidden" id="bimestre" name="nota[@i].Bimestre1" value="1" />
+                                                    <input type="hidden" id="materia" name="nota[@i].Materia" value="@item.Materia" />
+                                                    <input type="hidden" id="materia" name="nota[@i].Id" value="@item.Id" />
+
+                                                    <td><input id="valorNota2" name="nota[@i].Bimestre2" class="form-control col-sm-7" value="@item.Bimestre2" /></td>
+                                                    <input type="hidden" id="materiaId" name="nota[@i].MateriaId" value="@item.MateriaId" />
+                                                    <input type="hidden" id="bimestre" name="nota[@i].Bimestre2" value="2" />
+
+                                                    <td><input id="valorNota3" name="nota[@i].Bimestre3" class="form-control col-sm-7" value="@item.Bimestre3" /></td>
+                                                    <input type="hidden" id="materiaId" name="nota[@i].MateriaId" value="@item.MateriaId" />
+                                                    <input type="hidden" id="bimestre" name="nota[@i].Bimestre3" value="3" />
+
+                                                    <td><input id="valorNota4" name="nota[@i].Bimestre4" class="form-control col-sm-7" value="@item.Bimestre4" /></td>
+                                                    <input type="hidden" id="materiaId" name="nota[@i].MateriaId" value="@item.MateriaId" />
+                                                    <input type="hidden" id="bimestre" name="nota[@i].Bimestre4" value="4" />
+
+                                                </tr>
+                                                i++;
+                                                i1 = i1 + 4;
+                                                i2 = i2 + 4;
+                                                i3 = i3 + 4;
+                                                d++;
+
+                                            }
+
+                                        }
+                                    </tbody>
+                                </table>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--nova aba: PRESENÇA-->
+                <div class="tab-pane" id="presenca" role="tabpanel" aria-labelledby="tab-presenca">
+                </div>
+
+                <!--nova aba: PAGAMENTOS-->
+                <div class="tab-pane" id="pagamentos" role="tabpanel" aria-labelledby="tab-pagamentos">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="container">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Documento</th>
+                                            <th>Aluno</th>
+                                            <th>Valor</th>
+                                            <th>Vencimento</th>
+                                            <th>Situação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var documento in financeiro)
+                                        {
+                                            <tr>
+                                                <td>@documento.Id</td>
+                                                <td>@documento.Nome</td>
+                                                <td>R$@documento.Valor.ToString("n2")</td>
+                                                <td>@documento.Vencimento.ToShortDateString()</td>
+
+                                                @if (documento.Situacao == 0)
+                                                {
+                                                    <td>Aberto</td>
+
+                                                }
+                                                else if (documento.Situacao == 1)
+                                                {
+                                                    <td>Liquidado</td>
+                                                }
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
             <br />
-            <!--dados-->
-            <label>Dados Pessoais:</label>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="nome">Nome:</label>
-                            <input id="nome" name="aluno.Nome" value="@ViewBag.Aluno.Nome" class="form-control" />
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="email">E-mail:</label>
-                            <input id="email" type="email" name="aluno.Email" value="@ViewBag.Aluno.Email" placeholder="Ex: email@email.com" class="form-control" />
-                        </div>
-                        <div class="col-md-2">
-                            <label for="telefone">Telefone:</label>
-                            <input id="telefone" type="tel" name="aluno.Telefone" value="@ViewBag.Aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" />
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <!-- Responsável -->
-                        <div class="col-md-4">
-
-                            <label for="responsavel">Nome Responsável:</label>
-                            <input id="responsavel" name="aluno.NomeResponsavel" class="form-control" value="@ViewBag.Aluno.NomeResponsavel" />
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="emailResponsavel">E-mail Responsável:</label>
-                            <input id="emailResponsavel" name="aluno.EmailResponsavel" placeholder="Ex: email@email.com" class="form-control" value="@ViewBag.Aluno.EmailResponsavel" />
-                        </div>
-                        <div class="col-md-2">
-                            <label for="cpfResponsavel">CPF Responsável:</label>
-                            <input id="cpfResponsavel" name="aluno.cpfResponsavel" class="form-control" value="@ViewBag.Aluno.CpfResponsavel" />
-                        </div>
-                        <div class="col-md-2">
-                            <label for="telefone">Telefone Responsável:</label>
-                            <input id="telefone" type="tel" name="aluno.Telefone" placeholder="Ex: 00 00000-0000" class="form-control" value="@ViewBag.Aluno.TelefoneResponsavel" />
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <label>Matérias:</label>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="container">
-
-                        @foreach (var item in materias)
-                        {
-                            var check = MateriasDoAluno.Contains(item.Id) ? "checked" : "";
-
-                            <div class="col-md-2">
-                                <input id="materias" type="checkbox" @check name="materias" class="form-check-input" value="@item.Id" />
-                                <label class="choice" for="element_1_1">@item.Nome</label>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-
-            <label>Aulas:</label>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <label>Aulas:</label>
-                    <div class="row">
-                        @foreach (var item in diasAula)
-                        {
-                            var check = ViewBag.Aluno.DiasAula.Contains("Seg") ? "checked" : "";
-
-                            <div class="col-md-auto">
-                                <input id="diasAula" type="checkbox" name="diasAula" value="@item.Descricao" required />
-                                <label class="choice" for="aluno.AulaSegunda">@item.Descricao &nbsp;</label>
-                            </div>
-                        }
-                    </div>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-1">
-                            <label for="horario">Horário:</label>
-                        </div>
-                        <div class="col-md-2">
-                            <input id="horario" name="aluno.Horario" placeholder="Ex: 00:00" class="form-control" value="" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--nova aba-->
-        <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="container">
-
-                        <table>
-                            <tbody>
-
-                                <tr>
-                                    <td>Matéria&nbsp;</td>
-                                    <td>1º Bimestre&nbsp;</td>
-                                    <td>2º Bimestre&nbsp;</td>
-                                    <td>3º Bimestre&nbsp;</td>
-                                    <td>4º Bimestre&nbsp;</td>
-                                </tr>
-
-                                @{
-                                    foreach (var item in grupoNota)
-                                    {
-                                        //var notas_ = item.Value.GroupBy(n => n.Bimestre).ToDictionary(n => n.Key, n => n.FirstOrDefault());
-                                        <tr>
-                                            <td>
-                                                <input id="materia" name="materia" value="@item.Key" />
-
-                                            </td>
-                                            <td>
-                                                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 1).Select(n => n.ValorNota).FirstOrDefault()" />
-                                            </td>
-                                            <td>
-                                                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 2).Select(n => n.ValorNota).FirstOrDefault()" />
-                                            </td>
-                                            <td>
-                                                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 3).Select(n => n.ValorNota).FirstOrDefault()" />
-                                            </td>
-                                            <td>
-                                                <input id="nota" name="nota" value="@item.Value.Where(n => n.Bimestre == 4).Select(n => n.ValorNota).FirstOrDefault()" />
-                                            </td>
-                                            @*<td>
-                                                    <input id="nota" name="nota" value="@notas_[1].ValorNota" />
-                                                </td>*@
-                                        </tr>
-                                    }
-                                }
-
-                            </tbody>
-                        </table>
+            <br />
+            <input type="hidden" id="aluno.EmpresaId" name="aluno.EmpresaId" value="@Session["empresaLogada"]" />
+            <input type="hidden" id="aluno.Id" name="aluno.Id" value="@ViewBag.Aluno.Id" />
+            <input class="btn btn-secondary" type="button" value="Voltar" onClick="history.go(-1)">
+            <input class="btn btn-primary" align-baseline="right" type="submit" value="Alterar" />
 
 
 
-                        <br />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--nova aba-->
-        <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
 
-        </div>
 
+            <br />
+        </form>
     </div>
-
-    <br />
-    <br />
-    <input class="btn btn-primary" align-baseline="right" type="submit" value="Cadastrar" />
-
-
-
-
-
-    <br />
-</form>
-
-
+</body>
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#valorNota1').mask('#0,00'),
+            $('#valorNota2').mask('#0,00'),
+            $('#valorNota3').mask('#0,00'),
+            $('#valorNota4').mask('#0,00'),
+            $('#cpfResponsavel').mask('000.000.000-00'),
+            $('#cep').mask('00000-000'),
+            $('#horario').mask('00:00'),
+            $('#diaVencimento').mask('99/99/9999', { placeholder: "mm/dd/aaaa" }),
+            $('#telefone').mask('(99) 99999-9999', { placeholder: "(99) 99999-9999" }),
+            $('#telefoneResponsavel').mask('(99) 99999-9999', { placeholder: "(99) 99999-9999" }),
+            $('#mensalidadeValor').maskMoney({ symbol: 'R$ ', thousands: '.', decimal: ',', symbolStay: true })
+    });
+
     var i = 0;
     function adiciona(materiaId) {
         var url = ("/Materia/Adiciona");
@@ -215,5 +407,8 @@
         $.post(url, params);
     }
 
+    $(function () {
+        $('#myModal').modal('show');
+    });
 
 </script>

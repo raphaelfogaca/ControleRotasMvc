@@ -43,12 +43,15 @@ namespace ControleRotasMvc.DAO
         }
 
 
-        public Materia BuscaMateriaPorId(int id)
+        public IQueryable<Materia> BuscaMateriaPorId(int id)
         {
             using (var contexto = new ControleRotasContext())
             {
-                return contexto.Materias.Find(id);
-
+                ControleRotasContext db = new ControleRotasContext();
+                var q = db.Materias.AsQueryable();
+                q = q.Where(c => c.Id.Equals(id));
+                q.ToList();
+                return q;
             }
         }
 

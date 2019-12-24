@@ -16,6 +16,10 @@ namespace ControleRotasMvc.Models
         public bool IsFullDay { get; set; }
         public int EmpresaId { get; set; }
         public int AlunoId { get; set; }
+        public int GroupId { get; set; }
+        public string DaysOfWeek { get; set; }
+
+
 
     }
 }

@@ -20,13 +20,20 @@ namespace ControleRotasMvc.Controllers
 
         public Nota Cadastrar(Nota[] nota)
         {
-           
-            NotasEntity db = new NotasEntity();
-            
+            NotasEntity db = new NotasEntity();            
             db.Gravar(nota);
             return nota[0];
         }
 
-        
+        public Nota Alterar(Nota[] nota)
+        {
+            NotasEntity db = new NotasEntity();
+            db.Alterar(nota);
+            return nota[0];
+        }
+
+
+
+
     }
 }

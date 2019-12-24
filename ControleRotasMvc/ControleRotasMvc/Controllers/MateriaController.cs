@@ -29,9 +29,16 @@ namespace ControleRotasMvc.Controllers
         }
 
         public ActionResult BuscarMateria (string Pesquisa)
-        {
+        {            
             MateriaEntity dao = new MateriaEntity();
             var listaMaterias = dao.BuscaMateriaPorNome(Pesquisa);
+            return View("Index", listaMaterias);
+        }
+
+        public ActionResult BuscarMateriaPorId (int materiaId)
+        {
+            MateriaEntity dao = new MateriaEntity();
+            var listaMaterias = dao.BuscaMateriaPorId(materiaId);
             return View("Index", listaMaterias);
         }
 

@@ -74,5 +74,23 @@ namespace ControleRotasMvc.DAO
             q.ToList();
             return q;
         }
+
+        public string Alterar(Aluno aluno)
+        {
+            try
+            {
+                using (var repo = new ControleRotasContext())
+                {
+                    repo.Alunos.Update(aluno);
+                    repo.SaveChanges();
+                    return "OK";
+                }
+            }
+            catch (Exception EX)
+            {                
+                string erro = "" + EX.InnerException.Message;
+                return erro;
+            }
+        }
     }
 }

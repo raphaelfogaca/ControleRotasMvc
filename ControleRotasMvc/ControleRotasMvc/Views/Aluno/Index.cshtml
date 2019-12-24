@@ -1,60 +1,111 @@
 ﻿
 @model IQueryable<ControleRotasMvc.Models.Aluno>
-   
+
 
 <head>
     <h3>CADASTRO DE ALUNOS</h3>
 </head>
-    <div align="right">
-        <br />
+<body>
+    <div class="container">
+        <div align="right">
+            <br />
 
-        @using (Ajax.BeginForm("BuscarAluno", "Aluno", new AjaxOptions
+            @using (Ajax.BeginForm("BuscarAluno", "Aluno", new AjaxOptions
+            {
+                HttpMethod = "Get",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "listaAlunos"
+            }))
+            {
+                @Html.TextBox("Pesquisa")
+                <input type="submit" value="Pesquisar" class="btn btn-default btn-sm" />
+                <a href="/Aluno/Cadastro">
+                    <input type="button" class="btn btn-success btn-sm" value="Novo Aluno" />
+                </a>
+            }
+            <br />
+
+            <br />
+        </div>
+
+        @if (TempData["UserMessage"] != null)
         {
-            HttpMethod = "Get",
-            InsertionMode = InsertionMode.Replace,
-            UpdateTargetId = "listaAlunos"
-        }))
-        {
-            @Html.TextBox("Pesquisa")                      
-            <input type="submit" value="Pesquisar" class="btn btn-default btn-sm" />           
-            <a href="/Aluno/Cadastro">
-                <input type="button" class="btn btn-success btn-sm" value="Novo Aluno" />
-            </a>
+
+            <div id="myModal" class="modal fade" style="display: block; margin-left: -300px;" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title float-left">Alerta!</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <strong>@TempData["UserMessage"]</strong>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         }
-        <br />
 
-        <br />
-    </div>
-
-    <div id="listaAlunos">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
-                    <th>Responsável</th>
-                    <th>E-mail Responsável</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var aluno in Model)
-                {
+        <div class="container" id="listaAlunos">
+            <table class="col-lg-12 table-hover table-bordered">
+                <thead>
                     <tr>
-                        <td>@aluno.Id</td>
-                        <td>@Html.RouteLink(aluno.Nome, "VisualizaAluno", new { id = aluno.Id })</td>
-                        <td>@aluno.Email</td>
-                        <td>@aluno.Telefone</td>
-                        <td>@aluno.NomeResponsavel</td>
-                        <td>@aluno.EmailResponsavel</td>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Responsável</th>
+                        <th>E-mail Responsável</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-</div>
+                </thead>
+                <tbody>
+                    @foreach (var aluno in Model)
+                    {
+                        <tr>
+                            <td>@aluno.Id</td>
+                            <td>@aluno.Nome</td>
+                            <td>@aluno.Email</td>
+                            <td>@aluno.Telefone</td>
+                            <td>@aluno.NomeResponsavel</td>
+                            <td>@aluno.EmailResponsavel</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Opções
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        @Html.ActionLink("Alterar", "Visualiza", new { id = @aluno.Id }, new { @class = "dropdown-item" })
+                                        @if (aluno.Situacao == 1)
+                                        {
+                                            @Html.ActionLink("Inativar", "Inativar", new { id = @aluno.Id }, new { @class = "dropdown-item" })
+                                        }
+                                        else if (aluno.Situacao == 0)
+                                        {
+                                            @Html.ActionLink("Ativar", "Ativar", new { id = @aluno.Id }, new { @class = "dropdown-item" })
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
 
-        @*/codigo java script*@
+
+@*/codigo java script*@
+<script>
+    $(function () {
+        $('#myModal').modal('show');
+    });
+</script>
 
 
 

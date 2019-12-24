@@ -16,7 +16,7 @@ namespace ControleRotasMvc.Controllers
         // GET: Aluno
         [Route("alunos", Name = "ListaAlunos")]
         public ActionResult Index()
-        {            
+        {
             AlunoEntity dao = new AlunoEntity();
             IQueryable<Aluno> aluno = dao.Alunos();
             return View(aluno);
@@ -35,24 +35,15 @@ namespace ControleRotasMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Adiciona(Aluno aluno, int[] materias, Nota[] nota, Endereco endereco, string[] diasAula)
+        public ActionResult Adiciona(Aluno aluno, int[] materias, Nota[] nota, Endereco endereco, string[] diasAula, DateTime horarioStart, DateTime horarioEnd)
         {
-
-            ///cadastro automatico aluno///
-            //aluno.Nome = "raphael";
-            //aluno.NomeResponsavel = "Jose";
-            //aluno.Email = "raphael.fogaca@hotmail2.c23om";
-            //aluno.AulaSexta = 1;
-            //aluno.Telefone = "123456";
-            //aluno.EmailResponsavel = "liliane@gmail.com";
 
             if (diasAula != null)
             {
-                foreach (var item in diasAula)
-                {
-                    aluno.DiasAula = item + "," + aluno.DiasAula;
-                }
+                aluno.DiasAula = string.Join(",", diasAula);
             }
+            
+            
             //armazenar objeto Empresa na sessão//
             //var empresaLogada = Session["empresaLogada"];
             //Empresa empresa = (Empresa)Session["empresaLogada"];
@@ -60,7 +51,7 @@ namespace ControleRotasMvc.Controllers
             //aluno.EmpresaId = 1;
 
             AlunoEntity db2 = new AlunoEntity();
-            
+
             aluno.MateriaAlunos = materias.Select(n => new MateriaAlunos() { MateriaId = n }).ToList();
 
 
@@ -72,8 +63,8 @@ namespace ControleRotasMvc.Controllers
             {
 
                 AlunoEntity db = new AlunoEntity();
-                db.Gravar(aluno);          
-           
+                db.Gravar(aluno);
+
                 MateriaAlunoEntity materiaAlunos = new MateriaAlunoEntity();
                 materiaAlunos.Gravar(aluno.MateriaAlunos, aluno);
 
@@ -92,17 +83,21 @@ namespace ControleRotasMvc.Controllers
                     c--;
                 }
                 not.Cadastrar(nota);
+
+                EventoController evento = new EventoController();
+                evento.CadastrarEvento(horarioStart, horarioEnd, aluno);
                 return RedirectToAction("Index", "Aluno");
             }
             else
             {
-                return View("Cadastro");
+               
                 //testando sem json
-                //var errors = ModelState.Values.SelectMany(v => v.Errors);
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
                 //ViewBag.Aluno = aluno;
                 //AlunoEntity db = new AlunoEntity();                
                 //return Json(true, JsonRequestBehavior.AllowGet);
                 //testando sem json
+                return View("Cadastro");
             }
         }
 
@@ -117,7 +112,8 @@ namespace ControleRotasMvc.Controllers
             aluno.Notas = db.Notas.Where(n => n.AlunoId == aluno.Id).ToList();
             ViewBag.Aluno = aluno;
             ViewBag.Materias = db.Materias.ToList();
-            ViewBag.Notas = db.Notas.ToList();
+            NotasEntity dbNota = new NotasEntity();
+            ViewBag.Notas = dbNota.BuscarNotaPorAlunoId(aluno.Id);
 
             List<int> MateriasDoAluno = new List<int>();
             if (aluno != null && aluno.MateriaAlunos != null)
@@ -125,18 +121,97 @@ namespace ControleRotasMvc.Controllers
                 MateriasDoAluno = aluno.MateriaAlunos.Select(n => n.MateriaId).ToList(); //[2]
             }
 
+            DiasAulaEntity diasAula = new DiasAulaEntity();
+            ViewBag.DiasAula = diasAula.DiasAula();
+
+            EnderecoEntity enderecoDb = new EnderecoEntity();
+            ViewBag.Endereco = enderecoDb.BuscarEnderecoPorAlunoId(aluno.Id);
+
+            FinanceiroEntity financeiroDb = new FinanceiroEntity();
+            ViewBag.Financeiro = financeiroDb.DocumentosPorAluno(aluno.Id);
+
+            //List<string> listaDiasAula = aluno.DiasAula.Split(',').ToList();
+            ViewBag.DiasAulaAluno = aluno.DiasAula;
+
             ViewBag.MateriasDoAluno = MateriasDoAluno;
-            ViewBag.DiasAula = aluno.DiasAula;
+
 
             //List<int> NotasDoAluno = new List<int>();
             //if (aluno != null && aluno.Notas != null)
             //{
             //    NotasDoAluno = aluno.Notas.Select(n => n.AlunoId).ToList();
             //}
-
             //ViewBag.NotasDoAluno = Nota;
 
+
             return View(aluno);
+        }
+
+        [Route("aluno/Alterar", Name = "AlterarAluno")]
+        public ActionResult Alterar(Aluno aluno, int[] materias, Nota[] nota, string[] diasAula, Endereco endereco)
+        {
+            aluno.MateriaAlunos = materias.Select(n => new MateriaAlunos() { MateriaId = n }).ToList();
+            MateriaAlunoEntity materiaAlunos = new MateriaAlunoEntity();
+            materiaAlunos.Gravar(aluno.MateriaAlunos, aluno);
+
+            if (diasAula != null)
+            {
+                foreach (var item in diasAula)
+                {
+                    aluno.DiasAula = item + "," + aluno.DiasAula;
+                }
+            }
+
+            int c = nota.Count() - 1;
+          
+            NotaController not = new NotaController();
+
+            while (c >= 0)
+            {
+                nota[c].AlunoId = aluno.Id;
+                c--;
+            }
+            not.Alterar(nota);
+
+            EnderecoEntity dbEndereco = new EnderecoEntity();
+            endereco.AlunoId = aluno.Id;
+            endereco.Id = dbEndereco.BuscarEnderecoId(aluno.Id);
+            dbEndereco.Alterar(endereco);
+
+            AlunoEntity dao = new AlunoEntity();
+            if (dao.Alterar(aluno) == "OK")
+            {
+                TempData["UserMessage"] = "Aluno alterado com sucesso!";
+                return RedirectToAction("index");
+            }
+            else
+            {
+                TempData["UserMessage"] = "Erro ao alterar aluno " +aluno.Id + ".";
+                return RedirectToAction("","alunos/"+aluno.Id);
+            }
+            
+        }
+
+        [Route("aluno/Inativar/{id}", Name = "InativarAluno")]
+        public ActionResult Inativar (Aluno aluno)
+        {
+            AlunoEntity db = new AlunoEntity();
+            aluno = db.BuscaAlunoPorId(aluno.Id);
+            aluno.Situacao = 0;
+            db.Alterar(aluno);
+            TempData["UserMessage"] = "Aluno inativado com sucesso!";
+            return RedirectToAction("index");
+        }
+
+        [Route("aluno/Ativar/{id}", Name = "AtivarAluno")]
+        public ActionResult Ativar(Aluno aluno)
+        {
+            AlunoEntity db = new AlunoEntity();
+            aluno = db.BuscaAlunoPorId(aluno.Id);
+            aluno.Situacao = 1;
+            db.Alterar(aluno);
+            TempData["UserMessage"] = "Aluno ativado com sucesso!";
+            return RedirectToAction("index");
         }
 
         public ActionResult BuscarAluno(string Pesquisa)
@@ -145,6 +220,19 @@ namespace ControleRotasMvc.Controllers
             var listaAluno = dao.BuscarAlunoPorNome(Pesquisa);
             return View("Index", listaAluno);
         }
+
+        public ActionResult BuscarAluno2(List<string> values)
+        {
+            MateriaEntity dao2 = new MateriaEntity();
+            string materiaId = values.FirstOrDefault();
+            IQueryable<Materia> materia = dao2.BuscaMateriaPorId(Convert.ToInt16(materiaId));
+            DiasAulaEntity diasAula = new DiasAulaEntity();
+            ViewBag.DiasAula = diasAula.DiasAula();
+
+            return View("Cadastro",materia);
+
+        }
+
 
 
     }
