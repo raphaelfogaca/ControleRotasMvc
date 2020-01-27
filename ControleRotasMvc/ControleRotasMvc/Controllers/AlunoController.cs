@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ControleRotasMvc.Controllers
 {
@@ -37,21 +38,14 @@ namespace ControleRotasMvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Adiciona(Aluno aluno, int[] materias, Nota[] nota, Endereco endereco, string[] diasAula, DateTime horarioStart, DateTime horarioEnd)
         {
+            aluno.CpfResponsavel = Regex.Replace(aluno.CpfResponsavel, "[^0-9a-zA-Z]", "");
 
             if (diasAula != null)
             {
                 aluno.DiasAula = string.Join(",", diasAula);
             }
-            
-            
-            //armazenar objeto Empresa na sessão//
-            //var empresaLogada = Session["empresaLogada"];
-            //Empresa empresa = (Empresa)Session["empresaLogada"];
-            //aluno.EmpresaId = empresa.Id;
-            //aluno.EmpresaId = 1;
 
             AlunoEntity db2 = new AlunoEntity();
-
             aluno.MateriaAlunos = materias.Select(n => new MateriaAlunos() { MateriaId = n }).ToList();
 
 
@@ -100,14 +94,13 @@ namespace ControleRotasMvc.Controllers
                 return View("Cadastro");
             }
         }
-
+                
         [Route("alunos/{id}", Name = "VisualizaAluno")]
-        public ActionResult Visualiza(int id)
-        {
-            //AlunoEntity db = new AlunoEntity();
+        public ActionResult Visualiza(int id)        {
+           
             ControleRotasContext db = new ControleRotasContext();
             Aluno aluno = db.Alunos.Where(n => n.Id == id).FirstOrDefault();
-            aluno.MateriaAlunos = db.MateriaAlunos.Where(n => n.AlunoId == aluno.Id).ToList();//porque tenho que ter este? e tbm o [2]
+            aluno.MateriaAlunos = db.MateriaAlunos.Where(n => n.AlunoId == aluno.Id).ToList();
 
             aluno.Notas = db.Notas.Where(n => n.AlunoId == aluno.Id).ToList();
             ViewBag.Aluno = aluno;
@@ -118,7 +111,7 @@ namespace ControleRotasMvc.Controllers
             List<int> MateriasDoAluno = new List<int>();
             if (aluno != null && aluno.MateriaAlunos != null)
             {
-                MateriasDoAluno = aluno.MateriaAlunos.Select(n => n.MateriaId).ToList(); //[2]
+                MateriasDoAluno = aluno.MateriaAlunos.Select(n => n.MateriaId).ToList();
             }
 
             DiasAulaEntity diasAula = new DiasAulaEntity();
@@ -129,24 +122,12 @@ namespace ControleRotasMvc.Controllers
 
             FinanceiroEntity financeiroDb = new FinanceiroEntity();
             ViewBag.Financeiro = financeiroDb.DocumentosPorAluno(aluno.Id);
-
-            //List<string> listaDiasAula = aluno.DiasAula.Split(',').ToList();
+           
             ViewBag.DiasAulaAluno = aluno.DiasAula;
-
             ViewBag.MateriasDoAluno = MateriasDoAluno;
-
-
-            //List<int> NotasDoAluno = new List<int>();
-            //if (aluno != null && aluno.Notas != null)
-            //{
-            //    NotasDoAluno = aluno.Notas.Select(n => n.AlunoId).ToList();
-            //}
-            //ViewBag.NotasDoAluno = Nota;
-
-
             return View(aluno);
         }
-
+                
         [Route("aluno/Alterar", Name = "AlterarAluno")]
         public ActionResult Alterar(Aluno aluno, int[] materias, Nota[] nota, string[] diasAula, Endereco endereco)
         {
@@ -192,6 +173,7 @@ namespace ControleRotasMvc.Controllers
             
         }
 
+        [ValidateAntiForgeryToken]
         [Route("aluno/Inativar/{id}", Name = "InativarAluno")]
         public ActionResult Inativar (Aluno aluno)
         {
@@ -203,6 +185,7 @@ namespace ControleRotasMvc.Controllers
             return RedirectToAction("index");
         }
 
+        [ValidateAntiForgeryToken]
         [Route("aluno/Ativar/{id}", Name = "AtivarAluno")]
         public ActionResult Ativar(Aluno aluno)
         {

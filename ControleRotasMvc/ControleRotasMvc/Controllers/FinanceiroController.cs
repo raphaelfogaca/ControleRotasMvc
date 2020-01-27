@@ -94,15 +94,27 @@ namespace ControleRotasMvc.Controllers
             FinanceiroEntity dbFin = new FinanceiroEntity();
             Financeiro dadosDocFin = new Financeiro();
             dadosDocFin = dbFin.BuscarFinanceiroPorId(docfin.Id);
+
+            AlunoEntity dbAluno = new AlunoEntity();
+            Aluno aluno = new Aluno();
+            aluno = dbAluno.BuscaAlunoPorId(dadosDocFin.AlunoId);
+
+            EmpresaEntity dbEmp = new EmpresaEntity();
+            Empresa dadosEmpresa = new Empresa();
+            dadosEmpresa = dbEmp.BuscaEmpresaPorId(aluno.EmpresaId);         
+
             AlunoEntity dbAlun = new AlunoEntity();
             Aluno dadosAluno = new Aluno();
             dadosAluno = dbAlun.BuscaAlunoPorId(dadosDocFin.AlunoId);
+
             EnderecoEntity dbEnd = new EnderecoEntity();
             Endereco dadosEnd = new Endereco();
             dadosEnd = dbEnd.BuscarEnderecoPorAlunoId(dadosAluno.Id);
 
             //string url = "https://ptsv2.com/t/yq6or-1572481983/post";
-            string url = "https://ws.pagseguro.uol.com.br/recurring-payment/boletos?email=raphael15br@gmail.com&token=9ccbe1da-b415-4104-8d08-df3557a8aaed028209b24eb7bcffd83fb2a512fff607323b-a793-4f24-8c48-d6524e9c1b0a";
+            string url = "https://ws.pagseguro.uol.com.br/recurring-payment/boletos?email=" +
+                dadosEmpresa.emailPagseguro + "&token="+
+                dadosEmpresa.tokenPagSeguro;
 
             PostRequest(url, dadosDocFin, dadosAluno, dadosEnd);
             return (docfin);

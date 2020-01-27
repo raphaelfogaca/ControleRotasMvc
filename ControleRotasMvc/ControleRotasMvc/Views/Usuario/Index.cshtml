@@ -39,6 +39,7 @@
                     <div class="container-fluid">
 
                         <form id="cad-usuario" action="/Usuario/Adiciona" method="post" class="active">
+                            @Html.AntiForgeryToken()
                             <label for="Empresa">Empresa:</label>
                             <select class="form-control" name="usuario.EmpresaId">
                                 <option hidden selected value=""> -- Selecione -- </option>
@@ -50,7 +51,7 @@
                                         </option>
                                     }
                                 }
-                            </select>                           
+                            </select>
 
                             <label for="nome">Nome:</label>
                             <input id="nome" name="usuario.UsuarioNome" value="@ViewBag.Usuario.UsuarioNome" class="form-control" />

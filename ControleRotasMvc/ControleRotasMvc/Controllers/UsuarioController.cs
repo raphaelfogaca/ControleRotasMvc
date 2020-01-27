@@ -39,6 +39,7 @@ namespace ControleRotasMvc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Adiciona(Usuario usuario)
         {
             usuario.UsuarioLogin = usuario.UsuarioEmail;

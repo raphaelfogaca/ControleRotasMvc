@@ -1,6 +1,4 @@
 ﻿@{
-
-
     var materias = ViewBag.Materias as IEnumerable<ControleRotasMvc.Models.Materia>;
     List<int> MateriasDoAluno = ViewBag.MateriasDoAluno as List<int>;
     var notas = ViewBag.Notas as IQueryable<ControleRotasMvc.Models.Nota>;
@@ -9,8 +7,6 @@
     var diasAulaAluno = ViewBag.DiasAulaAluno;
     var endereco = ViewBag.Endereco;
     var financeiro = ViewBag.Financeiro;
-
-
 }
 <head>
     <div align="left">
@@ -19,8 +15,6 @@
 </head>
 <br />
 <body>
-
-
     <div class="container">
 
         @if (TempData["UserMessage"] != null)
@@ -47,8 +41,7 @@
         }
 
 
-        <form id="cad-aluno" action="/Aluno/Alterar" method="post" class="active">
-            @Html.AntiForgeryToken()
+        <form id="cad-aluno" action="/Aluno/Alterar" method="post" class="active">         
 
             <!--nav tabs-->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -368,18 +361,12 @@
                 </div>
 
             </div>
-
             <br />
             <br />
             <input type="hidden" id="aluno.EmpresaId" name="aluno.EmpresaId" value="@Session["empresaLogada"]" />
             <input type="hidden" id="aluno.Id" name="aluno.Id" value="@ViewBag.Aluno.Id" />
             <input class="btn btn-secondary" type="button" value="Voltar" onClick="history.go(-1)">
             <input class="btn btn-primary" align-baseline="right" type="submit" value="Alterar" />
-
-
-
-
-
             <br />
         </form>
     </div>

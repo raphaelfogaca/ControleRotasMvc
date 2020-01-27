@@ -20,8 +20,9 @@ namespace ControleRotasMvc.DAO
                     return true;
                 }
             }
-            catch
+            catch (Exception EX)
             {
+                string erro = "" + EX.InnerException.Message;
                 return false;
             }
         }

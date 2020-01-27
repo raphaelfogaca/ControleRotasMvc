@@ -16,5 +16,6 @@ namespace ControleRotasMvc.Models
         public string Estado { get; set; } // "state": "SP"
         public int AlunoId { get; set; }
         public int UsuarioId { get; set; }
+        public int EmpresaId { get; set; }
     }
 }

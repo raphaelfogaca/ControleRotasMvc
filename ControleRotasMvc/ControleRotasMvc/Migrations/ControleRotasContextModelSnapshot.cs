@@ -17,8 +17,8 @@ namespace ControleRotasMvc.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
             modelBuilder.Entity("ControleRotasMvc.Models.Aluno", b =>
                 {
@@ -38,6 +38,8 @@ namespace ControleRotasMvc.Migrations
                     b.Property<string>("Nome");
 
                     b.Property<string>("NomeResponsavel");
+
+                    b.Property<int>("Situacao");
 
                     b.Property<string>("Telefone");
 
@@ -65,7 +67,21 @@ namespace ControleRotasMvc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Documento");
+
+                    b.Property<int>("HabilitarPagSeguro");
+
                     b.Property<string>("Nome");
+
+                    b.Property<string>("ReponsavelTelefone");
+
+                    b.Property<string>("Responsavel");
+
+                    b.Property<string>("ResponsavelEmail");
+
+                    b.Property<string>("emailPagseguro");
+
+                    b.Property<string>("tokenPagSeguro");
 
                     b.HasKey("Id");
 
@@ -107,11 +123,15 @@ namespace ControleRotasMvc.Migrations
 
                     b.Property<string>("Cor");
 
+                    b.Property<string>("DaysOfWeek");
+
                     b.Property<string>("Descricao");
 
                     b.Property<int>("EmpresaId");
 
                     b.Property<DateTime>("End");
+
+                    b.Property<int>("GroupId");
 
                     b.Property<bool>("IsFullDay");
 
@@ -193,19 +213,17 @@ namespace ControleRotasMvc.Migrations
 
                     b.Property<int>("AlunoId");
 
-                    b.Property<int>("Bimestre1");
+                    b.Property<float>("Bimestre1");
 
-                    b.Property<int>("Bimestre2");
+                    b.Property<float>("Bimestre2");
 
-                    b.Property<int>("Bimestre3");
+                    b.Property<float>("Bimestre3");
 
-                    b.Property<int>("Bimestre4");
+                    b.Property<float>("Bimestre4");
 
                     b.Property<string>("Materia");
 
                     b.Property<int>("MateriaId");
-
-                    b.Property<float>("ValorNota");
 
                     b.HasKey("Id");
 

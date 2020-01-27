@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ControleRotasMvc;
 using ControleRotasMvc.Models;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace ControleRotasMvc.DAO
 
@@ -30,7 +31,10 @@ namespace ControleRotasMvc.DAO
            // optionsBuilder.UseSqlServer("Data Source=SQL5045.site4now.net;Initial Catalog=DB_A4E785_ControleRotasDB;User Id=DB_A4E785_ControleRotasDB_admin;Password=dslink123#;");
 
             //BASE LOCAL SPWPC
-            optionsBuilder.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Database = ControleRotasDB; Trusted_Connection=Yes");
+           // optionsBuilder.UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Database = ControleRotasDB; Trusted_Connection=Yes");
+
+            //base kinghost
+            optionsBuilder.UseMySql("Data Source=mysql.qalunos.com.br;Initial Catalog=qalunos;User Id=qalunos_add1;Password=H&F#LPgB5zLh;");
 
             //BASE.MDF NOTEBOOK LARISSA
             //optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Larissa\Documents\ControleRotasDB.mdf;Integrated Security=True;Connect Timeout=30");

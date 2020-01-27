@@ -1,31 +1,31 @@
-﻿@Html.AntiForgeryToken()
-<!-- Default form login -->
-<html>
-<head>    
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>QAlunos - Login</title>
 </head>
-<body>
-    <link href="~/Content/Css/bootstrap.css" rel="stylesheet" />
-    <div class="form-control col-sm-6 text-center border-light p-5">
-        <form class="text-center border border-light p-5" action="/Login/Autentica" method="post">
+<body class="text-center">
+            <div style="text-align: center;">
+                <div style="width: 450px; margin: 0 auto; padding: 70px 0;">
+                    <form class="text-center border border-light p-5" action="/Login/Autentica" method="post">
 
-            <p class="h4 mb-4">Entrar</p>
+                        <p class="h4 mb-4">Entrar</p>
 
-            <!-- Email -->
-            <input type="text" id="login" name="login" class="form-control" placeholder="Usuário">
+                        <!-- Email -->
+                        <input type="text" id="login" name="login" class="form-control" placeholder="Usuário">
 
-            <!-- Password -->
-            <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha">
+                        <!-- Password -->
+                        <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha">
 
-            <div class="d-flex justify-content-around">
-                <div>
-                    <!-- Forgot password -->
-                    <a href="">Esqueceu a senha?</a>
+                        <div class="d-flex justify-content-around">
+                            <div>
+                                <!-- Forgot password -->
+                                <a href="">Esqueceu a senha?</a>
+                            </div>
+                        </div>
+                        <!-- Sign in button -->
+                        <button class="btn btn-info btn-block my-4" type="submit">Entrar</button>
+                    </form>
                 </div>
-            </div>
-            <!-- Sign in button -->
-            <button class="btn btn-info btn-block my-4" type="submit">Entrar</button>
-        </form>
-    </div>
+        </div>
 </body>
 </html>
-

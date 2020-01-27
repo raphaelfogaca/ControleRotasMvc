@@ -24,7 +24,7 @@ namespace ControleRotasMvc.DAO
                     return true;
                 }
             }
-            catch
+            catch (Exception EX)
             {
                 return false;
             }

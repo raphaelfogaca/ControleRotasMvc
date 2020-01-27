@@ -1,35 +1,38 @@
 ﻿@model IQueryable<ControleRotasMvc.Models.Empresa>
 
-@{
-    Layout = null;
-}
 
-<!DOCTYPE html>
-
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <h3>CADASTRO DE EMPRESAS</h3>
 </head>
-<body>
-    <div id="listaEmpresas">
-        <table class="table table-hover">
-            <thead>
+<div align="right">
+    <br />
+        <a href="/Empresa/Cadastro">
+            <input type="button" class="btn btn-success btn-sm" value="Nova Empresa" />
+        </a>
+    <br />
+    <br />
+</div>
+
+<div id="listaEmpresas">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var empresa in Model)
+            {
                 <tr>
-                    <th>Id</th>
-                    <th>Nome</th>
+                    <td>@empresa.Id</td>
+                    <td>@empresa.Nome</td>
+                    <td>
+                        @Html.ActionLink("Excluir", "Deletar", new { id = empresa.Id }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var empresa in Model)
-                {
-                    <tr>
-                        <td>@empresa.Id</td>
-                        <td>@empresa.Nome</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</body>
-</html>
+            }
+        </tbody>
+    </table>
+</div>
+
