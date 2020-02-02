@@ -111,10 +111,10 @@ namespace ControleRotasMvc.Controllers
             Endereco dadosEnd = new Endereco();
             dadosEnd = dbEnd.BuscarEnderecoPorAlunoId(dadosAluno.Id);
 
-            //string url = "https://ptsv2.com/t/yq6or-1572481983/post";
+             //string url = "https://ptsv2.com/t/yq6or-1572481983/post";
             string url = "https://ws.pagseguro.uol.com.br/recurring-payment/boletos?email=" +
-                dadosEmpresa.emailPagseguro + "&token="+
-                dadosEmpresa.tokenPagSeguro;
+            dadosEmpresa.emailPagseguro + "&token="+
+            dadosEmpresa.tokenPagSeguro;            
 
             PostRequest(url, dadosDocFin, dadosAluno, dadosEnd);
             return (docfin);

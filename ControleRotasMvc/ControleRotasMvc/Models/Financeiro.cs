@@ -16,7 +16,7 @@ namespace ControleRotasMvc.Models
         public int AlunoId { get; set; }
         public int Situacao { get; set; }
         public int EmpresaId { get; set; }   
-        public int FormaRecebimento { get; set; }//1 dinheiro, 2 boleto     
+        public int FormaRecebimento { get; set; }//1 dinheiro, 2 boleto, 3 cartão     
         public string BoletoCode { get; set; }
         public string BoletoPaymentLink { get; set; }
         public string BoletoBarcode { get; set; }

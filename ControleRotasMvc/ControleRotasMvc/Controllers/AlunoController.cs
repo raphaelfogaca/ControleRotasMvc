@@ -38,7 +38,11 @@ namespace ControleRotasMvc.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Adiciona(Aluno aluno, int[] materias, Nota[] nota, Endereco endereco, string[] diasAula, DateTime horarioStart, DateTime horarioEnd)
         {
-            aluno.CpfResponsavel = Regex.Replace(aluno.CpfResponsavel, "[^0-9a-zA-Z]", "");
+
+            aluno.CpfResponsavel = RemoverCaracteres(aluno.CpfResponsavel);
+            aluno.Telefone = RemoverCaracteres(aluno.Telefone);
+            aluno.TelefoneResponsavel = RemoverCaracteres(aluno.TelefoneResponsavel);
+            endereco.Cep = RemoverCaracteres(endereco.Cep);
 
             if (diasAula != null)
             {
@@ -214,6 +218,11 @@ namespace ControleRotasMvc.Controllers
 
             return View("Cadastro",materia);
 
+        }
+
+        public string RemoverCaracteres (string texto)
+        {
+            return texto = Regex.Replace(texto, "[^0-9a-zA-Z]", "");
         }
 
 
