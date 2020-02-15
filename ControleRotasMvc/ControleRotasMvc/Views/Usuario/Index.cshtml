@@ -41,7 +41,7 @@
                         <form id="cad-usuario" action="/Usuario/Adiciona" method="post" class="active">
                             @Html.AntiForgeryToken()
                             <label for="Empresa">Empresa:</label>
-                            <select class="form-control" name="usuario.EmpresaId">
+                            @*<select class="form-control" name="usuario.EmpresaId">
                                 <option hidden selected value=""> -- Selecione -- </option>
                                 @{
                                     foreach (var items in empresas)
@@ -50,7 +50,7 @@
                                             @items.Nome
                                         </option>
                                     }
-                                }
+                                }*@
                             </select>
 
                             <label for="nome">Nome:</label>

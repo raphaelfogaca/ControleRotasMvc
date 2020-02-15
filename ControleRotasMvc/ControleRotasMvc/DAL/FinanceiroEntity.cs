@@ -32,7 +32,6 @@ namespace ControleRotasMvc.DAO
                 FormaRecebimento = n.f.FormaRecebimento,
             }).ToList();
         }
-
         public IQueryable<Financeiro> Documentos(int Pesquisa = 0)
         {            
             ControleRotasContext db = new ControleRotasContext();
@@ -41,8 +40,6 @@ namespace ControleRotasMvc.DAO
             q.ToList();
             return q;
         }
-
-
         public bool Gravar(Financeiro docfin)
         {
 
@@ -62,7 +59,6 @@ namespace ControleRotasMvc.DAO
                 return false;
             }
         }
-
         public bool Deletar(Financeiro docfin)
         {
             try
@@ -79,7 +75,6 @@ namespace ControleRotasMvc.DAO
                 return false;
             }
         }
-
         public bool Alterar(Financeiro docfin)
         {
             try
@@ -97,12 +92,19 @@ namespace ControleRotasMvc.DAO
             }
         }
 
-
         public Financeiro BuscarFinanceiroPorId(int Pesquisa)
         {
             ControleRotasContext db = new ControleRotasContext();
             return db.DocumentosFinanceiros.Find(Pesquisa);
 
+        }
+
+        public IQueryable<Financeiro> BuscarFinanceiroParaAlterar(int Pesquisa)
+        {
+            ControleRotasContext db = new ControleRotasContext();
+            var q = db.DocumentosFinanceiros.AsQueryable();
+            q = q.Where(c => c.Id == (Pesquisa));
+            return q;
         }
 
         public IList<FinanceiroViewModel> DocumentosPorAluno(int Pesquisa)

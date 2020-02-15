@@ -1,7 +1,7 @@
 ﻿@model IList<ControleRotasMvc.Models.FinanceiroViewModel>
 @{
     var alunos = ViewBag.Aluno;
-
+    var documentos = ViewBag.Financeiro;
 }
 
 <html>
@@ -14,25 +14,26 @@
 <body>
     <!-- Pesquisa-->
     <div align="right">
-        @using (Ajax.BeginForm("Buscar", "Financeiro", new AjaxOptions
-        {
-            HttpMethod = "Get",
-            InsertionMode = InsertionMode.Replace,
-            UpdateTargetId = "listaFinanceiro"
-        }))
-        {
-            <select name="Pesquisa">
-                <option hidden selected value=""> -- Selecione -- </option>
-                @foreach (var item in alunos)
-                {
-                    <option value="@item.Id">
-                        @item.Nome
-                    </option>
-                }
-            </select>
-            <input type="submit" value="Pesquisar" class="btn btn-default btn-sm" />
-            <input type="button" class="btn btn-success btn-sm" value="Novo Documento" data-toggle="modal" data-target="#NovoFinanceiro" />
+        @{ using (Ajax.BeginForm("Buscar", "Financeiro", new AjaxOptions
+            {
+                HttpMethod = "Get",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "listaFinanceiro"
+            }))
+            {
+                <select name="Pesquisa">
+                    <option hidden selected value=""> -- Selecione -- </option>
+                    @foreach (var item in alunos)
+                    {
+                        <option value="@item.Id">
+                            @item.Nome
+                        </option>
+                    }
+                </select>
+                <input type="submit" value="Pesquisar" class="btn btn-default btn-sm" />
+                <input type="button" class="btn btn-success btn-sm" value="Novo Documento" data-toggle="modal" data-target="#NovoFinanceiro" />
 
+            }
         }
     </div>
     <br />
@@ -121,85 +122,165 @@
         </div>
     </div>
 
+    @*ALTERAR DOCUMENTO FINANCEIRO*@
+    @*<div id="AlterarFinanceiro" class="modal fade modal-lg" tabindex="-1" role="form" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Alterar Documento</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
 
-    @*LISTA DE DOCUMENTOS FINANCEIROS*@
-    <div id="listaFinanceiro">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Pessoa</th>
-                    <th>Valor</th>
-                    <th>Vencimento</th>
-                    <th>Forma Recebimento</th>
-                    <th>Situação</th>
-                    <th rowspan="2"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var documento in Model)
-                {
+                        <form id="cad-financeiro" action="/Financeiro/Altera" method="post" class="active">
+                            <div class="row">                   
+
+                                @{
+                                    if (documentos != null)
+                                    {
+                                        <div class="col-md-6">
+                                            <label for="Aluno">Aluno</label>
+                                            <input id="currency" name="docfin.Valor" value="@documentos.Id" class="form-control" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="Valor">Valor:</label>
+                                            <input id="currency" name="docfin.Valor" value="@documentos.Valor" class="form-control" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="vencimento">Vencimento:</label>
+                                            <input id="Vencimento" type="date" name="docfin.Vencimento" class="form-control" value="" />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="recebimento">Forma Recebimento:</label>
+                                            <select class="form-control" id="recebimento" name="docfin.FormaRecebimento">
+                                                <option value="1">Boleto</option>
+                                                <option value="2">Dinheiro</option>
+                                                <option value="3">Cartão</option>
+                                            </select>
+                                        </div>
+                                        }
+                                    }
+                                    </br>
+                                    <div class="row row-no-gutters">
+                                        <div class="col-md-2">
+                                            <input id="provisao" type="checkbox" onclick="provisionar()" /> Provisionar
+                                        </div>
+                                        <div class="col-md-2 input-group">
+                                            <label id="labelprovisionar" for="qtdProvisionar" style="display:none">Qtd: </label>&nbsp;
+                                            <select name="qtdProvisionar" id="qtdProvisionar" class="form-control" style="display:none">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <input type="hidden" id="aluno.EmpresaId" name="aluno.EmpresaId" value="@Session["empresaLogada"]" />
+                        <input class="btn btn-primary" form="cad-financeiro" id="btnSave" align-baseline="right" type="submit" value="Cadastrar" />
+
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+        @*LISTA DE DOCUMENTOS FINANCEIROS*@
+        <div id="listaFinanceiro">
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <td>@documento.Id</td>
-                        <td>@documento.Nome</td>
-
-                        <td>R$@documento.Valor.ToString("n2")</td>
-                        @*<td>@Html.TextBoxFor(model => documento.Vencimento, "{0:dd/MM/yyyy}", new { @class = "meuCampoDate" })</td>*@
-                        <td>@documento.Vencimento.ToShortDateString()</td>
-                        @if (@documento.FormaRecebimento == 1)
-                        {
-                            <td>Dinheiro</td>
-                        }
-                        else if (@documento.FormaRecebimento == 2)
-                        {
-                            <td>Boleto</td>
-                        }
-                        else
-                        {
-                            <td>Cartão</td>
-                        }
-                        @if (documento.Situacao == 0)
-                        {
-                            <td>Aberto</td>
-
-                        }
-                        else if (documento.Situacao == 1)
-                        {
-                            <td>Liquidado</td>
-                        }
-
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Opções
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    @if (documento.Situacao == 0)
-                                    {
-                                        @Html.ActionLink("Liquidar", "Liquidar", new { id = documento.Id }, new { @class = "dropdown-item" })
-                                    }
-
-
-                                    @if (documento.BoletoPaymentLink == null)
-                                    {
-                                        @Html.ActionLink("Gerar Boleto", "GerarBoleto", new { id = documento.Id }, new { @class = "dropdown-item" })
-                                    }
-                                    else
-                                    {
-                                        <a href="@documento.BoletoPaymentLink" target="_blank" class="dropdown-item">Ver Boleto</a>
-                                    }
-
-                                    @Html.ActionLink("Alterar", "Alterar", new { id = documento.Id }, new { @class = "dropdown-item" })
-                                    @Html.ActionLink("Excluir", "Deletar", new { id = documento.Id }, new { @class = "dropdown-item" })
-                                </div>
-                            </div>
-                        </td>
+                        <th>Id</th>
+                        <th>Pessoa</th>
+                        <th>Valor</th>
+                        <th>Vencimento</th>
+                        <th>Forma Recebimento</th>
+                        <th>Situação</th>
+                        <th rowspan="2"></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</body>
+                </thead>
+                <tbody>
+                    @foreach (var documento in Model)
+                    {
+                        <tr>
+                            <td>@documento.Id</td>
+                            <td>@documento.Nome</td>
+
+                            <td>R$@documento.Valor.ToString("n2")</td>
+                            <td>@documento.Vencimento.ToShortDateString()</td>
+                            @if (@documento.FormaRecebimento == 1)
+                            {
+                                <td>Dinheiro</td>
+                            }
+                            else if (@documento.FormaRecebimento == 2)
+                            {
+                                <td>Boleto</td>
+                            }
+                            else
+                            {
+                                <td>Cartão</td>
+                            }
+                            @if (documento.Situacao == 0)
+                            {
+                                <td>Aberto</td>
+
+                            }
+                            else if (documento.Situacao == 1)
+                            {
+                                <td>Liquidado</td>
+                            }
+                            <td>
+                                @Ajax.ActionLink("Detail", "detail", new { id = documento.Id }, new AjaxOptions() { UpdateTargetId = "AlterarFinanceiro" })
+                            </td>
+
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Opções
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        @if (documento.Situacao == 0)
+                                        {
+                                            @Html.ActionLink("Liquidar", "Liquidar", new { id = documento.Id }, new { @class = "dropdown-item" })
+                                        }
+
+
+                                        @if (documento.BoletoPaymentLink == null && documento.Situacao != 1)
+                                        {
+                                            @Html.ActionLink("Gerar Boleto", "GerarBoleto", new { id = documento.Id }, new { @class = "dropdown-item" })
+                                        }
+                                        else if (documento.BoletoPaymentLink != null)
+                                        {
+                                            <a href="@documento.BoletoPaymentLink" target="_blank" class="dropdown-item">Ver Boleto</a>
+                                        }
+                                        @Html.ActionLink("Alterar", "BuscarFinanceiroParaAlterar", new { id = documento.Id }, new { @class = "dropdown-item" })
+                                        @*<input type="button" class="dropdown-item" value="Alterar Documento" data-toggle="modal" data-target="#AlterarFinanceiro" />*@
+                                        @if (documento.Situacao != 1)
+                                        {
+                                            @Html.ActionLink("Excluir", "Deletar", new { id = documento.Id }, new { @class = "dropdown-item" })
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </body>
 </html>
 
 <script>
@@ -223,11 +304,12 @@
             text.style.display = "none";
             text2.style.display = "none";
         }
-    }    
+    }
 
     function deletar(documentoId) {
         var url = ("/Financeiro/Deletar");
         var params = { id: documentoId };
         $.post(url, params);
     }
+
 </script>

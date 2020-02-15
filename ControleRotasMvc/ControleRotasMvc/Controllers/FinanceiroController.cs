@@ -18,7 +18,6 @@ namespace ControleRotasMvc.Controllers
         //GET: Mensalidade
         public ActionResult Index()
         {
-
             FinanceiroEntity dao = new FinanceiroEntity();
             IList<FinanceiroViewModel> docfin = dao.DocumentoFinanceiro();
 
@@ -123,8 +122,8 @@ namespace ControleRotasMvc.Controllers
         [Route("Financeiro/Buscar", Name = "Buscar")]
         public ActionResult BuscarFinanceiro(int Pesquisa)
         {
-            FinanceiroEntity dao = new FinanceiroEntity();
-            var listaFinanceiro = dao.DocumentosPorAluno(Pesquisa);
+            FinanceiroEntity db = new FinanceiroEntity();
+            var listaFinanceiro = db.DocumentosPorAluno(Pesquisa);
 
             AlunoEntity dbAluno = new AlunoEntity();
             IQueryable<Aluno> aluno = dbAluno.Alunos();
@@ -133,6 +132,52 @@ namespace ControleRotasMvc.Controllers
             return View("Index", listaFinanceiro);
         }
 
+        public ActionResult BuscarFinanceiroParaAlterar(int id)
+        {
+            FinanceiroEntity db = new FinanceiroEntity();
+            IList<FinanceiroViewModel> docfin = db.DocumentoFinanceiro();
+            IQueryable<Financeiro> doc = db.BuscarFinanceiroParaAlterar(id);
+            ViewBag.Financeiro = doc;
+
+            AlunoEntity dbAluno = new AlunoEntity();
+            IQueryable<Aluno> aluno = dbAluno.Alunos();
+            ViewBag.Aluno = aluno;
+
+            return View("Index",docfin);
+        }
+
+        public ActionResult detail(int id)
+        {
+
+            FinanceiroEntity db = new FinanceiroEntity();
+            IList<FinanceiroViewModel> docfin = db.DocumentoFinanceiro();
+            Financeiro doc = db.BuscarFinanceiroPorId(id);
+            ViewBag.Financeiro = doc;
+
+            AlunoEntity dbAluno = new AlunoEntity();
+            IQueryable<Aluno> aluno = dbAluno.Alunos();
+            ViewBag.Aluno = aluno;
+
+            return View("Index",docfin);
+        }
+
+
+        [Route("Financeiro/Alterar", Name = "Alterar3")]
+        public Financeiro BuscarFinanceiroParaAlterar2(Financeiro docfinz)
+        {
+            int Pesquisa = 1;
+            Financeiro docc = new Financeiro();
+            FinanceiroEntity db = new FinanceiroEntity();
+            IList<FinanceiroViewModel> docfin = db.DocumentoFinanceiro();
+            IQueryable<Financeiro> doc = db.BuscarFinanceiroParaAlterar(Pesquisa);
+            ViewBag.Financeiro = doc;
+
+            AlunoEntity dbAluno = new AlunoEntity();
+            IQueryable<Aluno> aluno = dbAluno.Alunos();
+            ViewBag.Aluno = aluno;
+
+            return docc;
+        }
         async static void PostRequest(string url, Financeiro docfin, Aluno dadosAluno, Endereco dadosEnd)
         {
             //falta buscar dados do boleto para preencher as variaveis
@@ -203,7 +248,6 @@ namespace ControleRotasMvc.Controllers
             }
 
         }
-
         public static Boleto GerarBoletoPagSeguro(int id)
         {
             string resultado = "{\"boletos\":[{\"code\":\"EDA6DEA7-10CB-4AF9-9C6F-FFD965BE963F\",\"paymentLink\":\"https://pagseguro.uol.com.br/checkout/payment/booklet/print.jhtml?c=c391274ab4b4208fad7df340226c2b7a56cfc3281e69429ae1854a9ee3418219fd11631b151f97d2\",\"barcode\":\"03399853012970000035849932701011980190000003100\",\"dueDate\":\"2019-09-21\"}]}";
@@ -211,7 +255,6 @@ namespace ControleRotasMvc.Controllers
             Boleto boleto = rootObject.Boletos.FirstOrDefault();
             return boleto;
         }
-
         public class BoletoTeste
         {
             public string reference { get; set; }// "reference": "PEDIDO123321",
@@ -223,7 +266,6 @@ namespace ControleRotasMvc.Controllers
             public string description { get; set; }//    "description": "Assinatura de Sorvete",  
             public Cliente customer { get; set; }// dados do comprador
         }
-
         public class Cliente
         {
             public Document document { get; set; }
@@ -232,19 +274,16 @@ namespace ControleRotasMvc.Controllers
             public Phone phone { get; set; }
             public Address address { get; set; }
         }
-
         public class Document
         {
             public string type { get; set; } //"type": "CPF",
             public string value { get; set; } //  "value": "02496340150"
         }
-
         public class Phone
         {
             public string areaCode { get; set; } //"areaCode": "11",
             public string number { get; set; } // "number": "80804040"
         }
-
         public class Address
         {
             public string postalCode { get; set; } // "postalCode": "01046010",
@@ -254,7 +293,6 @@ namespace ControleRotasMvc.Controllers
             public string city { get; set; } // "city": "Sao Paulo",
             public string state { get; set; } // "state": "SP"
         }
-
         public class Boleto
         {
             public string Code { get; set; }
@@ -262,7 +300,6 @@ namespace ControleRotasMvc.Controllers
             public string Barcode { get; set; }
             public string DueDate { get; set; }
         }
-
         public class RootObject
         {
             public List<Boleto> Boletos { get; set; }
