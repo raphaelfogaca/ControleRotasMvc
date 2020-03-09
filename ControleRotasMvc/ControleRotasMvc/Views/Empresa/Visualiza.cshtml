@@ -1,0 +1,131 @@
+﻿
+<head>
+    <h3>CADASTRO DE EMPRESA</h3>
+</head>
+<br />
+
+<form action="/Empresa/Adiciona" method="post">
+
+    <div class="panel panel-default border">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="nome">Nome ou Razão Social:</label>
+                    <input id="nome" name="empresa.Nome" value="@ViewBag.Empresa.Nome" class="form-control" oninput="this.value = this.value.toUpperCase()" />
+                </div>
+                <div class="col-md-4">
+                    <label for="documento">CPF ou CNPJ:</label>
+                    <input id="documento" name="empresa.documento" class="form-control" value="@ViewBag.Empresa.Documento" oninput="this.value = this.value.toUpperCase()" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="nomeResponsavel">Pessoa Responsável:</label>
+                    <input id="nomeResponsavel" name="empresa.Responsavel" value="@ViewBag.Empresa.Responsavel" class="form-control" oninput="this.value = this.value.toUpperCase()" />
+                </div>
+                <div class="col-md-4">
+                    <label for="email">E-mail:</label>
+                    <input id="email" type="email" name="empresa.ResponsavelEmail" value="@ViewBag.Empresa.ResponsavelEmail" placeholder="Ex: email@email.com" class="form-control" oninput="this.value = this.value.toUpperCase()" />
+                </div>
+                <div class="col-md-2">
+                    <label for="telefone">Telefone Responsável:</label>
+                    <input id="telefoneResponsavel" type="tel" name="empresa.ResponsavelTelefone" value="@ViewBag.Empresa.ResponsavelTelefone" placeholder="Ex: 00 00000-0000" class="form-control" />
+                </div>
+            </div>
+            <!--ENDEREÇO-->
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="logradouro">Logradouro:</label>
+                    <input id="logradouro" name="endereco.logradouro" class="form-control" value="ViewBag.Empresa." oninput="this.value = this.value.toUpperCase()" />
+                </div>
+                <div class="col-md-1">
+                    <label for="numero">nº:</label>
+                    <input id="numero" name="endereco.numero" type="text" class="form-control" value="ViewBag.Empresa." oninput="this.value = this.value.toUpperCase()" />
+                </div>
+                <div class="col-md-2">
+                    <label for="bairro">Bairro:</label>
+                    <input id="bairro" name="endereco.bairro" class="form-control" value="ViewBag.Empresa." oninput="this.value = this.value.toUpperCase()" />
+                </div>
+                <div class="col-md-2">
+                    <label for="cidade">Cidade:</label>
+                    <input id="cidade" type="tel" name="endereco.cidade" class="form-control" value="" oninput="this.value = this.value.toUpperCase()" />
+                </div>
+                <div class="col-md-2">
+                    <label for="estado">Estado:</label>
+                    <select name="endereco.estado" class="form-control">
+                        <option value="">Selecione</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="cep">CEP:</label>
+                    <input id="cep" type="tel" name="endereco.cep" class="form-control" value="" />
+                </div>
+            </div>
+            <!--PAGSEGURO
+            -->
+            <div class="row">
+                <div class="col-md-2">
+                    <input id="habilita" type="checkbox" onclick="habilitarPagSeguro()" /> Habilitar PagSeguro
+                </div>
+            </div>
+            <div class="row" id="divPagSeguro" style="display:none">
+                <div class="col-md-4">
+                    <label id="emailpagseguro" for="pagseguro">E-mail PagSeguro: </label>
+                    <input type="text" id="pagseguro" name="empresa.emailPagseguro" value="" class="form-control" />
+                </div>
+                <div class="col-md-10">
+                    <label id="tokenpagseguro" for="texttoken">Token PagSeguro: </label>
+                    <input type="text" id="texttoken" name="empresa.tokenPagSeguro" value="" class="form-control" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <input type="hidden" id="id" name="empresa.Id" value="@ViewBag.Empresa.Id" />
+    <input class="btn btn-primary" id="btnSave" align-baseline="right" type="submit" value="Alterar" />
+    <br />
+</form>
+
+<script>
+    function habilitarPagSeguro() {
+        // Get the checkbox
+        var checkBox = document.getElementById("habilita");
+        // Get the output text
+        var text5 = document.getElementById("divPagSeguro");
+
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true) {
+
+            text5.style.display = "block";
+        } else {
+            text5.style.display = "none";
+        }
+    }
+</script>

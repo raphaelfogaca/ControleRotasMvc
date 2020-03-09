@@ -27,7 +27,7 @@
         <br />
         <br />
     </div>
-
+    @*NOVO USUARIO*@
     <div id="NovoUsuario" class="modal fade modal-lg" tabindex="-1" role="form" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -41,7 +41,7 @@
                         <form id="cad-usuario" action="/Usuario/Adiciona" method="post" class="active">
                             @Html.AntiForgeryToken()
                             <label for="Empresa">Empresa:</label>
-                            @*<select class="form-control" name="usuario.EmpresaId">
+                            <select class="form-control" name="usuario.EmpresaId">
                                 <option hidden selected value=""> -- Selecione -- </option>
                                 @{
                                     foreach (var items in empresas)
@@ -50,7 +50,7 @@
                                             @items.Nome
                                         </option>
                                     }
-                                }*@
+                                }
                             </select>
 
                             <label for="nome">Nome:</label>
@@ -91,6 +91,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Empresa</th>
                     <th>Login</th>
                     <th>Nome</th>
                     <th>Sobrenome</th>
@@ -103,41 +104,42 @@
             <tbody>
                 @foreach (var usuario in Model)
                 {
-                    <tr>
-                        <td>@usuario.Id</td>
-                        <td>@usuario.UsuarioLogin</td>
-                        <td>@usuario.UsuarioNome</td>
-                        <td>@usuario.UsuarioSobrenome</td>
-                        <td>@usuario.UsuarioEmail</td>
-                        @if (usuario.UsuarioTipo == 0)
-                        {
-                            <td>Contratante</td>
-                        }
-                        else if (usuario.UsuarioTipo == 1)
-                        {
-                            <td>Administrador</td>
-                        }
-                        else if (usuario.UsuarioTipo == 2)
-                        {
-                            <td>Responsável</td>
-                        }
-                        @if (usuario.Status == 0)
-                        {
-                            <td>Inativo</td>
-                        }
-                        else if (usuario.Status == 1)
-                        {
-                            <td>Ativo</td>
-                        }
-                        <td>
-                            @Html.ActionLink(
-                      "Alterar",
-                      "VisualizaUsuario",                         // controller action
-                      "Usuario",        // controller
-                      new { id = usuario.Id },         // action parameters aka route values
-                      new { @class = "btn btn-info btn-sm" })
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@usuario.Id</td>
+                    <td>@usuario.EmpresaId</td>
+                    <td>@usuario.UsuarioLogin</td>
+                    <td>@usuario.UsuarioNome</td>
+                    <td>@usuario.UsuarioSobrenome</td>
+                    <td>@usuario.UsuarioEmail</td>
+                    @if (usuario.UsuarioTipo == 0)
+                    {
+                        <td>Contratante</td>
+                    }
+                    else if (usuario.UsuarioTipo == 1)
+                    {
+                        <td>Administrador</td>
+                    }
+                    else if (usuario.UsuarioTipo == 2)
+                    {
+                        <td>Responsável</td>
+                    }
+                    @if (usuario.Status == 0)
+                    {
+                        <td>Inativo</td>
+                    }
+                    else if (usuario.Status == 1)
+                    {
+                        <td>Ativo</td>
+                    }
+                    <td>
+                        @Html.ActionLink(
+                  "Alterar",
+                  "VisualizaUsuario",                         // controller action
+                  "Usuario",        // controller
+                  new { id = usuario.Id },         // action parameters aka route values
+                  new { @class = "btn btn-info btn-sm" })
+                    </td>                    
+                </tr>
                 }
             </tbody>
         </table>

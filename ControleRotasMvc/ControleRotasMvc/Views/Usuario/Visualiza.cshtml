@@ -4,6 +4,9 @@
     <label for="empresa">Empresa:</label>
     <input id="empresaId" name="usuario.EmpresaId" value="@ViewBag.Usuario.EmpresaId" readonly class="form-control" />
 
+    <label for="id">Id:</label>
+    <input id="id" name="usuario.Id" value="@ViewBag.Usuario.Id" readonly class="form-control" />
+
 
     <label for="nome">Nome:</label>
     <input id="nome" name="usuario.UsuarioNome" value="@ViewBag.Usuario.UsuarioNome" class="form-control" />
@@ -29,12 +32,12 @@
     <label for="usuarioStatus">Ativo</label>
     @if (@ViewBag.Usuario.Status == 1)
     {
-        <input id="status" type="checkbox" name="usuario.Status" value="@ViewBag.Usuario.Status" class="form-check"/>
+        <input id="status" type="checkbox" name="usuario.Status" value="@ViewBag.Usuario.Status" class="form-check" checked />
     }
     else if (@ViewBag.Usuario.Status == 0)
     {
-        <input id="status" type="checkbox" name="usuario.Status" value="@ViewBag.Usuario.Status" class="form-check"/> }
-       <p></p>
+        <input id="status" type="checkbox" name="usuario.Status" value="@ViewBag.Usuario.Status" class="form-check" />}
+    <p></p>
     <input type="submit" value="Salvar" class="btn btn-success btn-sm" />
 </form>
 

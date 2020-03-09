@@ -42,5 +42,13 @@ namespace ControleRotasMvc.Controllers
                 return View("Cadastro", "Empresa");
             }
         }
+        [Route("empresas/{id}", Name = "VisualizaEmpresa")]
+        public ActionResult Visualiza(int id)
+        {
+            EmpresaEntity db = new EmpresaEntity();
+            Empresa empresa = db.BuscaEmpresaPorId(id);
+            ViewBag.Empresa = empresa;
+            return View(empresa);
+        }
     }
 }
